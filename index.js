@@ -15,10 +15,22 @@ function logger(req, res, next) {
 app.use(logger);
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.render("home.ejs", {
         title: "Home",
     })
+})
+
+app.get('/signin', (req, res) => {
+    res.redirect("/home");
+})
+
+app.get('/about', (req, res) => {
+    res.redirect("/home");
+})
+
+app.get('/contact', (req, res) => {
+    res.redirect("/home");
 })
 
 app.listen(port, () => {
