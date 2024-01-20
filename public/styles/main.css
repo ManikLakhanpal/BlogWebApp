@@ -1,0 +1,34 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+nav {
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: #333;
+    padding-bottom: 1.2%;
+    height: 60px;
+}
+
+nav a {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 2em;
+    height: 100%;
+}
+
+nav .link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.title {
+    float: left;
+}
