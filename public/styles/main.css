@@ -43,7 +43,8 @@ BELOW IS FOR HOME.EJS
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
     position: relative;
     width: 100%;
     padding-bottom: 40%;
@@ -78,6 +79,9 @@ BELOW IS FOR HOME.EJS
     right: 0;
 }
 
+.posts-section {
+    padding: 200px;
+}
 
 /*
  =========================================
@@ -94,6 +98,6 @@ BELOW IS FOR Bottom.EJS
     color: white;
     overflow: hidden;
     background-color: #333;
-    padding-bottom: 1.2%;
-    height: 60px;
+    padding-top: 3%;
+    padding-bottom: 10%;
 }
