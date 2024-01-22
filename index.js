@@ -31,6 +31,14 @@ app.get('/contact', (req, res) => {
     res.redirect("/home");
 })
 
+app.get('/api', (req, res) => {
+    res.json({
+        "name" : "w16",
+        "phone" : 7087759461,
+        "instagram" : "w16.manik",
+    });
+})
+
 app.listen(port, () => {
     console.log(`[SERVER] : The server is up and running on port ${port}`);
 })
