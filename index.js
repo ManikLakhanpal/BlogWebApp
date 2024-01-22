@@ -3,8 +3,6 @@ import express from "express";
 const app = express();
 const port = 7777;
 
-
-
 function logger(req, res, next) {
     var time = new Date().toLocaleString();
 

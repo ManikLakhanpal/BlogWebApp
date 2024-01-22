@@ -65,6 +65,7 @@ BELOW IS FOR HOME.EJS
     color: #eee;
     background-color: #333;
     border-radius: 3px;
+    opacity: 0.7;
 }
 
 .left-swipe {
@@ -85,8 +86,8 @@ BELOW IS FOR Bottom.EJS
  */
 
 .bottom-section {
-    display: flex;
-    justify-content: center;
+    display: flex; /*This is temperoary*/
+    justify-content: center; /*This is temperoary*/
     align-items: center;
     font-size: 32px;
     border: 1px solid black;
