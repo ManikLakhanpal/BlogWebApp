@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 
 const app = express();
 const port = 7777;
@@ -9,6 +10,17 @@ function logger(req, res, next) {
     console.log(`[SERVER] [${time}] : URL accessed ${req.url}.`);
     next();
 }
+
+let json;
+
+try {
+    json = fs.readFileSync("data.json", "utf8");
+
+} catch (err) {
+    console.error('Error reading the JSON file:', err);
+}
+
+let jsonArray = JSON.parse(json);
 
 app.use(logger);
 app.use(express.static('public'));
@@ -32,11 +44,8 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
-    res.json({
-        "name" : "w16",
-        "phone" : 7087759461,
-        "instagram" : "w16.manik",
-    });
+    let index = Math.floor(Math.random() * 3); // Floor rounds the number to nearest integer and random generates from 0.0 to 1.0 only
+    res.send(jsonArray[index]);
 })
 
 app.listen(port, () => {
