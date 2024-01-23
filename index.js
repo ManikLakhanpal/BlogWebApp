@@ -6,19 +6,23 @@ const port = 7777;
 
 function logger(req, res, next) {
     var time = new Date().toLocaleString();
-
+    readJson();
     console.log(`[SERVER] [${time}] : URL accessed ${req.url}.`);
     next();
 }
 
 let json;
 
-try {
-    json = fs.readFileSync("data.json", "utf8");
+function readJson() {
+    try {
+        json = fs.readFileSync("data.json", "utf8");
 
-} catch (err) {
-    console.error('Error reading the JSON file:', err);
+    } catch (err) {
+        console.error('Error reading the JSON file:', err);
+    }
 }
+
+readJson();
 
 let jsonArray = JSON.parse(json);
 
