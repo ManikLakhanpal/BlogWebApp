@@ -31,6 +31,10 @@ let jsonArray = JSON.parse(json);
 app.use(logger);
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+    res.redirect("/home");
+})
+
 app.get('/home', async (req, res) => {
     const response = await axios.get("https://v2.jokeapi.dev/joke/Any");
     const result = response.data;
