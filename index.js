@@ -1,7 +1,6 @@
-import express, { response } from "express";
+import express from "express";
 import axios from "axios";
 import fs from "fs";
-import { title } from "process";
 
 const app = express();
 const port = 7777;
