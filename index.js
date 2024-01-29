@@ -46,7 +46,7 @@ app.get('/home', async (req, res) => {
     }
     catch (error) {
     res.render("home.ejs", {
-        title: "Home",
+        title: "HOME",
         joke: JSON.stringify(result.delivery),
     })
 }
