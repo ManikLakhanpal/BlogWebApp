@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home', async (req, res) => {
-    const response = await axios.get("https://v2.jokeapi.dev/joke/Any");
+    const response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,explicit");
     const result = response.data;
     try {
         res.render("home.ejs", {
