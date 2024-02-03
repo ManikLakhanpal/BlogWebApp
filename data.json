@@ -1,0 +1,25 @@
+[
+    {
+        "id" : "1",
+        "title" : "1st Post",
+        "content" : "Lakhanpala Manik The Great.",
+        "author" : "Manik Lakhanpal",
+        "date" : "03-02-2024"
+    },
+    
+    {
+        "id" : "2",
+        "title" : "2nd Post",
+        "content" : "Lakhanpala Manik The Great.",
+        "author" : "w16.manik",
+        "date" : "03-02-2024"
+
+    },
+    {
+        "id" : "3",
+        "title" : "3rd Post",
+        "content" : "Lakhanpala Manik The Great.",
+        "author" : "w16.manik",
+        "date" : "03-02-2024"
+    }
+]

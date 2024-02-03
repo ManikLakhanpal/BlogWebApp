@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    background-color: #eee;
 }
 
 nav {
@@ -41,13 +42,17 @@ BELOW IS FOR HOME.EJS
 
  .banner {
     display: flex;
+    background-image: url("https://static.wikia.nocookie.net/601504b4-4e95-4086-8a36-763657f5a363");
+    background-size:cover;
+    background-repeat: no-repeat;
     align-items: center;
     justify-content: center;
     border-top: 3px solid black;
     border-bottom: 3px solid black;
     position: relative;
     width: 100%;
-    padding-bottom: 40%;
+    height: 100%;
+    padding-bottom: 50%;
     background-color: #eee;
  }
 
@@ -80,7 +85,30 @@ BELOW IS FOR HOME.EJS
 }
 
 .posts-section {
-    padding: 200px;
+    padding-bottom: 100px;
+}
+
+.posts {
+    padding: 30px;
+    border: 10px solid black;
+    margin-bottom: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.post-title {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.post-author {
+    text-align: right;
+    font-size: 18px;
+}
+
+.post-date {
+    text-align: right;
+    font-size: 13px;
 }
 
 /*

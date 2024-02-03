@@ -5,12 +5,22 @@
 
         <span class="right-swipe swipe">></span>
     </div>
-
-    <h1 class="head">Posts</h1>
-    <h2 class="head"><%= joke %> </h2>
-
-
-    <div class="posts-section"></div>
+    <% if (joke) {%>
+        <h1 class="head">Joke</h1>
+        <h5 class="head"><%= joke %></h2>
+    <hr>
+    <% } %>        
+    <div class="posts-section">
+        <h1 class="head">Latest</h1>
+        <% posts.forEach(post => { %>
+            <div class="posts">
+                <h1 class="post-title"> <%= post.title %> </h1>
+                <h2 class="post-content"> <%= post.content %> </h2>
+                <h3 class="post-author"> By: <%= post.author %> </h3>
+                <h4 class="post-date"> Date: <%= post.date %> </h4>
+            </div>
+        <%})%>
+    </div>
 </main>
 
 <%- include("bottom.ejs") %>

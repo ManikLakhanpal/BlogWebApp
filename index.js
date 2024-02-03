@@ -4,6 +4,7 @@ import fs from "fs";
 
 const app = express();
 const port = 7777;
+const api_url = "http://localhost:4000";
 
 function logger(req, res, next) {
     var time = new Date().toLocaleString();
@@ -35,18 +36,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home', async (req, res) => {
-    const response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,explicit");
-    const result = response.data;
+    const joke_response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,explicit");
+    const posts_response = await axios.get(`${api_url}/posts`)
+    const joke_result = joke_response.data;
+    const posts_result = posts_response.data;
     try {
         res.render("home.ejs", {
             title: "Home",
-            joke: JSON.stringify(result.joke),
+            joke: joke_result.joke,
+            posts: posts_result
         })
     }
     catch (error) {
     res.render("home.ejs", {
         title: "HOME",
-        joke: JSON.stringify(result.delivery),
+        joke: joke_result.delivery,
     })
 }
 })
