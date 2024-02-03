@@ -37,17 +37,21 @@ To install the project dependencies, run the following command in your project d
 
 ```bash
 npm install
-
+```
 This command installs all the required packages listed in the package.json file.
 
 Launching the Site
 You can launch the site using the following commands:
 
+```bash
 node index.js
+```
 
 This command starts the main application.
 
+```bash
 node api.js
+```
 
 This command starts the API server.
 
@@ -55,11 +59,6 @@ Now, you can access the site in your web browser at http://localhost:7777.
 
 Contributing
 
-If you'd like to contribute to the project, please follow our Contributing Guidelines.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+Email me if you want to contribute 👉🏻 lakhanpalmanik@protonmail.com
 
 Feel free to customize it further based on your project's specifics.
