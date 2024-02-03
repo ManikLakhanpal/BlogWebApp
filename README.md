@@ -40,7 +40,7 @@ npm install
 ```
 This command installs all the required packages listed in the package.json file.
 
-Launching the Site
+### Launching the Site
 You can launch the site using the following commands:
 
 ```bash
@@ -57,7 +57,7 @@ This command starts the API server.
 
 Now, you can access the site in your web browser at http://localhost:7777.
 
-Contributing
+### Contributing
 
 Email me if you want to contribute 👉🏻 lakhanpalmanik@protonmail.com
 
