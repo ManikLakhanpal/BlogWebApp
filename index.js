@@ -56,20 +56,20 @@ app.get('/home', async (req, res) => {
 })
 
 app.get('/signin', (req, res) => {
-    res.redirect("/home");
+    res.status(200).redirect("/home");
 })
 
 app.get('/about', (req, res) => {
-    res.redirect("/home");
+    res.status(200).redirect("/home");
 })
 
 app.get('/contact', (req, res) => {
-    res.redirect("/home");
+    res.status(200).redirect("/home");
 })
 
 app.get('/api', (req, res) => {
     let index = Math.floor(Math.random() * 3); // Floor rounds the number to nearest integer and random generates from 0.0 to 1.0 only
-    res.send(jsonArray[index]);
+    res.status(200).send(jsonArray[index]);
 })
 
 app.listen(port, () => {
