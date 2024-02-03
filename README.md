@@ -1,6 +1,6 @@
 # WebBlogApp
 
-A simple blog site created by Manik Lakhanpal, currently working on it!
+A simple blog site created by Manik Lakhanpal, currently a work in progress! Node packages used: axios (for API requests), fs (to read data.json), and express (to launch the site).
 
 ## Getting Started
 
@@ -37,3 +37,29 @@ To install the project dependencies, run the following command in your project d
 
 ```bash
 npm install
+
+This command installs all the required packages listed in the package.json file.
+
+Launching the Site
+You can launch the site using the following commands:
+
+node index.js
+
+This command starts the main application.
+
+node api.js
+
+This command starts the API server.
+
+Now, you can access the site in your web browser at http://localhost:7777.
+
+Contributing
+
+If you'd like to contribute to the project, please follow our Contributing Guidelines.
+
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+Feel free to customize it further based on your project's specifics.
