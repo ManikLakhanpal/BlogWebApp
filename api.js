@@ -1,20 +1,31 @@
-import express from "express"
-import fs from "fs";
+import express from "express";
+import 'dotenv/config';
+import pg from "pg";
 
 const port = 4000;
 const app = express();
 
-app.get('/posts', (req, res) => {
+const db = new pg.Client({
+    user: "postgres",
+    host: "localhost",
+    database: "data",
+    password: process.env.PASSWORD,
+    port: 5432
+  });
+
+db.connect();
+
+app.get('/posts', async (req, res) => {
     try {
-        const js = fs.readFileSync("data.json", "utf8");
-        res.send(JSON.parse(js)).status(200);
+        const data = await db.query("SELECT * FROM posts");
+        console.log(data.rows);
+        res.send(data.rows);
         
     } catch (err) {
         console.log(`[SERVER] : There was some problems while retrieveing data ${err}`);
         res.status(404);
     }
 })
-
 
 app.listen(port, () => {
     console.log(`[SERVER] : The API server is up and running on port ${port}`)
