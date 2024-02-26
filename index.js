@@ -19,22 +19,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home', async (req, res) => {
-    const joke_response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,explicit");
     const posts_response = await axios.get(`${api_url}/posts`)
 
-    const joke_result = joke_response.data;
     const posts_result = posts_response.data;
     try {
         res.render("home.ejs", {
             title: "Home",
-            joke: joke_result.joke,
             posts: posts_result
         })
     }
     catch (error) {
     res.render("home.ejs", {
         title: "HOME",
-        joke: joke_result.delivery,
     })
 }
 })
