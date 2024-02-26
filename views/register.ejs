@@ -1,0 +1,19 @@
+<%- include("head.ejs") %>
+<h1 style="text-align: center;">Register Form</h1>
+<div class="form">
+    <form action="/register" method="post">
+        <label for="username">Username:</label><p>
+        <input class="form-input" type="text" placeholder="Enter username"> <p>
+
+        <label for="email">Email:</label><p>
+        <input class="form-input" type="email" placeholder="youremail@gmail.com">
+        <input class="send-button" type="button" value="send OTP"><p>
+
+        <label for="OTP">OTP:</label><p>
+        <input class="form-input otp" type="OTP" placeholder="Enter OTP"><p>
+
+        <label for="Password">Password:</label><p>
+        <input class="form-input" type="password" placeholder="Your Password"><p>
+        <input class="form-input submit-button" type="submit" value="Submit">
+</div>
+<%- include("bottom.ejs") %>

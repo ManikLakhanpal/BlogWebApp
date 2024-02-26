@@ -27,6 +27,16 @@ app.get('/posts', async (req, res) => {
     }
 })
 
+app.post('/register', async (req, res) => {
+    try {
+        const data = await db.query("SELECT * FROM users");
+        console.log(data.rows);
+        res.send("done");
+    } catch(err) {
+        res.send("done")
+    }
+})
+
 app.listen(port, () => {
     console.log(`[SERVER] : The API server is up and running on port ${port}`)
 })

@@ -113,6 +113,50 @@ BELOW IS FOR HOME.EJS
 
 /*
  =========================================
+BELOW IS FOR HOME.EJS 
+ =========================================
+ */
+
+ .form {
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    background-color: whitesmoke;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 5% 0%;
+ }
+
+ .form-input {
+    width: 270px;
+    height: 30px;
+    padding-left: 2px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 0.5px solid black;
+ }
+
+ .send-button {
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0.5px solid black;
+ }
+
+ .send-button:hover {
+    background-color: rgb(77, 145, 234);
+    color: white;
+ }
+
+ .submit-button:hover {
+    background-color: rgb(77, 145, 234);
+    color: white;
+ }
+
+/*
+ =========================================
 BELOW IS FOR Bottom.EJS 
  =========================================
  */

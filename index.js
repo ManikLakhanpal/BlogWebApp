@@ -39,8 +39,15 @@ app.get('/signin', (req, res) => {
     res.status(200).redirect("/home");
 })
 
-app.get('/about', (req, res) => {
-    res.status(200).redirect("/home");
+app.get('/register', (req, res) => {
+    res.status(200).render("register.ejs", {
+        title: "Register",
+    });
+})
+
+app.post('/register', async (req, res) => {
+    const data = await axios.post(`${api_url}/register`);
+    res.redirect("/home");
 })
 
 app.get('/contact', (req, res) => {
