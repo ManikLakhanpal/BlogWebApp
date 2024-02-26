@@ -3,5 +3,18 @@
 </div>
 <script>
     alert("🚧 Work in progress 🚧");
+
+    document.getElementById("otp-button").addEventListener('click', async function() {
+        var otpDivison = document.getElementById("otp-menu");
+        otpDivison.style.display = 'block';
+        const resp = await fetch('/generate-otp', {
+            method: 'POST',
+        });
+        if (resp.ok) {
+            alert("OTP generated, check your email");
+        } else {
+            alert("OTP couldn't be generated");
+        }
+    })
 </script>
 </html>

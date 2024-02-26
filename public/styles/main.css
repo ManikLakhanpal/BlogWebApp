@@ -138,6 +138,10 @@ BELOW IS FOR HOME.EJS
     border: 0.5px solid black;
  }
 
+ #otp-menu {
+    display: none;
+ }
+
  .send-button {
     width: 70px;
     height: 30px;
