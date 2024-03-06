@@ -4,14 +4,14 @@
     <form action="/register" method="post">
         <label for="username">Username:</label><p>
         <input class="form-input" type="text" placeholder="Enter username"> <p>
-
+            
         <label for="email">Email:</label><p>
-        <input class="form-input" type="email" placeholder="youremail@gmail.com">
+        <input id="otp-input-email" class="form-input" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" type="email" placeholder="youremail@gmail.com">
         <input id="otp-button" class="send-button" type="button" value="send OTP"><p>
         
         <div id="otp-menu">
             <label for="OTP">OTP:</label><p>
-            <input class="form-input otp" type="OTP" placeholder="Enter OTP"><p>
+            <input class="form-input otp" pattern="\d{6}" type="OTP" placeholder="Enter OTP" maxlength="6"><p>
         </div>
 
         <label for="Password">Password:</label><p>

@@ -6,15 +6,22 @@
 
     document.getElementById("otp-button").addEventListener('click', async function() {
         var otpDivison = document.getElementById("otp-menu");
+        var emailInput = document.getElementById("otp-input-email");
+        alert(emailInput.value);
         otpDivison.style.display = 'block';
         const resp = await fetch('/generate-otp', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Adjust the content type based on your server expectations
+            },
+            body: JSON.stringify({ data: emailInput.value })
         });
         if (resp.ok) {
             alert("OTP generated, check your email");
         } else {
             alert("OTP couldn't be generated");
         }
+
     })
 </script>
 </html>

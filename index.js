@@ -2,6 +2,7 @@ import express from "express";
 import nodemailer from "nodemailer";
 import 'dotenv/config';
 import axios from "axios";
+import bodyparser from "body-parser";
 
 // NOTE: CREATE A '.env' OR REPLACE THE "process.env"s WITH THE VALID VALUES
 
@@ -19,19 +20,19 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-async function sendMail() {
+async function sendMail(x, y) {
     try {
         await transporter.sendMail({
             from: process.env.EMAIL, // EMAIL WHICH WE ARE USING TO SEND DATA
-            to: "lakhanpalmanik@protonmail.com", // RECIEVER'S EMAIL
+            to: y, // RECIEVER'S EMAIL
             subject: "OTP", // SUBJECT OF EMAIL
-            text: `Your OTP is ${otp}`,
-            html: `<b>Your OTP is ${otp}</b>`,
+            text: `Your OTP is ${x}`,
+            html: `<b>Your OTP is ${x}</b>`,
         });
 
-        console.log("Mail was sent.")
+        console.log("Mail was sent.");
     } catch (err) {
-        console.log("Couldn't send email.")
+        console.log("Couldn't send email.", err);
     }
 };
 
@@ -41,10 +42,10 @@ function logger(req, res, next) {
     next();
 }
 
-var otp; // CURRENTLY STORING OTPs HERE 
-
 app.use(logger);
 app.use(express.static('public'));
+app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyparser.json());
 
 app.get('/', (req, res) => {
     res.redirect("/home");
@@ -85,9 +86,10 @@ app.post('/register', async (req, res) => {
 app.post('/generate-otp', async (req, res) => {
     try {
         const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP
-        otp = otpData.data;
-        console.log(otp);
-        await sendMail(); // SENDS THE EMAIL
+        const otp = otpData.data;
+        const email = req.body.data;
+        console.log("Client Provided OTP:", email);
+        await sendMail(otp, email); // SENDS THE EMAIL
         res.sendStatus(200); // IF SUCCESSFUL THEN WEBSITE WILL FLASH SUCCESSS
     } catch(err) {
         res.sendStatus(404); // IF FAIL THEN WEBSITE WILL FLASH FAIL
