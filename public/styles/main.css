@@ -113,7 +113,7 @@ BELOW IS FOR HOME.EJS
 
 /*
  =========================================
-BELOW IS FOR HOME.EJS 
+BELOW IS FOR REGISTER.EJS 
  =========================================
  */
 
@@ -139,6 +139,10 @@ BELOW IS FOR HOME.EJS
  }
 
  #otp-menu {
+    display: none;
+ }
+
+ #submit-button {
     display: none;
  }
 

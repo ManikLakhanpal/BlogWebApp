@@ -6,9 +6,11 @@
 
     document.getElementById("otp-button").addEventListener('click', async function() {
         var otpDivison = document.getElementById("otp-menu");
+        var submitButton = document.getElementById("submit-button");
         var emailInput = document.getElementById("otp-input-email");
         alert(emailInput.value);
         otpDivison.style.display = 'block';
+        submitButton.style.display = 'block';
         const resp = await fetch('/generate-otp', {
             method: 'POST',
             headers: {

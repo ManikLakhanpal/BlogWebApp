@@ -10,6 +10,8 @@ const app = express();
 const port = 7777; // YOU CAN ACCESS SITE ON "http://localhost:7777/"
 const api_url = "http://localhost:4000"; // API WILL RUN ON PORT 4000
 
+var otp=process.env.OTP;
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -20,14 +22,14 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-async function sendMail(x, y) {
+async function sendMail(subject, message, reciever) {
     try {
         await transporter.sendMail({
             from: process.env.EMAIL, // EMAIL WHICH WE ARE USING TO SEND DATA
-            to: y, // RECIEVER'S EMAIL
-            subject: "OTP", // SUBJECT OF EMAIL
-            text: `Your OTP is ${x}`,
-            html: `<b>Your OTP is ${x}</b>`,
+            to: reciever, // RECIEVER'S EMAIL
+            subject: `${subject}`, // SUBJECT OF EMAIL
+            text: `${message}`,
+            html: `<b>${message}</b>`,
         });
 
         console.log("Mail was sent.");
@@ -79,17 +81,41 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-    const data = await axios.post(`${api_url}/register`); // DOES STEPS FOR REGISTRATION OF USER
-    res.redirect("/home");
-})
+    const formData = req.body;
+    console.log(formData);
+
+    if (otp == formData.otp) {
+        const resp = await axios.post(`${api_url}/register`, formData);
+        console.log("API RESPONSE :", resp.data);
+            
+        if (resp.data === "User added") {
+            sendMail("Account Created", `Hey ${formData.username},<p>Your account was created on BlogWebApp`, formData.email,)
+            res.redirect('/home');
+        } else {
+            res.render("register.ejs", {
+                title: "Register",
+                error: resp.data
+            });
+        }
+        
+    } else {
+        console.log("OTP entered is Wrong.");
+        res.render("register.ejs", {
+            title: "Register",
+            error: "OTP entered is Wrong."
+        });
+    }
+});
+
 
 app.post('/generate-otp', async (req, res) => {
     try {
         const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP
-        const otp = otpData.data;
-        const email = req.body.data;
-        console.log("Client Provided OTP:", email);
-        await sendMail(otp, email); // SENDS THE EMAIL
+        const message = otpData.data;
+        console.log(message);
+        const recieverEmail = req.body.data;
+        console.log("Email:", recieverEmail);
+        await sendMail("OTP",message, recieverEmail); // SENDS THE EMAIL
         res.sendStatus(200); // IF SUCCESSFUL THEN WEBSITE WILL FLASH SUCCESSS
     } catch(err) {
         res.sendStatus(404); // IF FAIL THEN WEBSITE WILL FLASH FAIL
