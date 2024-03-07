@@ -119,11 +119,12 @@ app.post('/generate-otp', async (req, res) => {
     try {
         const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
         const message = otpData.data;
+        otp = message;
 
         const recieverEmail = req.body.data;
         console.log("Email:", recieverEmail);
 
-        await sendMail("OTP",message, recieverEmail); // SENDS THE EMAIL
+        await sendMail("OTP", `Your otp is : ${message}`, recieverEmail); // SENDS THE EMAIL
         res.sendStatus(200); // IF SUCCESSFUL THEN WEBSITE WILL FLASH SUCCESSS
 
     } catch(err) {
