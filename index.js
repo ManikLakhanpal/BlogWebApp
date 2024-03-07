@@ -22,6 +22,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Takes Subject, message and reciver's email address as parameters.
 async function sendMail(subject, message, reciever) {
     try {
         await transporter.sendMail({
@@ -45,18 +46,18 @@ function logger(req, res, next) {
 }
 
 app.use(logger);
-app.use(express.static('public'));
-app.use(bodyparser.urlencoded({ extended: true }))
-app.use(bodyparser.json());
+app.use(express.static('public')); // Tells express to use items inside public folder as static
+app.use(bodyparser.urlencoded({ extended: true })) // Allows to access the parsed form data in your Express route handlers using req.body
+app.use(bodyparser.json()); // Enables the use of JSON in express server req.body
 
 app.get('/', (req, res) => {
     res.redirect("/home");
 })
 
 app.get('/home', async (req, res) => {
-    const posts_response = await axios.get(`${api_url}/posts`) // GETS ALL THE EMAILS
+    const data = await axios.get(`${api_url}/posts`) // GETS ALL THE CURRENT POSTS
 
-    const posts_result = posts_response.data;
+    const posts_result = data.data;
     try {
         res.render("home.ejs", {
             title: "Home",
@@ -70,26 +71,31 @@ app.get('/home', async (req, res) => {
 }
 })
 
-app.get('/signin', (req, res) => {
+app.get('/signin', (req, res) => { // Working on it.
     res.status(200).redirect("/home");
 })
 
 app.get('/register', (req, res) => {
-    res.status(200).render("register.ejs", {
+    res.status(200).render("register.ejs", { // Renders register page
         title: "Register",
     });
 })
 
-app.post('/register', async (req, res) => {
-    const formData = req.body;
+app.post('/register', async (req, res) => { // Takes the data from the form and posts it to API.
+    const formData = req.body; 
     console.log(formData);
 
-    if (otp == formData.otp) {
-        const resp = await axios.post(`${api_url}/register`, formData);
+    if (otp == formData.otp) { // Checks if generated OTP is same as entered OTP.
+        const resp = await axios.post(`${api_url}/register`, formData); // sends form data to API
         console.log("API RESPONSE :", resp.data);
             
         if (resp.data === "User added") {
-            sendMail("Account Created", `Hey ${formData.username},<p>Your account was created on BlogWebApp`, formData.email,)
+            // This will send email upon successful creation of account.
+            sendMail("Account Created", 
+            `Hey ${formData.username},<p>Your account was created on BlogWebApp`, 
+            formData.email,) 
+
+            // Redirects to home on successful creation of account.
             res.redirect('/home');
         } else {
             res.render("register.ejs", {
@@ -100,6 +106,7 @@ app.post('/register', async (req, res) => {
         
     } else {
         console.log("OTP entered is Wrong.");
+        // Renders the register page and shows the wrong OTP error in red.
         res.render("register.ejs", {
             title: "Register",
             error: "OTP entered is Wrong."
@@ -110,13 +117,15 @@ app.post('/register', async (req, res) => {
 
 app.post('/generate-otp', async (req, res) => {
     try {
-        const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP
+        const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
         const message = otpData.data;
-        console.log(message);
+
         const recieverEmail = req.body.data;
         console.log("Email:", recieverEmail);
+
         await sendMail("OTP",message, recieverEmail); // SENDS THE EMAIL
         res.sendStatus(200); // IF SUCCESSFUL THEN WEBSITE WILL FLASH SUCCESSS
+
     } catch(err) {
         res.sendStatus(404); // IF FAIL THEN WEBSITE WILL FLASH FAIL
     }
@@ -126,11 +135,14 @@ app.get('/contact', (req, res) => {
     res.status(200).redirect("/home");
 })
 
-app.get('/api', async (req, res) => { // USED TO GET 1 POST AT A TIME
+app.get('/api', async (req, res) => { // USED TO GET 1 POST AT A TIME IN JSON
     try {
-        let data = await axios.get(`${api_url}/posts`);
+
+        let data = await axios.get(`${api_url}/posts`); // RETRIEVES ALL POSTS FROM DATABASE
         let index = Math.floor(Math.random() * 3);
-        res.status(200).send(data.data[index]);
+
+        res.status(200).send(data.data[index]); 
+
     } catch(err) {
         res.status(404).send("Something happened");
         console.log(err);

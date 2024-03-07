@@ -15,7 +15,7 @@ const db = new pg.Client({  // ACCESSES THE DATABASE
     user: "postgres",
     host: "localhost",
     database: "data",
-    password: process.env.PASSWORD,
+    password: process.env.PASSWORD, // PASSWORD for postgres database.
     port: 5432
   });
 
@@ -33,13 +33,13 @@ app.get('/posts', async (req, res) => { // THIS SENDS BACK ALL THE POSTS IN DATA
     }
 });
 
-app.post('/register', async (req, res) => { // REGISTERS THE USER WORK IN PROGRESS
+app.post('/register', async (req, res) => { 
     try {
         console.log(req.body);
-        const data = await db.query("SELECT * FROM users WHERE email = $1 OR username = $2", 
+        const data = await db.query("SELECT * FROM users WHERE email = $1 OR username = $2", // CHECKS IF ID ALREADY EXISTS OR NOT
         [req.body.email, req.body.username]);
         
-        if (data.rows.length == 0 ) {
+        if (data.rows.length == 0 ) { // IF NOT INSERTS DATA TO THE DATABASE
             try {
                 const resp = await db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
                 [req.body.username, req.body.email, req.body.password]);
@@ -51,7 +51,7 @@ app.post('/register', async (req, res) => { // REGISTERS THE USER WORK IN PROGRE
                 res.send("User not added because ", err);
             }
         }
-        else {
+        else { //IF USER ALREADY IN THE DATABSE
             console.log("EMAIL OR USERNAME ALREADY EXISTS\n")
             res.send("EMAIL OR USERNAME ALREADY EXISTS");
         }
