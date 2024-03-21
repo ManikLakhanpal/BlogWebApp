@@ -33,9 +33,9 @@ async function sendMail(subject, message, reciever) {
             html: `<b>${message}</b>`,
         });
 
-        console.log("Mail was sent.");
+        console.log(`~[SERVER] : Mail was sent to ${reciever} `);
     } catch (err) {
-        console.log("Couldn't send email.", err);
+        console.log("~[SERVER] : Couldn't send email.", err);
     }
 };
 
