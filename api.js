@@ -76,7 +76,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.get('/otp-gen', async (req, res) => { //GENERATES A 6 DIGIT OTP
+app.post('/otp-gen', async (req, res) => { //GENERATES A 6 DIGIT OTP
     const randomNumber = Math.floor(100000 + Math.random() * 900000);
     console.log(randomNumber);
     res.status(200).send(`${randomNumber}`);

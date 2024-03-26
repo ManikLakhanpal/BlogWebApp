@@ -117,7 +117,7 @@ app.post('/register', async (req, res) => { // Takes the data from the form and 
 
 app.post('/generate-otp', async (req, res) => {
     try {
-        const otpData = await axios.get(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
+        const otpData = await axios.post(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
         const message = otpData.data;
         otp = message;
 
@@ -130,11 +130,11 @@ app.post('/generate-otp', async (req, res) => {
     } catch(err) {
         res.sendStatus(404); // IF FAIL THEN WEBSITE WILL FLASH FAIL
     }
-})
+});
 
 app.get('/contact', (req, res) => {
     res.status(200).redirect("/home");
-})
+});
 
 app.get('/api', async (req, res) => { // USED TO GET 1 POST AT A TIME IN JSON
     try {
@@ -148,8 +148,23 @@ app.get('/api', async (req, res) => { // USED TO GET 1 POST AT A TIME IN JSON
         res.status(404).send("Something happened");
         console.log(err);
     }
-})
+});
+
+app.get('/post', (req, res) => {
+    try {
+        res.render('post.ejs', {
+            title: "Post"
+        });
+        }
+        catch (err) {
+            res.send("Error ", err);
+        }
+});
+
+app.post('/post', async (req, res) => {
+    res.send(req.body);
+});
 
 app.listen(port, () => {
     console.log(`[SERVER] : The server is up and running on port ${port}`);
-})
+});

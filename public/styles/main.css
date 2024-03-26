@@ -85,7 +85,9 @@ BELOW IS FOR HOME.EJS
 }
 
 .posts-section {
-    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;  
 }
 
 .posts {
@@ -109,6 +111,23 @@ BELOW IS FOR HOME.EJS
 .post-date {
     text-align: right;
     font-size: 13px;
+}
+
+.post-button {
+    align-self: center;
+    text-decoration: none;
+    text-align: center;
+    color:#333;
+    width: 25%;
+    border: 1px solid #333;
+    border-radius: 2px;
+    background-color: rgb(255, 130, 130);
+    font-size: 23px;
+}
+
+.post-button:hover {
+    background-color: rgb(253, 0, 0);
+    color: #ddd;
 }
 
 /*
@@ -163,6 +182,35 @@ BELOW IS FOR REGISTER.EJS
     color: white;
  }
 
+/*
+ =========================================
+BELOW IS FOR POST.EJS 
+ =========================================
+ */
+
+ .addForm {
+     display: flex;
+     flex-direction: column;
+     border: 1px solid black;
+     justify-content: center;
+     align-self: center;
+     background-color: whitesmoke;
+     width: 66%;
+     margin-top: 2%;
+     margin-bottom: 2%;
+     padding: 7% 4%;
+ }
+
+.inputField {
+    width: 100%;
+    height: 30px;
+    padding-left: 2px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 0.5px solid black;
+    margin-bottom: 3%;
+
+}
 /*
  =========================================
 BELOW IS FOR Bottom.EJS 
