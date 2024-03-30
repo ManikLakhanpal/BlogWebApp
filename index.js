@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import 'dotenv/config';
 import axios from "axios";
 import bodyparser from "body-parser";
+import session from "express-session";
 
 // NOTE: CREATE A '.env' OR REPLACE THE "process.env"s WITH THE VALID VALUES
 
@@ -50,6 +51,12 @@ app.use(express.static('public')); // Tells express to use items inside public f
 app.use(bodyparser.urlencoded({ extended: true })) // Allows to access the parsed form data in your Express route handlers using req.body
 app.use(bodyparser.json()); // Enables the use of JSON in express server req.body
 
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.get('/', (req, res) => {
     res.redirect("/home");
 })
@@ -85,7 +92,7 @@ app.post('/register', async (req, res) => { // Takes the data from the form and 
     const formData = req.body; 
     console.log(formData);
 
-    if (otp == formData.otp) { // Checks if generated OTP is same as entered OTP.
+    if (req.session.otp == formData.otp) { // Checks if generated OTP is same as entered OTP.
         const resp = await axios.post(`${api_url}/register`, formData); // sends form data to API
         console.log("API RESPONSE :", resp.data);
             
@@ -117,14 +124,13 @@ app.post('/register', async (req, res) => { // Takes the data from the form and 
 
 app.post('/generate-otp', async (req, res) => {
     try {
-        const otpData = await axios.post(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
-        const message = otpData.data;
-        otp = message;
+        const resp = await axios.post(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
+        req.session.otp = resp.data; // SAVES THE OTP IN SESSION
 
         const recieverEmail = req.body.data;
         console.log("Email:", recieverEmail);
 
-        await sendMail("OTP", `Your otp is : ${message}`, recieverEmail); // SENDS THE EMAIL
+        await sendMail("OTP", `Your otp is : ${req.session.otp}`, recieverEmail); // SENDS THE EMAIL
         res.sendStatus(200); // IF SUCCESSFUL THEN WEBSITE WILL FLASH SUCCESSS
 
     } catch(err) {

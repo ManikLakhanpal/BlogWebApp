@@ -26,7 +26,6 @@ db.connect(); // CONNECTS US WITH THE DATABASE
 app.get('/posts', async (req, res) => { // THIS SENDS BACK ALL THE POSTS IN DATABASE
     try {
         const data = await db.query("SELECT * FROM posts");
-        console.log(data.rows);
         res.send(data.rows);
         
     } catch (err) {
@@ -37,7 +36,6 @@ app.get('/posts', async (req, res) => { // THIS SENDS BACK ALL THE POSTS IN DATA
 
 app.post('/register', async (req, res) => { 
     try {
-        console.log(req.body);
         const data = await db.query("SELECT * FROM users WHERE email = $1 OR username = $2", // CHECKS IF ID ALREADY EXISTS OR NOT
         [req.body.email, req.body.username]);
         
@@ -53,13 +51,12 @@ app.post('/register', async (req, res) => {
                         
                         const resp = await db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
                         [req.body.username, req.body.email, hash]);
-
+                        
                         console.log(`SERVER : ACCOUNT CREATED ${req.body.email}\n${req.body.username}\n`);
                         res.send("User added");
                     }
                 });
 
-                
             } catch (err) {
                 console.log("User not added because ", err, "\n");
                 res.send("User not added because ", err);
