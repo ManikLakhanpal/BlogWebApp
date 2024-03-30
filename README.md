@@ -1,4 +1,4 @@
-# WebBlogApp
+# BlogWebApp
 
 A simple blog site created by Manik Lakhanpal, currently a work in progress! Node packages used: axios (for API requests), fs (to read data.json), and express (to launch the site).
 
