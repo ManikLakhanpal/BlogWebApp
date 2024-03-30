@@ -168,7 +168,14 @@ app.get('/post', (req, res) => {
 });
 
 app.post('/post', async (req, res) => {
-    res.send(req.body);
+    console.log(req.body);
+    try {
+        const resp = await axios.post(`${api_url}/post`, req.body); // POSTS THE DATA TO API
+        res.redirect('/home'); // REDIRECTS TO HOME PAGE
+
+    } catch (err) {
+        res.send("Error ", err);
+    }
 });
 
 app.listen(port, () => {

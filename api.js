@@ -51,7 +51,7 @@ app.post('/register', async (req, res) => {
                         
                         const resp = await db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
                         [req.body.username, req.body.email, hash]);
-                        
+
                         console.log(`SERVER : ACCOUNT CREATED ${req.body.email}\n${req.body.username}\n`);
                         res.send("User added");
                     }
@@ -77,6 +77,18 @@ app.post('/otp-gen', async (req, res) => { //GENERATES A 6 DIGIT OTP
     const randomNumber = Math.floor(100000 + Math.random() * 900000);
     console.log(randomNumber);
     res.status(200).send(`${randomNumber}`);
+});
+
+app.post('/post', async (req, res) => { // ADDS POST TO THE DATABASE
+    try {
+        console.log(req.body);
+        const resp = await db.query("INSERT INTO posts (title, content, author, date) VALUES ($1, $2, $3, $4)", 
+        [req.body.title, req.body.content, req.body.author, req.body.date]);
+        res.sendStatus(200);
+    } catch(err) {
+        console.log("Error while adding post", err);
+        res.sendStatus(404);
+    }
 });
 
 app.listen(port, () => {
