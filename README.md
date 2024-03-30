@@ -61,8 +61,5 @@ Now, you can access the site in your web browser at http://localhost:7777.
 
 Email me if you want to contribute 👉🏻 lakhanpalmanik@protonmail.com
 
-<<<<<<< HEAD
+## Using
 Feel free to customize it further based on your project's specifics.
-=======
-Feel free to customize it further based on your project's specifics.
->>>>>>> b94da81 (Added steps and Info to README.md)
