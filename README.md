@@ -1,6 +1,7 @@
 # BlogWebApp
 
-A simple blog site created by Manik Lakhanpal, currently a work in progress! Node packages used: axios (for API requests), fs (to read data.json), and express (to launch the site).
+A simple blog site created by Manik Lakhanpal, currently a work in progress! 
+You can access the live version on [blog.w16manik.ninja](http://blog.w16manik.ninja) and read this for API documentation(https://documenter.getpostman.com/view/30788213/2sA3BoZqwM)
 
 ## Getting Started
 

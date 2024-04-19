@@ -51,7 +51,7 @@ app.use(express.static('public')); // Tells express to use items inside public f
 app.use(bodyparser.urlencoded({ extended: true })) // Allows to access the parsed form data in your Express route handlers using req.body
 app.use(bodyparser.json()); // Enables the use of JSON in express server req.body
 
-app.use(session({
+app.use(session({ // Session is used to store data in the server.
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
@@ -90,7 +90,6 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res) => { // Takes the data from the form and posts it to API.
     const formData = req.body; 
-    console.log(formData);
 
     if (req.session.otp == formData.otp) { // Checks if generated OTP is same as entered OTP.
         const resp = await axios.post(`${api_url}/register`, formData); // sends form data to API
@@ -125,7 +124,8 @@ app.post('/register', async (req, res) => { // Takes the data from the form and 
 app.post('/generate-otp', async (req, res) => {
     try {
         const resp = await axios.post(`${api_url}/otp-gen`); // GENERATES OTP WITH MESSAGE
-        req.session.otp = resp.data; // SAVES THE OTP IN SESSION
+        console.log(resp.data.otp);
+        req.session.otp = resp.data.otp; // SAVES THE OTP IN SESSION
 
         const recieverEmail = req.body.data;
         console.log("Email:", recieverEmail);

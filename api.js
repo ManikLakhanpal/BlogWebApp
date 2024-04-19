@@ -13,11 +13,11 @@ app.use(bodyparser.json());
 
 // NOTE: CREATE A '.env' OR REPLACE THE "process.env"s WITH THE VALID VALUES
 
-const db = new pg.Client({  // ACCESSES THE DATABASE
+const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "data",
-    password: process.env.PASSWORD, // PASSWORD for postgres database.
+    password: process.env.PASSWORD,
     port: 5432
   });
 
@@ -26,7 +26,8 @@ db.connect(); // CONNECTS US WITH THE DATABASE
 app.get('/posts', async (req, res) => { // THIS SENDS BACK ALL THE POSTS IN DATABASE
     try {
         const data = await db.query("SELECT * FROM posts");
-        res.send(data.rows);
+        console.log(`[SERVER] : All the posts are sent.`);
+        res.json(data.rows);
         
     } catch (err) {
         console.log(`[SERVER] : There was some problems while retrieveing data ${err}`);
@@ -52,7 +53,7 @@ app.post('/register', async (req, res) => {
                         const resp = await db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
                         [req.body.username, req.body.email, hash]);
 
-                        console.log(`SERVER : ACCOUNT CREATED ${req.body.email}\n${req.body.username}\n`);
+                        console.log(`SERVER : ACCOUNT CREATED ${req.body.username}\t${req.body.email}\n`);
                         res.send("User added");
                     }
                 });
@@ -74,15 +75,15 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/otp-gen', async (req, res) => { //GENERATES A 6 DIGIT OTP
-    const randomNumber = Math.floor(100000 + Math.random() * 900000);
-    console.log(randomNumber);
-    res.status(200).send(`${randomNumber}`);
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    console.log(`[SERVER] : New otp generated : ${otp}`);
+    res.status(200).json({otp});
 });
 
 app.post('/post', async (req, res) => { // ADDS POST TO THE DATABASE
     try {
         console.log(req.body);
-        const resp = await db.query("INSERT INTO posts (title, content, author, date) VALUES ($1, $2, $3, $4)", 
+        await db.query("INSERT INTO posts (title, content, author, date) VALUES ($1, $2, $3, $4)", 
         [req.body.title, req.body.content, req.body.author, req.body.date]);
         res.sendStatus(200);
     } catch(err) {
