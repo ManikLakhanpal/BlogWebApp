@@ -27,11 +27,11 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [signInMethod, setSignInMethod] = useState<string | null>(null);
 
-  const BACKEND = "https://testing.w16manik.ninja";
+  const BACKEND = "http://localhost:5000";
 
   useEffect(() => {
     // Fetch data from your backend
-    const fetchData = async () => {
+    async function fetchData() {
       try {
         const result = await axios.get<UserData>(
           `${BACKEND}/api/user`,

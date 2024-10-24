@@ -7,7 +7,7 @@ import GitHubStrategy from "npm:passport-github";
 
 const app = express();
 const PORT = 5000;
-const FRONTEND = "http://localhost:3000";
+const FRONTEND = "http://localhost:3000/login";
 const BACKEND = "http://localhost:5000";
 
 // CORS setup
@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 // Trust first proxy, very important for secure cookies, using vercel as proxy
-app.set("trust proxy", 1); 
+// app.set("trust proxy", 1); 
 
 // Session setup
 app.use(session({
@@ -25,7 +25,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: true, // true only in https
+    secure: false, // true only in https
     maxAge: 1000 * 60,
   },
 }));
