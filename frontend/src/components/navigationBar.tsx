@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 function NavigationBar() {
   const linkClasses = "relative group hidden lg:block";
-  const underlineClasses =
-    "absolute left-1/2 bottom-0 w-0 h-[2px] bg-white transition-all duration-500 ease-out group-hover:w-full group-hover:left-0";
+  const underlineClasses = "absolute left-1/2 bottom-0 w-0 h-[2px] bg-white transition-all duration-500 ease-out group-hover:w-full group-hover:left-0";
+
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
     <nav
@@ -32,14 +36,24 @@ function NavigationBar() {
           <a href="./#projects">Trending</a>
           <div className={underlineClasses}></div>
         </div>
-        <a>
+        <a className="relative inline-block">
           <Image
             src="https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
             alt="profilePhoto"
             height={50}
             width={50}
+            onClick={() => {setShowProfileMenu(!showProfileMenu)}}
             className="rounded-full border-2 border-black hover:cursor-pointer"
           />
+
+          {showProfileMenu && (
+            <div 
+              onClick={() => {window.open("/login", "_blank")}}
+              className="absolute bg-orange-400 group rounded-md px-3 right-5 z-50 duration-300 cursor-pointer transition-colors hover:bg-orange-500"
+            >
+              Login
+            </div>
+          )}
         </a>
       </div>
     </nav>

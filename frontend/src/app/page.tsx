@@ -3,7 +3,9 @@ import NavigationBar from "../components/navigationBar";
 
 function Home() {
   return (
-    <NavigationBar />
+    <div>
+      <NavigationBar />
+    </div>
   );
 }
 
