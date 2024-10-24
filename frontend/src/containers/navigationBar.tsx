@@ -120,7 +120,7 @@ function NavigationBar() {
           showMobileNav
             ? "translate-x-0 opacity-100 block"
             : "-translate-x-full opacity-0"
-        } inset-y-0 left-0 block h-screen ease-in-out duration-500 border-2 transform fixed top-0 w-5/6 z-50 transition-all`}
+        } inset-y-0 left-0 block h-screen ease-in-out duration-300 border-2 transform fixed top-0 w-5/6 z-50 transition-all`}
         style={{ 
           visibility: showMobileNav ? "visible" : "hidden",
           backdropFilter: "blur(14px) saturate(100%)",
@@ -128,6 +128,12 @@ function NavigationBar() {
           backgroundColor: "rgba(6, 0, 11, 0.6)",
         }}
       >
+        <div 
+          className="fixed right-5 font-bold font-sans top-5 p-2 rounded-full"
+          onClick={() => {setShowMobileNav(false)}}
+        >
+          X
+        </div>
         <ul className="flex flex-col h-full justify-around pb-52 mt-10 text-white text-xl px-6">
           <li>
             <a href="./#home" onClick={() => setShowMobileNav(false)}>
