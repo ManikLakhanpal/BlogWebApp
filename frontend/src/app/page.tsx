@@ -1,12 +1,8 @@
 import Image from "next/image";
-import NavigationBar from "../components/navigationBar";
+import NavigationBar from "@/containers/navigationBar";
 
-function Home() {
+export default function Home() {
   return (
-    <div>
-      <NavigationBar />
-    </div>
+    <NavigationBar />
   );
 }
-
-export default Home;
