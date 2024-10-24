@@ -18,20 +18,15 @@ interface UserData {
 }
 
 export default function Home() {
-  const [data, setData] = useState<UserData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [signInMethod, setSignInMethod] = useState<string | null>(null)
+  const [data, setData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [signInMethod, setSignInMethod] = useState<string | null>(null);
 
   const BACKEND = "http://localhost:5000"
 
   useEffect(() => {
-    const storedData = sessionStorage.getItem("userData")
-    if (storedData) {
-      setData(JSON.parse(storedData))
-      setLoading(false)
-    } else {
-      async function fetchData() {
+    async function fetchData() {
         try {
           const result = await axios.get<UserData>(`${BACKEND}/api/user`, {
             withCredentials: true,
@@ -49,8 +44,7 @@ export default function Home() {
         }
       }
       fetchData()
-    }
-  }, [BACKEND])
+    }, [BACKEND])
 
   function handleGoogleSignIn() {
     window.open(`${BACKEND}/auth/google`, "_self")
