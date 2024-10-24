@@ -83,7 +83,7 @@ function NavigationBar() {
 
           {showProfileMenu && (
             <div 
-              onClick={() => {window.open("/login", "_blank")}}
+              onClick={() => {window.open("/login", "_self")}}
               className="absolute bg-orange-400 group rounded-md px-3 right-5 z-50 duration-300 cursor-pointer transition-colors hover:bg-orange-500"
             >
               {data == null ? "Login" : "Logout"}
