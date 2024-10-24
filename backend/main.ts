@@ -7,7 +7,7 @@ import GitHubStrategy from "npm:passport-github";
 
 const app = express();
 const PORT = 5000;
-const FRONTEND = "http://localhost:3000/login";
+const FRONTEND = "http://localhost:3000";
 const BACKEND = "http://localhost:5000";
 
 // CORS setup
