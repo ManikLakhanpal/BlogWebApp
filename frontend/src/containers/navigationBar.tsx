@@ -123,6 +123,7 @@ function NavigationBar() {
       }, 300)  && (
         <div 
           className="bg-opacity-0 fixed top-0 h-full w-full"
+          style={{ visibility: showMobileNav ? "visible" : "hidden",}}
           onClick={() => {setShowMobileNav(!showMobileNav)}}
         >
           <nav
