@@ -3,7 +3,7 @@ import { Heart, Flag, Bookmark, Share } from 'lucide-react'
 
 function PostCard() {
     return (
-        <div className="p-4 sm:p-6 border border-gray-500 rounded-md">
+        <div className="p-4 sm:p-6 border border-gray-900 rounded-sm">
           <div className="flex items-center space-x-4 mb-4">
             <Image
               src="https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
@@ -13,7 +13,7 @@ function PostCard() {
               className="rounded-full border-2 border-gray-200"
             />
             <div>
-              <h1 className="text-xl font-bold text-gray-200">Manik</h1>
+              <h1 className="text-xl font-bold text-gray-200">Manik Lakhanpal</h1>
               <p className="text-sm text-gray-500">@Manik</p>
             </div>
           </div>
