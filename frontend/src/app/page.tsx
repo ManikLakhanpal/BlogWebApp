@@ -1,12 +1,13 @@
 import Image from "next/image";
 import NavigationBar from "@/containers/navigationBar";
 import HeroPage from "@/containers/heroPage";
+import { UserProvider } from "@/context/UserContext";
 
 export default function Home() {
   return (
-    <div>
+    <UserProvider>
       <NavigationBar />
       <HeroPage />
-    </div>
+    </UserProvider>
   );
 }

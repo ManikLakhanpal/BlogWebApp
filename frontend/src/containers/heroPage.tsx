@@ -2,11 +2,25 @@
 import Image from "next/image";
 import PostCard from "@/components/PostCard";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useUser } from "@/context/UserContext";
+import { useState, useEffect } from "react";
+
+interface UserData {
+  name: {
+    familyName: string;
+    givenName: string;
+  };
+  displayName: string;
+  photos: { value: string }[];
+  provider: string;
+}
 
 export default function HeroPage() {
+  const { user, loading, error } = useUser();
   const [showCreate, setShowCreate] = useState(false);
   const [textInput, setTextInput] = useState("");
+
+  const BACKEND = "http://localhost:5000";
 
   const handleCancel = () => {
     setTextInput("");
@@ -29,7 +43,7 @@ export default function HeroPage() {
         <PostCard />
       </div>
       <span
-        className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 rounded-full"
+        className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-0 rounded-full"
         onClick={() => setShowCreate(!showCreate)}
       >
         <Plus />
@@ -40,7 +54,7 @@ export default function HeroPage() {
           <div className="h-fit w-3/4 bg-slate-800 rounded-lg shadow-lg p-6">
             <div className="flex items-center space-x-4 mb-4">
               <Image
-                src="https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
+                src={user? user.photos[0].value : "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"}
                 height={64}
                 width={64}
                 alt="Manik's profile picture"

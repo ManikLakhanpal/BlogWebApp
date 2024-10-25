@@ -4,6 +4,7 @@ import session from "npm:express-session";
 import passport from "npm:passport";
 import GoogleStrategy from "npm:passport-google-oauth20";
 import GitHubStrategy from "npm:passport-github";
+import MongoStore from "npm:connect-mongo";
 
 const app = express();
 const PORT = 5000;
@@ -24,9 +25,13 @@ app.use(session({
   secret: Deno.env.get("SESSION_SECRET"),
   resave: false,
   saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: "mongodb://localhost:27017/sessions",
+    ttl: 1000 * 60 * 60 * 24 * 14,
+  }),
   cookie: {
     secure: false, // true only in https
-    maxAge: 1000 * 60 * 60 * 24,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
   },
 }));
 
@@ -144,9 +149,9 @@ app.get(
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(
-    `${Deno.env.get("SESSION_SECRET")}\n${Deno.env.get("NODE_ENV")}\n${
-      Deno.env.get("GOOGLE_CLIENT_ID")
-    }\n${Deno.env.get("GOOGLE_CLIENT_SECRET")}`,
-  );
+  // console.log(
+  //   `${Deno.env.get("SESSION_SECRET")}\n${Deno.env.get("NODE_ENV")}\n${
+  //     Deno.env.get("GOOGLE_CLIENT_ID")
+  //   }\n${Deno.env.get("GOOGLE_CLIENT_SECRET")}`,
+  // );
 });
