@@ -51,9 +51,8 @@ function NavigationBar() {
 
   return (
     <div className="w-full sticky top-0">
-      
-        <div>
-          <nav
+      <div>
+        <nav
             style={{
               backdropFilter: "blur(14px) saturate(100%)",
               WebkitBackdropFilter: "blur(14px) saturate(100%)",
@@ -115,12 +114,13 @@ function NavigationBar() {
                 )}
               </a>
             </div>
-          </nav>
-        </div>
+        </nav>
+      </div>
       
-
       {/* MOBILE NAV BELOW */}
-      {showMobileNav && (
+      {setTimeout(() => {
+        showMobileNav
+      }, 300)  && (
         <div 
           className="bg-opacity-0 fixed top-0 h-full w-full"
           onClick={() => {setShowMobileNav(!showMobileNav)}}
