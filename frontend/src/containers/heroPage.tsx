@@ -1,13 +1,13 @@
-import exp from "constants";
+import Image from "next/image"
+import PostCard from "@/components/PostCard"
 
-function HeroPage() {
-    return (
-        <section className="h-screen w-screen">
-            <div className="border-2 border-red-500 m-5 h-full">
-
-            </div>
-        </section>
-    );
+export default function HeroPage() {
+  return (
+    <section className="h-screen w-screen">
+        <h1 className="text-center text-4xl">Latest</h1>
+      <div className="border-red-500 border-2 m-5 sm:mx-96 h-full">
+        <PostCard />
+      </div>
+    </section>
+  )
 }
-
-export default HeroPage;
