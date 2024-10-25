@@ -18,9 +18,7 @@ function PostCard() {
             </div>
           </div>
           <p className="text-gray-300 leading-relaxed mb-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-            reiciendis dolore consectetur ab rerum labore vel non placeat cumque
-            voluptates!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nemo alias perspiciatis reprehenderit ut magnam.
           </p>
           <p className="text-sm text-gray-500 mb-4">13:34 · Oct 25, 2024</p>
           <div className="flex justify-around mt-2">

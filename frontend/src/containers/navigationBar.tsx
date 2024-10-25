@@ -80,11 +80,11 @@ function NavigationBar() {
                 <div className={underlineClasses}></div>
               </div>
               <div className={linkClasses}>
-                <a href="./#about">Latest</a>
+                <a href="./#about">Profile</a>
                 <div className={underlineClasses}></div>
               </div>
               <div className={linkClasses}>
-                <a href="./#projects">Trending</a>
+                <a href="./#projects">About</a>
                 <div className={underlineClasses}></div>
               </div>
               <a className="relative">
