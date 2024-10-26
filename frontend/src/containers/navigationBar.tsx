@@ -105,7 +105,7 @@ function NavigationBar() {
             }}
           >
             <div
-              className="fixed right-5 font-bold font-sans top-5 p-2 rounded-full"
+              className="fixed right-5 text-white font-bold font-sans top-5 p-2 rounded-full"
               onClick={() => {
                 setShowMobileNav(false);
               }}
