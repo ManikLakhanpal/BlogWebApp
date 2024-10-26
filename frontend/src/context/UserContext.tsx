@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { cookies } from 'next/headers';
 
 const BACKEND = "http://localhost:5000";
 
