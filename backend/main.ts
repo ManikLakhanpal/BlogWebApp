@@ -126,7 +126,7 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
   (_req: express.Request, res: express.Response) => { // Redirect to frontend on success
-    res.redirect(`${FRONTEND}/verified`);
+    res.redirect(`${FRONTEND}`);
   },
 );
 

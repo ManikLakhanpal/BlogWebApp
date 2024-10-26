@@ -1,7 +1,6 @@
 // context/UserContext.tsx
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const BACKEND = "http://localhost:5000";
