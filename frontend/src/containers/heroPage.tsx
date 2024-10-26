@@ -10,8 +10,6 @@ export default function HeroPage() {
   const [showCreate, setShowCreate] = useState(false);
   const [textInput, setTextInput] = useState("");
 
-  const BACKEND = "http://localhost:5000";
-
   const handleCancel = () => {
     setTextInput("");
     setShowCreate(false);

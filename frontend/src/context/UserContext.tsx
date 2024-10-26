@@ -1,7 +1,7 @@
 // context/UserContext.tsx
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; // ! Import the js-cookie library
 
 const BACKEND = "http://localhost:5000";
 
@@ -23,12 +23,14 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// * Takes the children prop and returns the UserContext.Provider component
 function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const BACKEND = "http://localhost:5000";
 
+  // * Fetches the user data from the cookie
   useEffect(() => {
     async function fetchUserData() {
       const userCookie = Cookies.get('user');
@@ -54,15 +56,21 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// * Logs out the user and removes the user data from the session storage
 function handleLogout() {
   window.location.href = `${BACKEND}/auth/logout`;
   sessionStorage.removeItem("user");
-  Cookies.remove('user');
+  Cookies.remove('user'); // ! Remove the user cookie
 }
 
+/*  
+  * Custom hook that returns the user context value
+  * throws an error if the hook is used outside of the UserProvider
+*/
 function useUser() {
   const context = useContext(UserContext);
   if (!context) {
+    // ! This will happen if elements are not inside UserProvider in the App component
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;

@@ -11,14 +11,14 @@ const PORT = 5000;
 const FRONTEND = "http://localhost:3000";
 const BACKEND = "http://localhost:5000";
 
-// CORS setup
+// * CORS setup
 app.use(cors({
   origin: `${FRONTEND}`,
   credentials: true,
 }));
 
-// Trust first proxy, very important for secure cookies, using vercel as proxy
-// app.set("trust proxy", 1); 
+// TODO Trust first proxy, very important for secure cookies, using vercel as proxy
+// TODO app.set("trust proxy", 1); 
 
 // Session setup
 app.use(session({
@@ -39,7 +39,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Google Strategy
+// * Google Passport Strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -58,6 +58,7 @@ passport.use(
   ),
 );
 
+// * GitHub Passport Strategy
 passport.use(
   new GitHubStrategy({
     clientID: Deno.env.get("GITHUB_CLIENT_ID"),
@@ -74,11 +75,11 @@ passport.use(
 );
 
 passport.serializeUser((user: express.user, done: passport.done) => {
-  done(null, user); // Save the user in the session
+  done(null, user); // ! Save the user in the session
 });
 
 passport.deserializeUser((user: express.user, done: passport.done) => {
-  done(null, user); // Retrieve the user from the session
+  done(null, user); // ! Retrieve the user from the session
 });
 
 // Routes
@@ -98,7 +99,7 @@ app.get("/deno", (req: express.Request, res: express.Response) => {
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["profile", "email"], // Request access to profile and email
+    scope: ["profile", "email"], // ! Request access to profile and email
   }),
 );
 
@@ -109,9 +110,9 @@ app.get('/login', (_req: express.Request, res: express.Response) => {
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }), // Redirect to login on failure
+  passport.authenticate("google", { failureRedirect: "/login" }), // ! Redirect to login on failure
   (_req: express.Request, res: express.Response) => {
-    res.redirect(`${FRONTEND}/verified`); // Redirect to frontend on success
+    res.redirect(`${FRONTEND}/verified`); // ! Redirect to frontend on success
   },
 );
 
@@ -125,7 +126,7 @@ app.get(
 app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
-  (_req: express.Request, res: express.Response) => { // Redirect to frontend on success
+  (_req: express.Request, res: express.Response) => { // ! Redirect to frontend on success
     res.redirect(`${FRONTEND}`);
   },
 );
@@ -140,7 +141,7 @@ app.get(
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
     req.logout((err: Error | null) => {
       if (err) {
-        return next(err); // Ensure next is available
+        return next(err); // ! Ensure next is available
       }
       res.redirect(`${FRONTEND}`);
     });
@@ -149,9 +150,4 @@ app.get(
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  // console.log(
-  //   `${Deno.env.get("SESSION_SECRET")}\n${Deno.env.get("NODE_ENV")}\n${
-  //     Deno.env.get("GOOGLE_CLIENT_ID")
-  //   }\n${Deno.env.get("GOOGLE_CLIENT_SECRET")}`,
-  // );
 });
