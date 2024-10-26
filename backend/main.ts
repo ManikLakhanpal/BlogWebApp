@@ -111,7 +111,7 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }), // Redirect to login on failure
   (_req: express.Request, res: express.Response) => {
-    res.redirect(`${FRONTEND}`); // Redirect to frontend on success
+    res.redirect(`${FRONTEND}/verified`); // Redirect to frontend on success
   },
 );
 
@@ -126,7 +126,7 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
   (_req: express.Request, res: express.Response) => { // Redirect to frontend on success
-    res.redirect(`${FRONTEND}`);
+    res.redirect(`${FRONTEND}/verified`);
   },
 );
 
