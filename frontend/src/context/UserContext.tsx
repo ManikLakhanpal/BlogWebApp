@@ -31,7 +31,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   const BACKEND = "http://localhost:5000";
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    async function fetchUserData() {
       const userCookie = Cookies.get('user');
       if (userCookie) {
         try {
@@ -40,22 +40,6 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         } catch (error) {
           console.error("Error parsing user cookie:", error);
           setError("Failed to parse user data.");
-          setUser(null);
-        }
-      } else {
-        try {
-          const result = await axios.get<UserData>(`${BACKEND}/api/user`, {
-            withCredentials: true,
-          });
-          if (result.data) {
-            setUser(result.data);
-            Cookies.set('user', JSON.stringify(result.data), { expires: 14 });
-          } else {
-            setUser(null);
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-          setError("Failed to fetch user data.");
           setUser(null);
         }
       }
@@ -85,4 +69,4 @@ function useUser() {
   return context;
 };
 
-export { handleLogout, useUser, UserProvider};
+export { handleLogout, useUser, UserProvider };
