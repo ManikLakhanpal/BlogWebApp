@@ -32,19 +32,25 @@ export default function HeroPage() {
         <PostCard />
         <PostCard />
       </div>
-      <span
-        className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-0 rounded-full"
-        onClick={() => setShowCreate(!showCreate)}
-      >
-        <Plus />
-      </span>
+      {user != null && (
+        <span
+          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-0 rounded-full"
+          onClick={() => setShowCreate(!showCreate)}
+        >
+          <Plus />
+        </span>
+      )}
 
       {showCreate && (
         <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50">
           <div className="h-fit w-3/4 bg-slate-800 rounded-lg shadow-lg p-6">
             <div className="flex items-center space-x-4 mb-4">
               <Image
-                src={user? user.photos[0].value : "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"}
+                src={
+                  user
+                    ? user.photos[0].value
+                    : "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
+                }
                 height={64}
                 width={64}
                 alt="Manik's profile picture"
