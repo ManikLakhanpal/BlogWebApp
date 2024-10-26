@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { GoogleImage, GoogleText } from "@/components/Google";
 import { GitHubImage, GitHubText } from "@/components/GitHub";
 import { Loader2, LogOut } from "lucide-react";
-import { useUser } from "@/context/UserContext";
+import { useUser, handleLogout as logout } from "@/context/UserContext";
 
 interface UserData {
   name: {
@@ -41,8 +41,7 @@ function LoginPage() {
 
   function handleLogout() {
     setSignInMethod(null);
-    window.location.href = `${BACKEND}/auth/logout`;
-    sessionStorage.removeItem("userData");
+    logout();
   }
     return(
         <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">

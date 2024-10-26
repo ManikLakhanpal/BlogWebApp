@@ -3,6 +3,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
+
+const BACKEND = "http://localhost:5000";
 
 interface UserData {
   name: {
@@ -68,6 +71,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     </UserContext.Provider>
   );
 };
+
+export function handleLogout() {
+  window.location.href = `${BACKEND}/auth/logout`;
+  sessionStorage.removeItem("user");
+  Cookies.remove('user');
+}
 
 export const useUser = () => {
   const context = useContext(UserContext);
