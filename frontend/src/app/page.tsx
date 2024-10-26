@@ -1,4 +1,3 @@
-import Image from "next/image";
 import NavigationBar from "@/containers/navigationBar";
 import HeroPage from "@/containers/heroPage";
 import { UserProvider } from "@/context/UserContext";

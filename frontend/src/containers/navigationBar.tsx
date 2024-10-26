@@ -81,10 +81,7 @@ function NavigationBar() {
               X
             </div>
             <ul className="flex flex-col h-full justify-around pb-52 mt-10 text-white text-xl px-6">
-              <li><a href="./#home" onClick={() => setShowMobileNav(false)}>Home</a></li>
-              <li><a href="./#about" onClick={() => setShowMobileNav(false)}>Latest</a></li>
-              <li><a href="./#projects" onClick={() => setShowMobileNav(false)}>Trending</a></li>
-              <li><a href="./contact" onClick={() => setShowMobileNav(false)}>Contact</a></li>
+              {/* Add your mobile navigation items here */}
             </ul>
           </nav>
         </div>
