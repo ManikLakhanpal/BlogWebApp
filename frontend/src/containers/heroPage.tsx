@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
 import PostCard from "@/components/PostCard";
+import axios from "axios";
 import { Plus } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useState } from "react";
+
+const BACKEND = "http://localhost:5000";
 
 export default function HeroPage() {
   const { user, loading, error } = useUser();
@@ -15,10 +18,26 @@ export default function HeroPage() {
     setShowCreate(false);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log("Submitted:", textInput);
+
+    const data = {
+      name: user?.displayName,
+      content: textInput,
+      email: user?.emails[0].value,
+    };
+    try {
+      const resp = await axios.post(`${BACKEND}/add/posts`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Submitted:", textInput);
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
+
     setTextInput("");
     setShowCreate(false);
   };

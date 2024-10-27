@@ -5,7 +5,7 @@ import passport from "npm:passport";
 import GoogleStrategy from "npm:passport-google-oauth20";
 import GitHubStrategy from "npm:passport-github";
 import MongoStore from "npm:connect-mongo";
-import { connectDB, User } from "./mongoDB.ts";
+import { connectDB, User, Post } from "./mongoDB.ts";
 
 connectDB();
 
@@ -118,13 +118,16 @@ app.get('/login', (_req: express.Request, res: express.Response) => {
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }), // ! Redirect to login on failure
-  (req: express.Request, res: express.Response) => {
-    const newUser = new User({ 
-      name: req.user?.displayName,
-      email: req.user?.emails[0].value,
-      method: "google",
-    });
-    newUser.save();
+  async (req: express.Request, res: express.Response) => {
+    const existingUser = await User.findOne({ email: req.user?.emails[0].value });
+    if (!existingUser) {
+      const newUser = new User({ 
+        name: req.user?.displayName,
+        email: req.user?.emails[0].value,
+        method: "google",
+      });
+      await newUser.save();
+    }
     res.redirect(`${FRONTEND}/verified`); // ! Redirect to frontend on success
   },
 );
@@ -140,12 +143,15 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
   async (req: express.Request, res: express.Response) => { // ! Redirect to frontend on success
-    const newUser = new User({
-      name: req.user?.displayName,
-      email: req.user?.emails[0].value,
-      method: "github",
-    });
-    await newUser.save();
+    const existingUser = await User.findOne({ email: req.user?.emails[0].value });
+    if (!existingUser) {
+      const newUser = new User({
+        name: req.user?.displayName,
+        email: req.user?.emails[0].value,
+        method: "github",
+      });
+      await newUser.save();
+    }
     res.redirect(`${FRONTEND}`);
   },
 );
@@ -153,6 +159,20 @@ app.get(
 app.get("/api/user", (req: express.Request, res: express.Response) => {
   console.log(req.user || null);
   res.json(req.user || null);
+});
+
+app.post("/add/posts", async (req: express.Request, res: express.Response) => {
+  try {
+    const newPost = new Post({
+      name: req.body.name,
+      content: req.body.content,
+      email: req.body.email,
+    });
+    await newPost.save();
+    res.json(newPost);
+  } catch (error) {
+    res.status(500).json({ error: `Failed to add post.\n ${error}` });
+  }
 });
 
 app.get(

@@ -10,6 +10,7 @@ interface UserData {
     familyName: string;
     givenName: string;
   };
+  emails: {value: string}[];
   displayName: string;
   photos: { value: string }[];
   provider: string;
