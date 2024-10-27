@@ -10,7 +10,7 @@ function NavigationBarLinks() {
     <div className="flex items-center justify-end sm:justify-around">
       {routes.map((val, index) => (
         <div key={index} className={linkClasses}>
-          <a href={`./${val}`}>{val}</a>
+          <a href={`./#${val}`}>{val}</a>
           <div className={underlineClasses}></div>
         </div>
       ))}
