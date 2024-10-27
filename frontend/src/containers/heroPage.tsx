@@ -93,7 +93,7 @@ export default function HeroPage() {
 
       {showCreate && (
         <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50">
-          <div className="h-fit w-3/4 bg-slate-800 rounded-lg shadow-lg p-6">
+          <div className="h-fit w-11/12 sm:w-6/12 bg-slate-800 rounded-lg shadow-lg p-6">
             <div className="flex items-center space-x-4 mb-4">
               <Image
                 src={
@@ -108,17 +108,22 @@ export default function HeroPage() {
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-200">
-                  Manik Lakhanpal
+                  {user?.displayName}
                 </h1>
                 <p className="text-sm text-gray-500">@Manik</p>
               </div>
             </div>
+
+            <p className="text-right pb-2">
+              { textInput.length } / 150
+            </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <textarea
                 className="w-full h-32 p-3 rounded-md bg-gray-700 text-gray-300 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
                 placeholder="Write something here..."
                 value={textInput}
+                maxLength={150}
                 onChange={(e) => setTextInput(e.target.value)}
               ></textarea>
               <div className="flex justify-end space-x-2">
