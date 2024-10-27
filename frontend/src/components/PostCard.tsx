@@ -6,9 +6,19 @@ interface PostCardProps {
   content: string;
   email: string;
   photo: string;
+  createdAt: number;
 }
 
 function PostCard(props: PostCardProps) {
+  const date = new Date(props.createdAt);
+  const formattedDate = new Intl.DateTimeFormat('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  }).format(date);
+
   return (
     <div className="p-4 sm:p-6 border border-gray-900 rounded-sm">
       <div className="flex items-center space-x-4 mb-4">
@@ -31,7 +41,7 @@ function PostCard(props: PostCardProps) {
       <p className="text-gray-300 leading-relaxed mb-2">
         {props.content}
       </p>
-      <p className="text-sm text-gray-500 mb-4">13:34 · Oct 25, 2024</p>
+      <p className="text-sm text-gray-500 mb-4">{formattedDate}</p>
       <div className="flex justify-around mt-2">
         <button className="text-gray-500 hover:text-pink-500 transition-colors duration-200">
           <Heart className="w-5 h-5" />

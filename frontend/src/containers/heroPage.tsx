@@ -13,6 +13,7 @@ interface Post {
   content: string;
   photo: string;
   email: string;
+  createdAt: number;
 }
 
 export default function HeroPage() {
@@ -36,6 +37,7 @@ export default function HeroPage() {
       content: textInput,
       photo: user?.photos[0].value,
       email: user?.emails[0].value,
+      createdAt: Number(Date.now())
     };
     try {
       const resp = await axios.post(`${BACKEND}/add/posts`, data, {
@@ -64,7 +66,7 @@ export default function HeroPage() {
     };
 
     fetchData();
-  }, []);
+  }, [showCreate]);
 
   return (
     <section className="min-h-screen max-h-fit w-screen">
@@ -78,6 +80,7 @@ export default function HeroPage() {
               content={post.content}
               photo={post.photo}
               email={post.email}
+              createdAt={post.createdAt}
             />
           ))
         }
@@ -110,7 +113,9 @@ export default function HeroPage() {
                 <h1 className="text-xl font-bold text-gray-200">
                   {user?.displayName}
                 </h1>
-                <p className="text-sm text-gray-500">@Manik</p>
+                <p className="text-sm text-gray-500">
+                  {user?.emails[0].value}
+                </p>
               </div>
             </div>
 

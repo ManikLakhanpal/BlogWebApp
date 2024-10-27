@@ -40,18 +40,21 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         }
 
         // Then verify with backend
-        const response = await axios.get(`${BACKEND}/api/user`, {
-          withCredentials: true
-        });
+        if (!userCookie) {
+          const response = await axios.get(`${BACKEND}/api/user`, {
+            withCredentials: true
+          });
 
-        if (response.data) {
-          setUser(response.data);
-          // Update cookie with latest data
-          Cookies.set('user', JSON.stringify(response.data));
-        } else {
-          setUser(null);
-          Cookies.remove('user');
+          if (response.data) {
+            setUser(response.data);
+            // Update cookie with latest data
+            Cookies.set('user', JSON.stringify(response.data));
+          } else {
+            setUser(null);
+            Cookies.remove('user');
+          }
         }
+
       } catch (error) {
         console.error("Error fetching user data:", error);
         setError("Failed to fetch user data.");

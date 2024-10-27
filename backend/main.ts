@@ -169,6 +169,7 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
         content: req.body.content,
         email: req.body.email,
         photo: req.body.photo,
+        createdAt: req.body.createdAt
       });
       await newPost.save();
       res.json(newPost);
@@ -181,7 +182,7 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 });
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
-  const posts = await Post.find();
+  const posts = await Post.find().sort({createdAt: 'desc'});
   res.json(posts);
 });
 
