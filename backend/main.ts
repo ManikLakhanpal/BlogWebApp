@@ -5,6 +5,9 @@ import passport from "npm:passport";
 import GoogleStrategy from "npm:passport-google-oauth20";
 import GitHubStrategy from "npm:passport-github";
 import MongoStore from "npm:connect-mongo";
+import { connectDB, User } from "./mongoDB.ts";
+
+connectDB();
 
 const app = express();
 const PORT = 5000;
@@ -82,6 +85,10 @@ passport.deserializeUser((user: express.user, done: passport.done) => {
   done(null, user); // ! Retrieve the user from the session
 });
 
+app.use(express.json());
+
+// TODO MongoDB Connection Checking + Schemes
+
 // Routes
 app.get("/", (_req: express.Request, res: express.Response) => {
   res.json("Lol");
@@ -111,7 +118,13 @@ app.get('/login', (_req: express.Request, res: express.Response) => {
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }), // ! Redirect to login on failure
-  (_req: express.Request, res: express.Response) => {
+  (req: express.Request, res: express.Response) => {
+    const newUser = new User({ 
+      name: req.user?.displayName,
+      email: req.user?.emails[0].value,
+      method: "google",
+    });
+    newUser.save();
     res.redirect(`${FRONTEND}/verified`); // ! Redirect to frontend on success
   },
 );
@@ -126,7 +139,13 @@ app.get(
 app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
-  (_req: express.Request, res: express.Response) => { // ! Redirect to frontend on success
+  async (req: express.Request, res: express.Response) => { // ! Redirect to frontend on success
+    const newUser = new User({
+      name: req.user?.displayName,
+      email: req.user?.emails[0].value,
+      method: "github",
+    });
+    await newUser.save();
     res.redirect(`${FRONTEND}`);
   },
 );
