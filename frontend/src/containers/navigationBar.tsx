@@ -1,8 +1,7 @@
-// components/NavigationBar.tsx
-"use client";
+"use client"
 
-import Image from "next/image";
 import NavigationBarLinks from "@/components/navigationBarLinks";
+import MobileNavToggle from "@/components/mobileNavToggle";
 import { useState } from "react";
 
 function NavigationBar() {
@@ -19,25 +18,18 @@ function NavigationBar() {
           }}
           className="grid grid-cols-3 sm:grid-cols-2 text-white w-full py-4 text-xl px-9 z-40"
         >
-          <div className="flex sm:hidden items-center">
-            <Image
-              src="https://w16manik.blr1.cdn.digitaloceanspaces.com/elements/list.svg"
-              height={30}
-              width={30}
-              onClick={() => {
-                setShowMobileNav(!showMobileNav);
-              }}
-              alt="list"
-            />
-          </div>
-          <div className="flex justify-center sm:justify-start items-center">
+          <MobileNavToggle
+            onClick={() => {
+              setShowMobileNav(!showMobileNav);
+            }}
+           />
+          <div className="flex flex-row justify-center sm:justify-start items-center">
             <a href="./">Blog</a>
           </div>  
             <NavigationBarLinks />
         </nav>
       </div>
 
-      {/* MOBILE NAV BELOW */}
       {setTimeout(() => {
         showMobileNav;
       }, 300) && (
