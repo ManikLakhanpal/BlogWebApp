@@ -2,16 +2,11 @@
 "use client";
 
 import Image from "next/image";
+import NavigationBarLinks from "@/components/navigationBarLinks";
 import { useState } from "react";
-import { useUser } from "@/context/UserContext";
 
 function NavigationBar() {
-  const { user, loading, error } = useUser();
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const linkClasses = "relative group hidden lg:block";
-  const underlineClasses =
-    "absolute left-1/2 bottom-0 w-0 h-[2px] bg-white transition-all duration-500 ease-out group-hover:w-full group-hover:left-0";
 
   return (
     <div className="w-full sticky top-0">
@@ -37,47 +32,8 @@ function NavigationBar() {
           </div>
           <div className="flex justify-center sm:justify-start items-center">
             <a href="./">Blog</a>
-          </div>
-          <div className="flex items-center justify-end sm:justify-around">
-            <div className={linkClasses}>
-              <a href="./#home">Home</a>
-              <div className={underlineClasses}></div>
-            </div>
-            <div className={linkClasses}>
-              <a href="./#about">Profile</a>
-              <div className={underlineClasses}></div>
-            </div>
-            <div className={linkClasses}>
-              <a href="./#projects">About</a>
-              <div className={underlineClasses}></div>
-            </div>
-            <a className="relative">
-              <Image
-                src={
-                  user == null
-                    ? "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
-                    : user.photos[0].value
-                }
-                alt="profilePhoto"
-                height={50}
-                width={50}
-                onClick={() => {
-                  setShowProfileMenu(!showProfileMenu);
-                }}
-                className="rounded-full border border-white hover:cursor-pointer"
-              />
-              {showProfileMenu && (
-                <div
-                  onClick={() => {
-                    window.open("/login", "_self");
-                  }}
-                  className="absolute bg-gray-500 hover:bg-gray-700 transition-colors ease-in-out duration-200 group rounded-md px-3 right-5 z-50 cursor-pointer"
-                >
-                  {user == null ? "Login" : "Logout"}
-                </div>
-              )}
-            </a>
-          </div>
+          </div>  
+            <NavigationBarLinks />
         </nav>
       </div>
 
