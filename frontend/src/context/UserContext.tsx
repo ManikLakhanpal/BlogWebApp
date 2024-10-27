@@ -1,7 +1,7 @@
-// context/UserContext.tsx
-"use client";
+"use client"
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import Cookies from 'js-cookie'; // ! Import the js-cookie library
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const BACKEND = "http://localhost:5000";
 
@@ -10,7 +10,7 @@ interface UserData {
     familyName: string;
     givenName: string;
   };
-  emails: {value: string}[];
+  emails: { value: string }[];
   displayName: string;
   photos: { value: string }[];
   provider: string;
@@ -24,31 +24,46 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// * Takes the children prop and returns the UserContext.Provider component
 function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const BACKEND = "http://localhost:5000";
 
-  // * Fetches the user data from the cookie
   useEffect(() => {
     async function fetchUserData() {
-      const userCookie = Cookies.get('user');
-      if (userCookie) {
-        try {
+      try {
+        // First check if we have a local cookie
+        const userCookie = Cookies.get('user');
+        if (userCookie) {
           const userData: UserData = JSON.parse(userCookie);
           setUser(userData);
-        } catch (error) {
-          console.error("Error parsing user cookie:", error);
-          setError("Failed to parse user data.");
-          setUser(null);
         }
+
+        // Then verify with backend
+        const response = await axios.get(`${BACKEND}/api/user`, {
+          withCredentials: true
+        });
+
+        if (response.data) {
+          setUser(response.data);
+          // Update cookie with latest data
+          Cookies.set('user', JSON.stringify(response.data));
+        } else {
+          setUser(null);
+          Cookies.remove('user');
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setError("Failed to fetch user data.");
+        setUser(null);
+        Cookies.remove('user');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    };
+    }
+
     fetchUserData();
-  }, [BACKEND]);
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, loading, error }}>
@@ -57,24 +72,24 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// * Logs out the user and removes the user data from the session storage
-function handleLogout() {
-  window.location.href = `${BACKEND}/auth/logout`;
-  sessionStorage.removeItem("user");
-  Cookies.remove('user'); // ! Remove the user cookie
+async function handleLogout() {
+  try {
+    await axios.get(`${BACKEND}/auth/logout`, {
+      withCredentials: true
+    });
+    Cookies.remove('user');
+    window.location.href = '/';
+  } catch (error) {
+    console.error("Error during logout:", error);
+  }
 }
 
-/*  
-  * Custom hook that returns the user context value
-  * throws an error if the hook is used outside of the UserProvider
-*/
 function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    // ! This will happen if elements are not inside UserProvider in the App component
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;
-};
+}
 
 export { handleLogout, useUser, UserProvider };

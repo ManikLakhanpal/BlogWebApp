@@ -4,27 +4,37 @@ import PostCard from "@/components/PostCard";
 import axios from "axios";
 import { Plus } from "lucide-react";
 import { useUser } from "@/context/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BACKEND = "http://localhost:5000";
+
+interface Post {
+  name: string;
+  content: string;
+  photo: string;
+  email: string;
+}
 
 export default function HeroPage() {
   const { user, loading, error } = useUser();
   const [showCreate, setShowCreate] = useState(false);
   const [textInput, setTextInput] = useState("");
+  
+  const [postData, setPostData] = useState<Post[]>([]);
 
   const handleCancel = () => {
     setTextInput("");
     setShowCreate(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // Handle form submission logic here
 
     const data = {
       name: user?.displayName,
       content: textInput,
+      photo: user?.photos[0].value,
       email: user?.emails[0].value,
     };
     try {
@@ -32,6 +42,7 @@ export default function HeroPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       });
       console.log("Submitted:", textInput);
     } catch (error) {
@@ -40,14 +51,36 @@ export default function HeroPage() {
 
     setTextInput("");
     setShowCreate(false);
-  };
+  }; 
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${BACKEND}/posts`);
+        setPostData(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <section className="min-h-screen max-h-fit w-screen">
       <h1 className="text-center text-4xl text-white mt-10 mb-5">Latest</h1>
       <div className="m-2 sm:mx-96 h-fit">
-        <PostCard />
-        <PostCard />
+        {
+          postData.map((post, index) => (
+            <PostCard
+              key={index}
+              name={post.name}
+              content={post.content}
+              photo={post.photo}
+              email={post.email}
+            />
+          ))
+        }
       </div>
       {user != null && (
         <span

@@ -24,6 +24,7 @@ const postSchema  = new Schema({
     name: {type: String, required: true},
     email: {type: String, required: true},
     content: {type: String, required: true},
+    photo: {type: String, required: false, default: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"},
     createdAt: { type: Date, default: Date.now },
     likes: {type: Number, default: 0},
 })

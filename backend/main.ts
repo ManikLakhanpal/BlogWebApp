@@ -162,17 +162,27 @@ app.get("/api/user", (req: express.Request, res: express.Response) => {
 });
 
 app.post("/add/posts", async (req: express.Request, res: express.Response) => {
-  try {
-    const newPost = new Post({
-      name: req.body.name,
-      content: req.body.content,
-      email: req.body.email,
-    });
-    await newPost.save();
-    res.json(newPost);
-  } catch (error) {
-    res.status(500).json({ error: `Failed to add post.\n ${error}` });
+  if (req.isAuthenticated()) {
+    try {
+      const newPost = new Post({
+        name: req.body.name,
+        content: req.body.content,
+        email: req.body.email,
+        photo: req.body.photo,
+      });
+      await newPost.save();
+      res.json(newPost);
+    } catch (error) {
+      res.status(500).json({ error: `Failed to add post.\n ${error}` });
+    }
+  } else {
+    res.redirect(`${FRONTEND}/login`);
   }
+});
+
+app.get("/posts", async (_req: express.Request, res: express.Response) => {
+  const posts = await Post.find();
+  res.json(posts);
 });
 
 app.get(
