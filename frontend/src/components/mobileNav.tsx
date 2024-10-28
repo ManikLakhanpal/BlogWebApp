@@ -4,6 +4,7 @@ interface Props {
 }
 
 function MobileNav(props: Props) {
+  const routes = ["Home", "Latest", "Trending", "Contact"];
     return(
         <div
           className="bg-opacity-0 fixed top-0 h-full w-full"
@@ -34,12 +35,14 @@ function MobileNav(props: Props) {
               X
             </div>
             <ul className="flex flex-col h-full justify-around pb-52 mt-10 text-white text-xl px-6">
-              <li>
-                <a href="./#home" onClick={() => props.set(false)}>
-                  Home
+              {routes.map((val, index) => (
+                <li key={index}>
+                <a href={`./#${val.toLowerCase()}`} onClick={() => props.set(false)}>
+                  {val}
                 </a>
               </li>
-              <li>
+              ))}
+              {/* <li>
                 <a href="./#about" onClick={() => props.set(false)}>
                   Latest
                 </a>
@@ -53,7 +56,7 @@ function MobileNav(props: Props) {
                 <a href="./contact" onClick={() => props.set(false)}>
                   Contact
                 </a>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>

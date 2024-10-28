@@ -15,28 +15,32 @@ const FRONTEND = "http://localhost:3000";
 const BACKEND = "http://localhost:5000";
 
 // * CORS setup
-app.use(cors({
-  origin: `${FRONTEND}`,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: `${FRONTEND}`,
+    credentials: true,
+  })
+);
 
 // TODO Trust first proxy, very important for secure cookies, using vercel as proxy
-// TODO app.set("trust proxy", 1); 
+// TODO app.set("trust proxy", 1);
 
 // Session setup
-app.use(session({
-  secret: Deno.env.get("SESSION_SECRET"),
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({
-    mongoUrl: "mongodb://localhost:27017/sessions",
-    ttl: 1000 * 60 * 60 * 24 * 14,
-  }),
-  cookie: {
-    secure: false, // true only in https
-    maxAge: 1000 * 60 * 60 * 24 * 14,
-  },
-}));
+app.use(
+  session({
+    secret: Deno.env.get("SESSION_SECRET"),
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: "mongodb://localhost:27017/sessions",
+      ttl: 1000 * 60 * 60 * 24 * 14,
+    }),
+    cookie: {
+      secure: false, // true only in https
+      maxAge: 1000 * 60 * 60 * 24 * 14,
+    },
+  })
+);
 
 // Initialize Passport
 app.use(passport.initialize());
@@ -54,27 +58,30 @@ passport.use(
       _accessToken: string,
       _refreshToken: string,
       profile: passport.Profile,
-      done: (error: Error | null, user?: express.user) => void,
+      done: (error: Error | null, user?: express.user) => void
     ) => {
       return done(null, profile);
-    },
-  ),
+    }
+  )
 );
 
 // * GitHub Passport Strategy
 passport.use(
-  new GitHubStrategy({
-    clientID: Deno.env.get("GITHUB_CLIENT_ID"),
-    clientSecret: Deno.env.get("GITHUB_CLIENT_SECRET"),
-    callbackURL: `${BACKEND}/auth/github/callback`,
-  }, (
-    _accessToken: string,
-    _refreshToken: string,
-    profile: passport.Profile,
-    done: (error: Error | null, user?: express.user) => void,
-  ) => {
-    return done(null, profile);
-  }),
+  new GitHubStrategy(
+    {
+      clientID: Deno.env.get("GITHUB_CLIENT_ID"),
+      clientSecret: Deno.env.get("GITHUB_CLIENT_SECRET"),
+      callbackURL: `${BACKEND}/auth/github/callback`,
+    },
+    (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: passport.Profile,
+      done: (error: Error | null, user?: express.user) => void
+    ) => {
+      return done(null, profile);
+    }
+  )
 );
 
 passport.serializeUser((user: express.user, done: passport.done) => {
@@ -102,26 +109,28 @@ app.get("/deno", (req: express.Request, res: express.Response) => {
   }
 });
 
-// Google Auth Routes 
+// Google Auth Routes
 app.get(
   "/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"], // ! Request access to profile and email
-  }),
+  })
 );
 
-app.get('/login', (_req: express.Request, res: express.Response) => {
-  console.log("err"); 
+app.get("/login", (_req: express.Request, res: express.Response) => {
+  console.log("err");
   res.send("ok");
-})
+});
 
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }), // ! Redirect to login on failure
   async (req: express.Request, res: express.Response) => {
-    const existingUser = await User.findOne({ email: req.user?.emails[0].value });
+    const existingUser = await User.findOne({
+      email: req.user?.emails[0].value,
+    });
     if (!existingUser) {
-      const newUser = new User({ 
+      const newUser = new User({
         name: req.user?.displayName,
         email: req.user?.emails[0].value,
         method: "google",
@@ -129,21 +138,24 @@ app.get(
       await newUser.save();
     }
     res.redirect(`${FRONTEND}/verified`); // ! Redirect to frontend on success
-  },
+  }
 );
 
 app.get(
   "/auth/github",
   passport.authenticate("github", {
     scope: ["user:email"],
-  }),
+  })
 );
 
 app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
-  async (req: express.Request, res: express.Response) => { // ! Redirect to frontend on success
-    const existingUser = await User.findOne({ email: req.user?.emails[0].value });
+  async (req: express.Request, res: express.Response) => {
+    // ! Redirect to frontend on success
+    const existingUser = await User.findOne({
+      email: req.user?.emails[0].value,
+    });
     if (!existingUser) {
       const newUser = new User({
         name: req.user?.displayName,
@@ -153,7 +165,7 @@ app.get(
       await newUser.save();
     }
     res.redirect(`${FRONTEND}`);
-  },
+  }
 );
 
 app.get("/api/user", (req: express.Request, res: express.Response) => {
@@ -169,7 +181,7 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
         content: req.body.content,
         email: req.body.email,
         photo: req.body.photo,
-        createdAt: req.body.createdAt
+        createdAt: req.body.createdAt,
       });
       await newPost.save();
       res.json(newPost);
@@ -182,18 +194,18 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 });
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
-  const posts = await Post.find().sort({createdAt: 'desc'});
+  const posts = await Post.find().sort({ createdAt: "desc" });
   res.json(posts);
 });
 
 // Backend logout route example
-app.get('/auth/logout', (req: express.Request, res: express.Response) => {
+app.get("/auth/logout", (req: express.Request, res: express.Response) => {
   req.logout((err: express.Error) => {
     if (err) {
-      return res.status(500).json({ error: 'Error logging out' });
+      return res.status(500).json({ error: "Error logging out" });
     }
-    res.clearCookie('connect.sid'); // Clear session cookie
-    res.redirect('/'); // Redirect to home page
+    res.clearCookie("connect.sid"); // Clear session cookie
+    res.redirect("/"); // Redirect to home page
   });
 });
 
