@@ -9,7 +9,7 @@ function NavigationBar() {
   const [showMobileNav, setShowMobileNav] = useState(false);
 
   return (
-    <div className="w-full sticky top-0">
+    <div className="w-full sticky top-0 z-50">
       <div>
         <nav
           style={{

@@ -7,7 +7,7 @@ function MobileNav(props: Props) {
   const routes = ["Home", "Latest", "Trending", "Contact"];
     return(
         <div
-          className="bg-opacity-0 fixed top-0 h-full w-full"
+          className="bg-opacity-0 fixed top-0 h-full w-full z-50"
           style={{ visibility: props.show ? "visible" : "hidden" }}
           onClick={() => {
             props.set(!props.show);
@@ -18,7 +18,7 @@ function MobileNav(props: Props) {
               props.show
                 ? "translate-x-0 opacity-100 block"
                 : "-translate-x-full opacity-0"
-            } inset-y-0 left-0 block h-screen ease-in-out duration-300 border-2 transform fixed top-0 w-5/6 z-50 transition-all`}
+            } inset-y-0 left-0 block h-screen ease-in-out duration-300 border-2 transform fixed z-50 top-0 w-5/6 transition-all`}
             style={{
               visibility: props.show ? "visible" : "hidden",
               backdropFilter: "blur(14px) saturate(100%)",

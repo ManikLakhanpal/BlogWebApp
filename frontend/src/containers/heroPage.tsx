@@ -36,7 +36,7 @@ export default function HeroPage() {
   }, [showCreate]);
 
   return (
-    <section className="min-h-screen max-h-fit w-screen">
+    <section className="min-h-screen max-h-fit w-screen z-0">
       <h1 className="text-center text-4xl text-white mt-10 mb-5">Latest</h1>
       <div className="m-2 sm:mx-96 h-fit">
         {postData.length !== 0 &&
@@ -58,7 +58,7 @@ export default function HeroPage() {
       </div>
       {user != null && (
         <span
-          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-10 rounded-full"
+          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 rounded-full"
           onClick={() => setShowCreate(!showCreate)}
         >
           <Plus />
