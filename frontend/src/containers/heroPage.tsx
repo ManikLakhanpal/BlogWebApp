@@ -119,7 +119,7 @@ export default function HeroPage() {
               </div>
             </div>
 
-            <p className="text-right pb-2">
+            <p className="text-right text-white pb-2">
               { textInput.length } / 150
             </p>
 

@@ -42,7 +42,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         // Then verify with backend
         if (!userCookie) {
           const response = await axios.get(`${BACKEND}/api/user`, {
-            withCredentials: true
+            withCredentials: true,
           });
 
           if (response.data) {

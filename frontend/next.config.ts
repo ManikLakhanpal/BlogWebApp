@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "w16manik.blr1.cdn.digitaloceanspaces.com",
-      "lh3.googleusercontent.com"
+      "lh3.googleusercontent.com",
+      "avatars.githubusercontent.com"
     ]
   }
 };

@@ -186,17 +186,16 @@ app.get("/posts", async (_req: express.Request, res: express.Response) => {
   res.json(posts);
 });
 
-app.get(
-  "/auth/logout",
-  (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    req.logout((err: Error | null) => {
-      if (err) {
-        return next(err); // ! Ensure next is available
-      }
-      res.redirect(`${FRONTEND}`);
-    });
-  },
-);
+// Backend logout route example
+app.get('/auth/logout', (req: express.Request, res: express.Response) => {
+  req.logout((err: express.Error) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error logging out' });
+    }
+    res.clearCookie('connect.sid'); // Clear session cookie
+    res.redirect('/'); // Redirect to home page
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
