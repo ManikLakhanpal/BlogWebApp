@@ -1,4 +1,4 @@
-import NavProfileIcon from "./navProfileIcon";
+import NavProfileIcon from "./NavProfileIcon";
 
 function NavigationBarLinks() {
   const linkClasses = "relative group hidden lg:block";

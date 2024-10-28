@@ -42,21 +42,6 @@ function MobileNav(props: Props) {
                 </a>
               </li>
               ))}
-              {/* <li>
-                <a href="./#about" onClick={() => props.set(false)}>
-                  Latest
-                </a>
-              </li>
-              <li>
-                <a href="./#projects" onClick={() => props.set(false)}>
-                  Trending
-                </a>
-              </li>
-              <li>
-                <a href="./contact" onClick={() => props.set(false)}>
-                  Contact
-                </a>
-              </li> */}
             </ul>
           </nav>
         </div>
