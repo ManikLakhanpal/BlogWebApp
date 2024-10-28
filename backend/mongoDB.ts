@@ -3,7 +3,7 @@ import mongoose from "npm:mongoose";
 const Schema = mongoose.Schema;
 const dbURL = "mongodb://localhost:27017/Blog"; // * Specify the database name here at end of URL
 
-const connectDB = async () => {
+async function  connectDB() {
   try {
     await mongoose.connect(dbURL);
     console.log("Connected to MongoDB using Mongoose");
