@@ -60,4 +60,52 @@ function PostCard(props: PostCardProps) {
   );
 }
 
-export default PostCard;
+function PostCardTemp() {
+  const date = new Date();
+  const formattedDate = new Intl.DateTimeFormat('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  }).format(date);
+
+  return (
+    <div className="p-4 sm:p-6 border border-gray-900 rounded-sm">
+      <div className="flex items-center space-x-4 mb-4">
+        
+        <div className="animate-pulse bg-gray-800 h-16 w-16 rounded-full">
+
+        </div>
+        <div>
+          <h1 className="animate-pulse mb-1 rounded-lg text-xl font-bold text-gray-800 bg-gray-800">
+            placeholder text
+          </h1>
+          <p className="animate-pulse rounded-lg w-1/2 text-sm text-gray-800 bg-gray-800">
+            na
+          </p>
+        </div>
+      </div>
+      <p className="animate-pulse p-5 text-gray-800 rounded-lg bg-gray-800 leading-relaxed mb-2">
+        This is some content
+      </p>
+      <p className="animate-pulse rounded-lg text-sm text-gray-800 bg-gray-800 w-6/12 mb-4">{formattedDate}</p>
+      <div className="flex justify-around mt-2">
+        <button className="text-gray-500 hover:text-pink-500 transition-colors duration-200">
+          <Heart className="w-5 h-5" />
+        </button>
+        <button className="text-gray-500 hover:text-blue-500 transition-colors duration-200">
+          <Flag className="w-5 h-5" />
+        </button>
+        <button className="text-gray-500 hover:text-green-500 transition-colors duration-200">
+          <Bookmark className="w-5 h-5" />
+        </button>
+        <button className="text-gray-500 hover:text-blue-500 transition-colors duration-200">
+          <Share className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export {PostCard, PostCardTemp};

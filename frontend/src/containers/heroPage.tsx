@@ -1,5 +1,5 @@
 "use client";
-import PostCard from "@/components/PostCard";
+import { PostCard, PostCardTemp } from "@/components/PostCard";
 import axios from "axios";
 import { Plus } from "lucide-react";
 import { useUser } from "@/context/UserContext";
@@ -19,8 +19,7 @@ interface Post {
 export default function HeroPage() {
   const { user, loading, error } = useUser();
   const [showCreate, setShowCreate] = useState(false);
-  const [textInput, setTextInput] = useState("");
-  
+
   const [postData, setPostData] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export default function HeroPage() {
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
-    };
+    }
 
     fetchData();
   }, [showCreate]);
@@ -40,7 +39,7 @@ export default function HeroPage() {
     <section className="min-h-screen max-h-fit w-screen">
       <h1 className="text-center text-4xl text-white mt-10 mb-5">Latest</h1>
       <div className="m-2 sm:mx-96 h-fit">
-        {
+        {postData.length !== 0 &&
           postData.map((post, index) => (
             <PostCard
               key={index}
@@ -50,12 +49,16 @@ export default function HeroPage() {
               email={post.email}
               createdAt={post.createdAt}
             />
-          ))
-        }
+          ))}
+        {/* // ! When there are no posts, show a temporary post card */}
+        {postData.length === 0 &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <PostCardTemp key={index} />
+          ))}
       </div>
       {user != null && (
         <span
-          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-0 rounded-full"
+          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 z-10 rounded-full"
           onClick={() => setShowCreate(!showCreate)}
         >
           <Plus />
@@ -63,10 +66,7 @@ export default function HeroPage() {
       )}
 
       {showCreate && (
-        <PostInput
-          showCreate={showCreate}
-          setShowCreate={setShowCreate}
-        />
+        <PostInput showCreate={showCreate} setShowCreate={setShowCreate} />
       )}
     </section>
   );
