@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import { Heart, Flag, Bookmark, Share } from "lucide-react";
 import PostDeleteButton from "./PostDeleteButton";
@@ -69,15 +71,6 @@ function PostCard(props: PostCardProps) {
 }
 
 function PostCardTemp() {
-  const date = new Date();
-  const formattedDate = new Intl.DateTimeFormat('en-IN', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  }).format(date);
-
   return (
     <div className="p-4 sm:p-6 border border-gray-900 rounded-sm">
       <div className="flex items-center space-x-4 mb-4">
@@ -97,7 +90,7 @@ function PostCardTemp() {
       <p className="animate-pulse p-5 text-gray-800 rounded-lg bg-gray-800 leading-relaxed mb-2">
         This is some content
       </p>
-      <p className="animate-pulse rounded-lg text-sm text-gray-800 bg-gray-800 w-6/12 mb-4">{formattedDate}</p>
+      <p className="animate-pulse rounded-lg text-sm text-gray-800 bg-gray-800 w-6/12 mb-4">none</p>
       <div className="flex justify-around mt-2">
         <button className="text-gray-500 hover:text-pink-500 transition-colors duration-200">
           <Heart className="w-5 h-5" />
