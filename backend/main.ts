@@ -200,25 +200,24 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
   try {
-    const posts = await Post.find().lean(); // Retrieve posts
+    const posts = await Post.find().sort({createdAt: "desc"}).lean(); // Retrieve posts
     const userEmails = posts.map(post => post.email);
     const users = await User.find({ email: { $in: userEmails } }).lean();
-    console.log(users)
     const postsWithUserInfo = posts.map(post => {
-      const user = users.find(user => user.email === post.email);
+    const user = users.find(user => user.email === post.email);
       return {
         _id: post._id,
-        name: user.name,
+        name: user?.name || "Unknown",
         email: post.email,
         content: post.content,
-        photo: user.photo,
+        photo: user?.photo || "",
         createdAt: post.createdAt,
         likes: post.likes,
       };
     });
-
     res.json(postsWithUserInfo);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Failed to retrieve posts.\n" + error });
   }
 });
@@ -232,7 +231,7 @@ app.delete("/delete/post/:id", async (req: express.Request, res: express.Respons
       }
 
       // Check if the authenticated user is the author of the post
-      if (post.email !== req.user?._id.toString()) {
+      if (post.email !== req.user?.emails?.[0]?.value) {
         return res.status(403).json({ error: "Unauthorized to delete this post" });
       }
 

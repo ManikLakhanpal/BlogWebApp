@@ -20,13 +20,14 @@ function PostDeleteButton(props: Props) {
   async function handleConfirmDelete() {
     try {
       // Make DELETE request to the backend
+      console.log(props);
       await axios.delete(`${BACKEND}/delete/post/${props.id}`, { withCredentials: true });
       console.log("Post deleted");
       // You may want to trigger additional actions here, such as refreshing the post list
     } catch (error) {
       console.error("Failed to delete post:", error);
     } finally {
-      window.location.reload();
+      // window.location.reload();
       setShowPrompt(false);
     }
   }
