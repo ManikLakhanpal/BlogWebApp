@@ -78,6 +78,7 @@ function PostInput(props: Props) {
             value={textInput}
             maxLength={150}
             onChange={(e) => setTextInput(e.target.value)}
+            autoFocus
           ></textarea>
           <div className="flex justify-end space-x-2">
             <button
