@@ -26,11 +26,9 @@ function PostInput(props: Props) {
     // Handle form submission logic here
 
     const data = {
-      name: user?.displayName,
       content: textInput,
-      photo: user?.photos[0].value,
-      email: user?.emails[0].value,
       createdAt: Number(Date.now()),
+      user: user?.emails[0].value
     };
     try {
       const resp = await axios.post(`${BACKEND}/add/posts`, data, {

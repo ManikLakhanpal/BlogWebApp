@@ -133,6 +133,7 @@ app.get(
       const newUser = new User({
         name: req.user?.displayName,
         email: req.user?.emails[0].value,
+        photo: req.user?.photos[0].value,
         method: "google",
       });
       await newUser.save();
@@ -160,6 +161,7 @@ app.get(
       const newUser = new User({
         name: req.user?.displayName,
         email: req.user?.emails[0].value,
+        photo: req.user?.photos[0].value,
         method: "github",
       });
       await newUser.save();
@@ -177,11 +179,14 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated()) {
     try {
       const newPost = new Post({
-        name: req.body.name,
         content: req.body.content,
-        email: req.body.email,
-        photo: req.body.photo,
         createdAt: req.body.createdAt,
+        email: req.body.user
+      });
+      console.log({
+        content: req.body.content,
+        createdAt: req.body.createdAt,
+        email: req.user.user
       });
       await newPost.save();
       res.json(newPost);
@@ -194,8 +199,28 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 });
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
-  const posts = await Post.find().sort({ createdAt: "desc" });
-  res.json(posts);
+  try {
+    const posts = await Post.find().lean(); // Retrieve posts
+    const userEmails = posts.map(post => post.email);
+    const users = await User.find({ email: { $in: userEmails } }).lean();
+    console.log(users)
+    const postsWithUserInfo = posts.map(post => {
+      const user = users.find(user => user.email === post.email);
+      return {
+        _id: post._id,
+        name: user.name,
+        email: post.email,
+        content: post.content,
+        photo: user.photo,
+        createdAt: post.createdAt,
+        likes: post.likes,
+      };
+    });
+
+    res.json(postsWithUserInfo);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve posts.\n" + error });
+  }
 });
 
 app.delete("/delete/post/:id", async (req: express.Request, res: express.Response) => {
@@ -206,8 +231,8 @@ app.delete("/delete/post/:id", async (req: express.Request, res: express.Respons
         return res.status(404).json({ error: "Post not found" });
       }
 
-      // Check if the authenticated user matches the post's author
-      if (post.email !== req.user?.emails?.[0]?.value) {
+      // Check if the authenticated user is the author of the post
+      if (post.email !== req.user?._id.toString()) {
         return res.status(403).json({ error: "Unauthorized to delete this post" });
       }
 

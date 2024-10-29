@@ -37,6 +37,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         const userCookie = Cookies.get('user');
         if (userCookie) {
           const userData: UserData = JSON.parse(userCookie);
+          console.log(userData);
           setUser(userData);
         }
 
