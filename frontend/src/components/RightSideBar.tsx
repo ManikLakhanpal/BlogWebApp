@@ -4,18 +4,18 @@ import Image from "next/image"
 const users = [
   {
     name: "Manik",
-    username: "manik",
+    username: "w1_manik",
+    imageUrl: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Profile.jpeg"
+  },
+  {
+    name: "Luffy",
+    username: "onepiece",
     imageUrl: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
   },
   {
-    name: "Zoro",
-    username: "zoro",
-    imageUrl: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
-  },
-  {
-    name: "Nami",
-    username: "nami",
-    imageUrl: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
+    name: "Naruto",
+    username: "uzumaki",
+    imageUrl: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Naruto.jpg"
   }
 ]
 
@@ -33,14 +33,14 @@ export default function RightSideBar() {
       <div className="bg-gray-900 rounded-lg p-4">
         <h2 className="font-bold text-xl mb-4 text-white">Who to follow</h2>
         {users.map((user) => (
-          <div key={user.username} className="flex items-center justify-between space-x-4 mb-5">
+          <div key={user.username} className="flex hover:cursor-pointer items-center justify-between space-x-4 mb-5">
             <div className="flex items-center space-x-3">
               <Image
                 src={user.imageUrl}
                 height={55}
                 width={55}
                 alt={`${user.name}'s profile picture`}
-                className="rounded-full border-2 border-gray-700"
+                className="rounded-full border-2 border-gray-300"
               />
               <div className="flex flex-col">
                 <h3 className="font-bold text-gray-200">{user.name}</h3>
