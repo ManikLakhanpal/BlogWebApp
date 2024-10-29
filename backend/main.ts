@@ -164,7 +164,7 @@ app.get(
       });
       await newUser.save();
     }
-    res.redirect(`${FRONTEND}/verified`).json(req.user);
+    res.redirect(`${FRONTEND}/verified`);
   }
 );
 
