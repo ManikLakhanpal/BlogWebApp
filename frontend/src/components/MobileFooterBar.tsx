@@ -7,7 +7,7 @@ function MobileFooterBar() {
           style={{
             backdropFilter: "blur(14px) saturate(100%)",
             WebkitBackdropFilter: "blur(14px) saturate(100%)",
-            backgroundColor: "rgba(6, 0, 11, 0.5)",
+            backgroundColor: "rgba(3, 3, 32, 0.6)",
           }}
         >
           <a href="#" className="p-2 rounded-full hover:bg-gray-800">

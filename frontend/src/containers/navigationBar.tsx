@@ -15,7 +15,7 @@ function NavigationBar() {
           style={{
             backdropFilter: "blur(14px) saturate(100%)",
             WebkitBackdropFilter: "blur(14px) saturate(100%)",
-            backgroundColor: "rgba(6, 0, 11, 0.6)",
+            backgroundColor: "rgba(3, 3, 32, 0.6)",
           }}
           className="grid grid-cols-3 sm:grid-cols-2 text-white w-full py-4 text-xl px-9 z-40"
         >
