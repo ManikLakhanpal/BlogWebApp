@@ -1,9 +1,12 @@
 "use client";
+
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import axios from "axios";
-import { Plus } from "lucide-react";
+import { Plus, Home, Bell, Mail, User, Search } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
+import LeftSideBar from "@/components/LeftSideBar";
+import MobileFooterBar from "@/components/MobileFooterBar";
 import PostInput from "@/components/PostInput";
 
 const BACKEND = "http://localhost:5000";
@@ -19,7 +22,6 @@ interface Post {
 export default function HeroPage() {
   const { user, loading, error } = useUser();
   const [showCreate, setShowCreate] = useState(false);
-
   const [postData, setPostData] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -36,38 +38,103 @@ export default function HeroPage() {
   }, [showCreate]);
 
   return (
-    <section className="min-h-screen max-h-fit w-screen z-0">
-      <h1 className="text-center text-4xl text-white mt-10 mb-5">Latest</h1>
-      <div className="m-2 sm:mx-96 h-fit">
-        {postData.length !== 0 &&
-          postData.map((post, index) => (
-            <PostCard
-              key={index}
-              name={post.name}
-              content={post.content}
-              photo={post.photo}
-              email={post.email}
-              createdAt={post.createdAt}
+    <div className="min-h-screen bg-black text-white">
+      {/* Desktop layout */}
+      <div className="hidden sm:flex justify-center">
+        {/* Left sidebar */}
+        <LeftSideBar 
+          user={user}
+          setShowCreate={setShowCreate}
+        />
+
+        {/* Main content */}
+        <main className="w-1/2 max-w-xl border-x border-gray-800">
+          <h1 className="text-2xl font-bold p-4 border-b border-gray-800">
+            Home
+          </h1>
+          <div className="divide-y divide-gray-800">
+            {postData.length !== 0
+              ? postData.map((post, index) => (
+                  <PostCard
+                    key={index}
+                    name={post.name}
+                    content={post.content}
+                    photo={post.photo}
+                    email={post.email}
+                    createdAt={post.createdAt}
+                  />
+                ))
+              : Array.from({ length: 5 }).map((_, index) => (
+                  <PostCardTemp key={index} />
+                ))}
+          </div>
+        </main>
+
+        {/* Right sidebar */}
+        <aside className="w-1/4 max-w-xs fixed right-0 h-screen p-4">
+          <div className="bg-gray-900 rounded-full mb-4">
+            <input
+              type="text"
+              placeholder="Search Twitter"
+              className="bg-transparent p-3 pl-12 w-full rounded-full"
             />
-          ))}
-        {/* // ! When there are no posts, show a temporary post card */}
-        {postData.length === 0 &&
-          Array.from({ length: 5 }).map((_, index) => (
-            <PostCardTemp key={index} />
-          ))}
+            <Search className="absolute top-7 left-7 text-gray-500" />
+          </div>
+          <div className="bg-gray-900 rounded-lg p-4">
+            <h2 className="font-bold text-xl mb-4">What's happening</h2>
+            {/* Add trending topics here */}
+          </div>
+        </aside>
       </div>
-      {user != null && (
-        <span
-          className="bg-blue-400 sm:hidden fixed right-5 bottom-20 p-5 rounded-full"
-          onClick={() => setShowCreate(!showCreate)}
-        >
-          <Plus />
-        </span>
-      )}
+
+      {/* Mobile layout */}
+      <div className="sm:hidden">
+        {/* Mobile header */}
+        <header className="flex justify-between items-center p-4 border-b border-gray-800">
+          <h1 className="text-xl font-bold">Home</h1>
+          <button className="p-2 rounded-full hover:bg-gray-800">
+            <Search className="w-5 h-5" />
+          </button>
+        </header>
+
+        {/* Mobile main content */}
+        <main className="pb-16">
+          <div className="divide-y divide-gray-800">
+            {postData.length !== 0
+              ? postData.map((post, index) => (
+                  <PostCard
+                    key={index}
+                    name={post.name}
+                    content={post.content}
+                    photo={post.photo}
+                    email={post.email}
+                    createdAt={post.createdAt}
+                  />
+                ))
+              : Array.from({ length: 5 }).map((_, index) => (
+                  <PostCardTemp key={index} />
+                ))}
+          </div>
+        </main>
+
+        {/* Mobile footer navigation */}
+
+        <MobileFooterBar />
+
+        {/* Mobile tweet button */}
+        {user && (
+          <button
+            onClick={() => setShowCreate(true)}
+            className="bg-blue-500 text-white rounded-full p-4 fixed right-4 bottom-20 shadow-lg"
+          >
+            <Plus className="w-6 h-6" />
+          </button>
+        )}
+      </div>
 
       {showCreate && (
         <PostInput showCreate={showCreate} setShowCreate={setShowCreate} />
       )}
-    </section>
+    </div>
   );
 }
