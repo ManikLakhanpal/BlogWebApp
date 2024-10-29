@@ -13,6 +13,7 @@ import RightSideBar from "@/components/RightSideBar";
 const BACKEND = "http://localhost:5000";
 
 interface Post {
+  _id: string;
   name: string;
   content: string;
   photo: string;
@@ -58,6 +59,8 @@ export default function HeroPage() {
               ? postData.map((post, index) => (
                   <PostCard
                     key={index}
+                    id={post._id}
+                    user={user? user?.emails[0].value : null}
                     name={post.name}
                     content={post.content}
                     photo={post.photo}
@@ -92,6 +95,8 @@ export default function HeroPage() {
               ? postData.map((post, index) => (
                   <PostCard
                     key={index}
+                    id={post._id}
+                    user={user? user?.emails[0].value : null}
                     name={post.name}
                     content={post.content}
                     photo={post.photo}

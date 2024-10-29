@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { Heart, Flag, Bookmark, Share, Trash2 } from "lucide-react";
+import { Heart, Flag, Bookmark, Share } from "lucide-react";
+import PostDeleteButton from "./PostDeleteButton";
 
 interface PostCardProps {
+  id: string
+  user: string | null;
   name: string;
   content: string;
   email: string;
@@ -55,9 +58,9 @@ function PostCard(props: PostCardProps) {
         <button className="text-gray-500 hover:text-blue-500 transition-colors duration-200">
           <Share className="w-5 h-5" />
         </button>
-        <button className="text-gray-500 hover:text-red-500 transition-colors duration-200">
-          <Trash2 className="w-5 h-5" />
-        </button>
+        { (props.email === props.user) &&
+          <PostDeleteButton />
+        }
       </div>
     </div>
   );
