@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import LeftSideBar from "@/components/LeftSideBar";
 import MobileFooterBar from "@/components/MobileFooterBar";
 import PostInput from "@/components/PostInput";
+import RightSideBar from "@/components/RightSideBar";
 
 const BACKEND = "http://localhost:5000";
 
@@ -71,20 +72,8 @@ export default function HeroPage() {
         </main>
 
         {/* Right sidebar */}
-        <aside className="w-1/4 max-w-xs fixed right-0 h-screen p-4">
-          <div className="bg-gray-900 rounded-full mb-4">
-            <input
-              type="text"
-              placeholder="Search Twitter"
-              className="bg-transparent p-3 pl-12 w-full rounded-full"
-            />
-            <Search className="absolute top-7 left-7 text-gray-500" />
-          </div>
-          <div className="bg-gray-900 rounded-lg p-4">
-            <h2 className="font-bold text-xl mb-4">What's happening</h2>
-            {/* Add trending topics here */}
-          </div>
-        </aside>
+        <RightSideBar />
+        
       </div>
 
       {/* Mobile layout */}
