@@ -1,27 +1,43 @@
-"use client"
+"use client";
+
 import { useState } from "react";
+import axios from "axios";
 import { Trash2 } from "lucide-react";
 
-function PostDeleteButton() {
+const BACKEND = "http://localhost:5000";
+
+interface Props {
+  id: string;
+}
+
+function PostDeleteButton(props: Props) {
   const [showPrompt, setShowPrompt] = useState(false);
 
-  const handleDeleteClick = () => {
+  function handleDeleteClick() {
     setShowPrompt(true);
-  };
+  }
 
-  const handleConfirmDelete = () => {
-    // Proceed with delete logic here
-    setShowPrompt(false);
-    console.log("Post deleted");
-  };
+  async function handleConfirmDelete() {
+    try {
+      // Make DELETE request to the backend
+      await axios.delete(`${BACKEND}/delete/post/${props.id}`, { withCredentials: true });
+      console.log("Post deleted");
+      // You may want to trigger additional actions here, such as refreshing the post list
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    } finally {
+      window.location.reload();
+      setShowPrompt(false);
+    }
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setShowPrompt(false);
-  };
+  }
 
   return (
-    <>
-      <button 
+    <div>
+      <button
         className="text-gray-500 hover:text-red-500 transition-colors duration-200"
         onClick={handleDeleteClick}
       >
@@ -49,7 +65,7 @@ function PostDeleteButton() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

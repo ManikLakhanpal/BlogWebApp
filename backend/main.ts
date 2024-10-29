@@ -198,6 +198,29 @@ app.get("/posts", async (_req: express.Request, res: express.Response) => {
   res.json(posts);
 });
 
+app.delete("/delete/post/:id", async (req: express.Request, res: express.Response) => {
+  if (req.isAuthenticated()) {
+    try {
+      const post = await Post.findById(req.params.id);
+      if (!post) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+
+      // Check if the authenticated user matches the post's author
+      if (post.email !== req.user?.emails?.[0]?.value) {
+        return res.status(403).json({ error: "Unauthorized to delete this post" });
+      }
+
+      await post.deleteOne(); // `deleteOne` is preferred over `remove` in Mongoose 6+
+      return res.json({ message: "Post deleted successfully" });
+    } catch (error) {
+      return res.status(500).json({ error: `Failed to delete post.\n ${error}` });
+    }
+  } else {
+    return res.redirect(`${FRONTEND}/login`);
+  }
+});
+
 // Backend logout route example
 app.get("/auth/logout", (req: express.Request, res: express.Response) => {
   req.logout((err: express.Error) => {

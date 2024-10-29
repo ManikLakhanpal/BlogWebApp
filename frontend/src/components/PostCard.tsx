@@ -59,7 +59,9 @@ function PostCard(props: PostCardProps) {
           <Share className="w-5 h-5" />
         </button>
         { (props.email === props.user) &&
-          <PostDeleteButton />
+          <PostDeleteButton
+            id={props.id}
+          />
         }
       </div>
     </div>
