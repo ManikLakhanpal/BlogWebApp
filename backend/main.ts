@@ -137,7 +137,7 @@ app.get(
       });
       await newUser.save();
     }
-    res.redirect(`${FRONTEND}/verified`); // ! Redirect to frontend on success
+    res.redirect(`${FRONTEND}/verified`).json(req.json); // ! Redirect to frontend on success
   }
 );
 
@@ -164,7 +164,7 @@ app.get(
       });
       await newUser.save();
     }
-    res.redirect(`${FRONTEND}`);
+    res.redirect(`${FRONTEND}/verified`).json(req.user);
   }
 );
 
