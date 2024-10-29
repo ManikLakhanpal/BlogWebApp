@@ -2,7 +2,7 @@
 
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import axios from "axios";
-import { Plus, Home, Bell, Mail, User, Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import LeftSideBar from "@/components/LeftSideBar";
@@ -39,7 +39,7 @@ export default function HeroPage() {
   }, [showCreate]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-slate-950 text-white pb-16">
       {/* Desktop layout */}
       <div className="hidden sm:flex justify-center">
         {/* Left sidebar */}
@@ -73,7 +73,6 @@ export default function HeroPage() {
 
         {/* Right sidebar */}
         <RightSideBar />
-        
       </div>
 
       {/* Mobile layout */}
