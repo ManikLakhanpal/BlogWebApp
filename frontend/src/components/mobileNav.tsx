@@ -4,7 +4,12 @@ interface Props {
 }
 
 function MobileNav(props: Props) {
-  const routes = ["Home", "Latest", "Trending", "Contact"];
+  const routes = [
+    ["Home", "/"],
+    ["Profile", "/"],
+    ["Support", "https://www.w16manik.ninja/support-me"],
+    ["About", "/"]
+  ]
     return(
         <div
           className="bg-opacity-0 fixed top-0 h-full w-full z-50"
@@ -35,10 +40,10 @@ function MobileNav(props: Props) {
               X
             </div>
             <ul className="flex flex-col h-full justify-around pb-52 mt-10 text-white text-xl px-6">
-              {routes.map((val, index) => (
+              {routes.map(([name, path], index) => (
                 <li key={index}>
-                <a href={`./#${val.toLowerCase()}`} onClick={() => props.set(false)}>
-                  {val}
+                <a href={`${path}`} onClick={() => props.set(false)}>
+                  {name}
                 </a>
               </li>
               ))}
