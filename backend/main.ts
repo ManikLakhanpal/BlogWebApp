@@ -200,11 +200,11 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
   try {
-    const posts = await Post.find().sort({createdAt: "desc"}).lean(); // Retrieve posts
+    const posts = await Post.find().sort({ createdAt: "desc" }).lean(); // Retrieve posts
     const userEmails = posts.map(post => post.email);
     const users = await User.find({ email: { $in: userEmails } }).lean();
     const postsWithUserInfo = posts.map(post => {
-    const user = users.find(user => user.email === post.email);
+      const user = users.find(user => user.email === post.email);
       return {
         _id: post._id,
         name: user?.name || "Unknown",
@@ -243,6 +243,42 @@ app.delete("/delete/post/:id", async (req: express.Request, res: express.Respons
   } else {
     return res.redirect(`${FRONTEND}/login`);
   }
+});
+
+app.get("/user/:id", async (req: express.Request, res: express.Response) => {
+  try {
+    const users = await User.find({email: req.params.id});
+    const posts = await Post.find({email: req.params.id}).sort({ createdAt: "desc" }).lean();
+
+    const postsWithUserInfo = posts.map(post => {
+      const user = users.find(user => user.email === post.email);
+      return {
+        _id: post._id,
+        name: user?.name || "Unknown",
+        email: post.email,
+        content: post.content,
+        photo: user?.photo || "",
+        createdAt: post.createdAt,
+        likes: post.likes,
+      };
+    });
+
+    const userData = {
+      users,
+      postsWithUserInfo
+    }
+
+    console.log(userData);
+    
+    if (!users) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json(userData);
+  } catch (error) {
+    return res.status(500).json({ error: `Failed to get user.\n ${error}` });
+  }
+
 });
 
 // Backend logout route example

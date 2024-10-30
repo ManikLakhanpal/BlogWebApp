@@ -18,6 +18,9 @@ const userSchema = new Schema({
   email: { type: String, unique: true, required: true },
   photo: { type: String, required: false, default: "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg" },
   method: { type: String, enum: ["google", "github"] },
+  posts: { type: Number, default: 0},
+  followers: {type: Number, default: 0},
+  following: {type: Number, default: 0},
   createdAt: { type: Date, default: Date.now }
 });
 

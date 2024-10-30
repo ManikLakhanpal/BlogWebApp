@@ -1,10 +1,15 @@
 import { UserProvider } from "@/context/UserContext";
 import ProfilePage from "@/containers/profilePage";
 
-function Page() {
+async function Page({ params }: { params: Promise<{ uid: string }> }) {
+
+    const uid = (await params).uid
     return(
         <UserProvider>
-            <ProfilePage/>
+            <ProfilePage
+                uid={uid.replace("%40", "@")}
+            />
+            <h1>{uid.replace("%40", "@")}</h1>
         </UserProvider>
     );
 }

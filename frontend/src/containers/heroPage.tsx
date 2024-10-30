@@ -42,7 +42,7 @@ export default function HeroPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white pb-16">
       {/* Desktop layout */}
-      <div className="hidden sm:flex border-2 justify-center">
+      <div className="hidden sm:flex justify-center">
         {/* Left sidebar */}
         <LeftSideBar
           user={user}
