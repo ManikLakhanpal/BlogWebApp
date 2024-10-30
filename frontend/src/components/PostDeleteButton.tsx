@@ -27,7 +27,7 @@ function PostDeleteButton(props: Props) {
     } catch (error) {
       console.error("Failed to delete post:", error);
     } finally {
-      // window.location.reload();
+      window.location.reload();
       setShowPrompt(false);
     }
   }
