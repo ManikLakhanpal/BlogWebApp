@@ -13,6 +13,8 @@ import { useState, useEffect } from "react";
 
 const BACKEND = "http://localhost:5000";
 
+// TODO ADD CASE IF NO USER FOUND
+
 interface Post {
     _id: string;
     name: string;
@@ -47,7 +49,7 @@ function ProfilePage(props: Props) {
             try {
                 const response = await axios.get(`${BACKEND}/user/${props.uid}`);
                 setUserData(response.data.users[0]);
-                
+
                 setPostData(response.data.postsWithUserInfo);
             } catch (error) {
                 console.error("Error fetching posts:", error);
@@ -83,10 +85,12 @@ function ProfilePage(props: Props) {
                                     <h1 className="truncate text-lg font-bold sm:text-xl">
                                         {userData?.name}
                                     </h1>
-                                    <span 
-                                    className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center rounded-full">
-                                        <Settings />
-                                    </span>
+                                    {userData?.email == user?.emails[0].value && (
+                                        <span
+                                            className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center rounded-full">
+                                            <Settings />
+                                        </span>
+                                    )}
                                 </div>
                                 <h2 className="text-sm text-gray-400">
                                     {props.uid}
@@ -133,13 +137,13 @@ function ProfilePage(props: Props) {
             </div>
             <MobileFooterBar />
             {user && (
-          <button
-            onClick={() => setShowCreate(true)}
-            className="bg-blue-500 text-white rounded-full p-4 fixed right-4 bottom-20 shadow-lg"
-          >
-            <Plus className="w-6 h-6" />
-          </button>
-        )}
+                <button
+                    onClick={() => setShowCreate(true)}
+                    className="bg-blue-500 text-white rounded-full p-4 fixed right-4 bottom-20 shadow-lg"
+                >
+                    <Plus className="w-6 h-6" />
+                </button>
+            )}
             {showCreate && (
                 <PostInput
                     setShowCreate={setShowCreate}

@@ -1,8 +1,12 @@
 import { Home, Bell, Mail, User } from "lucide-react";
 
+interface User {
+    emails: { value: string }[];
+}
+
 interface Props {
-    user: object | null;
-    setShowCreate: Function
+    user: User | null;
+    setShowCreate: Function;
 }
 
 function LeftSideBar(props: Props) {
@@ -31,7 +35,7 @@ function LeftSideBar(props: Props) {
               <span>Messages</span>
             </a>
             <a
-              href="#"
+              href={`http://localhost:3000/user/${props.user?.emails[0].value}`}
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <User />
