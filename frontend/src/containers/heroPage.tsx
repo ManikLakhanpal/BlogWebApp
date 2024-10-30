@@ -44,7 +44,7 @@ export default function HeroPage() {
       {/* Desktop layout */}
       <div className="hidden sm:flex border-2 justify-center">
         {/* Left sidebar */}
-        <LeftSideBar 
+        <LeftSideBar
           user={user}
           setShowCreate={setShowCreate}
         />
@@ -57,20 +57,20 @@ export default function HeroPage() {
           <div className="divide-y divide-gray-800">
             {postData.length !== 0
               ? postData.map((post, index) => (
-                  <PostCard
-                    key={index}
-                    id={post._id}
-                    user={user? user?.emails[0].value : null}
-                    name={post.name}
-                    content={post.content}
-                    photo={post.photo}
-                    email={post.email}
-                    createdAt={post.createdAt}
-                  />
-                ))
+                <PostCard
+                  key={index}
+                  id={post._id}
+                  user={user ? user?.emails[0].value : null}
+                  name={post.name}
+                  content={post.content}
+                  photo={post.photo}
+                  email={post.email}
+                  createdAt={post.createdAt}
+                />
+              ))
               : Array.from({ length: 5 }).map((_, index) => (
-                  <PostCardTemp key={index} />
-                ))}
+                <PostCardTemp key={index} />
+              ))}
           </div>
         </main>
 
@@ -93,20 +93,20 @@ export default function HeroPage() {
           <div className="divide-y divide-gray-800">
             {postData.length !== 0
               ? postData.map((post, index) => (
-                  <PostCard
-                    key={index}
-                    id={post._id}
-                    user={user? user?.emails[0].value : null}
-                    name={post.name}
-                    content={post.content}
-                    photo={post.photo}
-                    email={post.email}
-                    createdAt={post.createdAt}
-                  />
-                ))
+                <PostCard
+                  key={index}
+                  id={post._id}
+                  user={user ? user?.emails[0].value : null}
+                  name={post.name}
+                  content={post.content}
+                  photo={post.photo}
+                  email={post.email}
+                  createdAt={post.createdAt}
+                />
+              ))
               : Array.from({ length: 5 }).map((_, index) => (
-                  <PostCardTemp key={index} />
-                ))}
+                <PostCardTemp key={index} />
+              ))}
           </div>
         </main>
 
