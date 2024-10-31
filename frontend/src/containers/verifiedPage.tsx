@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { CheckCircle } from "lucide-react";
 
 const BACKEND = "http://localhost:5000";
+const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 
 interface UserData {
     name: {
@@ -34,7 +35,7 @@ export default function Page() {
 
         setTimeout(() => {
             fetchUserData();
-            window.open(`http://localhost:3000/`, "_self");
+            window.open(`${FRONTEND}/`, "_self");
         }, 3000);
 
     }, []);

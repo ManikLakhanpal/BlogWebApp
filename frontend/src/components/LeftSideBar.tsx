@@ -9,7 +9,7 @@ interface Props {
     setShowCreate: Function;
 }
 
-const FRONTEND = "http://localhost:3000";
+const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 
 function LeftSideBar(props: Props) {
     return (

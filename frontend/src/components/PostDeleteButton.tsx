@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Trash2 } from "lucide-react";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 interface Props {
   id: string;

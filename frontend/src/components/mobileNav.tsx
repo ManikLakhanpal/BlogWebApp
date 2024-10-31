@@ -5,7 +5,7 @@ interface Props {
   set: Function;
 }
 
-const FRONTEND = "http:/localhost:3000"
+const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 
 function MobileNav(props: Props) {
   const { user, loading, error } = useUser();

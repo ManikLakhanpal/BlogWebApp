@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import UserProfileCard from "@/components/UserProfileCard";
 import UserSettings from "@/components/UserSettings";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 // TODO ADD CASE IF NO USER FOUND
 
@@ -112,7 +112,7 @@ function ProfilePage(props: Props) {
             {user && (
                 <button
                     onClick={() => setShowCreate(true)}
-                    className="bg-blue-500 text-white rounded-full p-4 fixed right-4 bottom-20 shadow-lg"
+                    className="bg-blue-500 sm:hidden text-white rounded-full p-4 fixed right-4 bottom-20 shadow-lg"
                 >
                     <Plus className="w-6 h-6" />
                 </button>

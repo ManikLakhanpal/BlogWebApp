@@ -5,7 +5,7 @@ import axios from "axios";
 import { useUser } from "@/context/UserContext";
 import { useState } from "react";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 interface Props {
   setShowCreate: Function;

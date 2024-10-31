@@ -1,6 +1,8 @@
 import { Home, Bell, Mail, User } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 
+const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
+
 function MobileFooterBar() {
     const {user, loading, error} = useUser();
     return (
@@ -21,7 +23,7 @@ function MobileFooterBar() {
           <a href="/" className="p-2 rounded-full hover:bg-gray-800">
             <Mail className="w-6 h-6" />
           </a>
-          <a href={user? `http://localhost:3000/user/${user?.emails[0].value}` : "http://localhost:3000/login" } className="p-2 rounded-full hover:bg-gray-800">
+          <a href={user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">
             <User className="w-6 h-6" />
           </a>
         </nav>

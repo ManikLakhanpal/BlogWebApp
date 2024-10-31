@@ -6,7 +6,7 @@ import { useState } from "react"
 import axios from "axios"
 import { X } from "lucide-react"
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 interface Props {
   set: React.Dispatch<React.SetStateAction<boolean>>

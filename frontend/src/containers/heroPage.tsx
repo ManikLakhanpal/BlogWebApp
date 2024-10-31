@@ -10,7 +10,7 @@ import MobileFooterBar from "@/components/MobileFooterBar";
 import PostInput from "@/components/PostInput";
 import RightSideBar from "@/components/RightSideBar";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 interface Post {
   _id: string;

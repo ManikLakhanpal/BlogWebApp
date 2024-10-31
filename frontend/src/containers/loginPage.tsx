@@ -22,7 +22,7 @@ function LoginPage() {
   const [data, setData] = useState<UserData | null>(null);
   const [signInMethod, setSignInMethod] = useState<string | null>(null);
 
-  const BACKEND = "http://localhost:5000";
+  const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
   useEffect(() => {
     if (user) {
