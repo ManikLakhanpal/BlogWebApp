@@ -18,6 +18,7 @@ interface Post {
   content: string;
   photo: string;
   email: string;
+  uid: string;
   createdAt: number;
 }
 
@@ -62,6 +63,7 @@ export default function HeroPage() {
                   id={post._id}
                   user={user ? user?.emails[0].value : null}
                   name={post.name}
+                  uid={post.uid}
                   content={post.content}
                   photo={post.photo}
                   email={post.email}
@@ -96,6 +98,7 @@ export default function HeroPage() {
                 <PostCard
                   key={index}
                   id={post._id}
+                  uid={post.uid}
                   user={user ? user?.emails[0].value : null}
                   name={post.name}
                   content={post.content}

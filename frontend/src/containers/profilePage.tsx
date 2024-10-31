@@ -21,6 +21,7 @@ interface Post {
     name: string;
     content: string;
     photo: string;
+    uid: string;
     email: string;
     createdAt: number;
 }
@@ -83,6 +84,7 @@ function ProfilePage(props: Props) {
                             ? postData.map((post, index) => (
                                 <PostCard
                                     key={index}
+                                    uid={post.uid}
                                     id={post._id}
                                     user={user ? user?.emails[0].value : null}
                                     name={post.name}

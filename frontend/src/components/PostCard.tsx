@@ -10,6 +10,7 @@ interface PostCardProps {
   name: string;
   content: string;
   email: string;
+  uid: string;
   photo: string;
   createdAt: number;
 }
@@ -39,7 +40,7 @@ function PostCard(props: PostCardProps) {
             {props.name}
           </h1>
           <p className="text-sm text-gray-500">
-            {props.email}
+            @{props.uid}
           </p>
         </div>
       </div>
