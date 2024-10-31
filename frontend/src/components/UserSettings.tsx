@@ -15,6 +15,7 @@ interface Props {
     bio: string;
     followers: string;
     following: string;
+    uid: string;
     posts: string;
   } | null
 }
@@ -24,13 +25,23 @@ export default function UserSettings(props: Props) {
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
-    userId: user?.email || "",
+    userId: user?.uid || "",
     bio: user?.bio || ""
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
+    
+    const data ={
+      "name": formData.name,
+      "uid": formData.userId,
+      "bio": formData.bio
+    }
+
+    alert(data.name);
+    alert(data.uid);
+    alert(data.bio);
+
     props.set(false)
   }
 

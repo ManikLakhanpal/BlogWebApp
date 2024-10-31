@@ -50,7 +50,7 @@ function UserProfileCard(props: Props) {
                         )}
                     </div>
                     <h2 className="text-sm text-gray-400">
-                        {props.uid}
+                        @{props.uid}
                     </h2>
                 </div>
             </div>

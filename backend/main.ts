@@ -198,6 +198,19 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
   }
 });
 
+app.put("/user/update", async (req: express.Request, res: express.Response) => {
+  if (req.isAuthenticated) {
+    try {
+      const user = await User.findOne({email: req?.user.email});
+      res.json(user);
+    } catch (error) {
+      res.json(error);
+    }
+  } else {
+    res.redirect(`${FRONTEND}/login`);
+  }
+})
+
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
   try {
     const posts = await Post.find().sort({ createdAt: "desc" }).lean(); // Retrieve posts

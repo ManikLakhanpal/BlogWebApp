@@ -21,7 +21,14 @@ const userSchema = new Schema({
   posts: { type: Number, default: 0},
   followers: {type: Number, default: 0},
   following: {type: Number, default: 0},
-  createdAt: { type: Date, default: Date.now }
+  uid: {
+    type: String,
+    default: function(this: { email: string }) {
+      return this.email; // Set uid default to email value
+    }
+  },
+  createdAt: { type: Date, default: Date.now },
+  bio: {type: String, default: "I'am new to Blog 😀", maxlength: 160},
 });
 
 const postSchema = new Schema({

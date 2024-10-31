@@ -34,6 +34,7 @@ interface UserData {
     email: string;
     photo: string;
     bio: string;
+    uid: string;
     followers: string;
     following: string;
     posts: string;
@@ -75,7 +76,7 @@ function ProfilePage(props: Props) {
                                 userData={userData}
                                 showSettings={showSettings}
                                 setShowSettings={setShowSettings}
-                                uid={props.uid}
+                                uid={userData.uid}
                             />
                         )}
                         {postData.length !== 0
