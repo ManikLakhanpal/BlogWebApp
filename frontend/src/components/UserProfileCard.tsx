@@ -17,6 +17,8 @@ interface Props {
 
     showSettings: boolean;
 
+    posts: number;
+
     uid: string;
 }
 
@@ -62,7 +64,7 @@ function UserProfileCard(props: Props) {
             <div className="mt-4 flex justify-between text-sm">
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Posts</span>
-                    <span className="text-xsr">{props.userData?.posts}</span>
+                    <span className="text-xsr">{props.posts}</span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Followers</span>

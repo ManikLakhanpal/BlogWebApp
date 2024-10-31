@@ -76,6 +76,7 @@ function ProfilePage(props: Props) {
                             <UserProfileCard
                                 userData={userData}
                                 showSettings={showSettings}
+                                posts={postData.length}
                                 setShowSettings={setShowSettings}
                                 uid={userData.uid}
                             />
