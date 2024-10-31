@@ -201,15 +201,17 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 app.put("/user/update", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated) {
     try {
-      const user = await User.findOne({email: req?.user.email});
-      res.json(user);
+      const user = await User.updateOne({ email: req.user?.emails?.[0]?.value }, { name: req.body.name, bio: req.body.bio });
+      console.log(user);
+
+      res.json({ "User updated": user }).status(200);
     } catch (error) {
       res.json(error);
     }
   } else {
     res.redirect(`${FRONTEND}/login`);
   }
-})
+});
 
 app.get("/posts", async (_req: express.Request, res: express.Response) => {
   try {
@@ -260,8 +262,8 @@ app.delete("/delete/post/:id", async (req: express.Request, res: express.Respons
 
 app.get("/user/:id", async (req: express.Request, res: express.Response) => {
   try {
-    const users = await User.find({email: req.params.id});
-    const posts = await Post.find({email: req.params.id}).sort({ createdAt: "desc" }).lean();
+    const users = await User.find({ email: req.params.id });
+    const posts = await Post.find({ email: req.params.id }).sort({ createdAt: "desc" }).lean();
 
     const postsWithUserInfo = posts.map(post => {
       const user = users.find(user => user.email === post.email);
@@ -282,7 +284,7 @@ app.get("/user/:id", async (req: express.Request, res: express.Response) => {
     }
 
     console.log(userData);
-    
+
     if (!users) {
       return res.status(404).json({ error: "User not found" });
     }

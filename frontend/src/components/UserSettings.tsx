@@ -3,7 +3,10 @@
 import Image from "next/image"
 import { useUser } from "@/context/UserContext"
 import { useState } from "react"
+import axios from "axios"
 import { X } from "lucide-react"
+
+const BACKEND = "http://localhost:5000";
 
 interface Props {
   set: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,20 +32,32 @@ export default function UserSettings(props: Props) {
     bio: user?.bio || ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    const data ={
-      "name": formData.name,
-      "uid": formData.userId,
-      "bio": formData.bio
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const data = {
+      name: formData.name,
+      uid: formData.userId,
+      bio: formData.bio
+    };
+
+    try {
+      const resp = await axios.put(`${BACKEND}/user/update`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true  // If your server requires authentication with cookies
+      });
+      console.log(resp.data);
+
+      alert("User updated successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to update user.");
     }
 
-    alert(data.name);
-    alert(data.uid);
-    alert(data.bio);
-
-    props.set(false)
+    props.set(false);
   }
 
   return (
@@ -104,9 +119,18 @@ export default function UserSettings(props: Props) {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="bio" className="block text-sm font-medium text-gray-300">
-              Bio
-            </label>
+            <div className="flex justify-between items-end">
+              <label htmlFor="bio" className="block text-sm font-medium text-gray-300">
+                Bio
+              </label>
+              <label
+                htmlFor="bio"
+                className="lock text-sm font-medium text-gray-300 text-right"
+              >
+                {formData.bio.length} / 160
+              </label>
+            </div>
+
             <textarea
               id="bio"
               value={formData.bio}
@@ -114,6 +138,7 @@ export default function UserSettings(props: Props) {
               rows={4}
               className="w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-2 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               placeholder="Write a short bio about yourself"
+              maxLength={160}
             />
             <p className="text-xs text-gray-400">Brief description for your profile.</p>
           </div>

@@ -25,7 +25,8 @@ const userSchema = new Schema({
     type: String,
     default: function(this: { email: string }) {
       return this.email; // Set uid default to email value
-    }
+    },
+    unique: true
   },
   createdAt: { type: Date, default: Date.now },
   bio: {type: String, default: "I'am new to Blog 😀", maxlength: 160},
