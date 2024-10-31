@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import axios from "axios";
-import { useUser } from "@/context/UserContext";
+import { useUser } from "../context/UserContext";
 import { useState } from "react";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND;

@@ -1,8 +1,8 @@
 "use client"
 
-import NavigationBarLinks from "@/components/NavigationBarLinks";
-import MobileNavToggle from "@/components/MobileNavToggle";
-import MobileNav from "@/components/MobileNav";
+import NavigationBarLinks from "../components/NavigationBarLinks";
+import MobileNavToggle from "../components/MobileNavToggle";
+import MobileNav from "../components/MobileNav";
 import { useState } from "react";
 
 function NavigationBar() {

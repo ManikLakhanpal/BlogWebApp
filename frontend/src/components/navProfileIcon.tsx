@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useUser } from "@/context/UserContext";
+import { useUser } from "../context/UserContext";
 
 function NavProfileIcon() {
     const { user, loading, error } = useUser();

@@ -1,4 +1,4 @@
-import Page from "@/containers/verifiedPage";
+import Page from "../../containers/verifiedPage";
 
 export default function Home() {
   return(

@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { useUser } from "@/context/UserContext"
 import { useState } from "react"
 import axios from "axios"
 import { X } from "lucide-react"

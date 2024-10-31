@@ -1,5 +1,5 @@
-import { UserProvider } from "@/context/UserContext";
-import ProfilePage from "@/containers/profilePage";
+import { UserProvider } from "../../../context/UserContext";
+import ProfilePage from "../../../containers/profilePage";
 
 async function Page({ params }: { params: Promise<{ uid: string }> }) {
 

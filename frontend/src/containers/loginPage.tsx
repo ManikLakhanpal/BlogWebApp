@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { GoogleImage, GoogleText } from "@/components/Google";
-import { GitHubImage, GitHubText } from "@/components/GitHub";
+import { GoogleImage, GoogleText } from "../components/Google";
+import { GitHubImage, GitHubText } from "../components/GitHub";
 import { Loader2, LogOut } from "lucide-react";
-import { useUser, handleLogout as logout } from "@/context/UserContext";
+import { useUser, handleLogout as logout } from "../context/UserContext";
 
 interface UserData {
   name: {
