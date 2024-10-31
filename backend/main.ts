@@ -201,7 +201,7 @@ app.post("/add/posts", async (req: express.Request, res: express.Response) => {
 app.put("/user/update", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated) {
     try {
-      const user = await User.updateOne({ email: req.user?.emails?.[0]?.value }, { uid: req.body.uid, bio: req.body.bio });
+      const user = await User.updateOne({ email: req.user?.emails?.[0]?.value }, { uid: req.body.uid, bio: req.body.bio, name: req.body.name });
       console.log(user);
 
       res.json({ "User updated": user }).status(200);
