@@ -1,12 +1,21 @@
+import { useUser } from "@/context/UserContext";
+
 interface Props {
   show: boolean;
   set: Function;
 }
 
+const FRONTEND = "http:/localhost:3000"
+
 function MobileNav(props: Props) {
+  const { user, loading, error } = useUser();
+
+  const profile = user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login`
+  const profileLink = user? `Profile` : `Login`;
+
   const routes = [
     ["Home", "/"],
-    ["Profile", "/"],
+    [profileLink, profile],
     ["Support", "https://www.w16manik.ninja/support-me"],
     ["About", "/"]
   ]

@@ -5,9 +5,8 @@ import LeftSideBar from "@/components/LeftSideBar";
 import { useUser } from "@/context/UserContext";
 import PostInput from "@/components/PostInput";
 import MobileFooterBar from "@/components/MobileFooterBar";
-import Image from "next/image";
 import axios from "axios";
-import { Plus, Settings } from "lucide-react";
+import { Plus } from "lucide-react";
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import { useState, useEffect } from "react";
 import UserProfileCard from "@/components/UserProfileCard";
@@ -62,7 +61,7 @@ function ProfilePage(props: Props) {
     return (
         <>
             <NavigationBar />
-            <div className="text-white bg-slate-950 flex h-screen justify-center">
+            <div className="text-white bg-slate-950 flex min-h-screen justify-center">
                 <LeftSideBar
                     user={user}
                     setShowCreate={setShowCreate}

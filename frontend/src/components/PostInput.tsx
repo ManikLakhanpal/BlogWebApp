@@ -37,6 +37,7 @@ function PostInput(props: Props) {
         },
         withCredentials: true,
       });
+      window.location.reload();
       console.log("Submitted:", textInput);
     } catch (error) {
       console.error("Error submitting post:", error);
