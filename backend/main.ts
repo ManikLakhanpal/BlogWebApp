@@ -264,7 +264,7 @@ app.delete("/delete/post/:id", async (req: express.Request, res: express.Respons
 app.get("/user/:id", async (req: express.Request, res: express.Response) => {
   try {
     let users = await User.find({ email: req.params.id });
-    let posts = await Post.find({ uid: req.params.id }).sort({ createdAt: "desc" }).lean();
+    let posts = await Post.find({ email: req.params.id }).sort({ createdAt: "desc" }).lean();
 
     console.log(users);
     if (users.length == 0) {
