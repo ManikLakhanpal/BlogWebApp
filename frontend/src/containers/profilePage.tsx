@@ -62,14 +62,14 @@ function ProfilePage(props: Props) {
     return (
         <>
             <NavigationBar />
-            <div className="flex h-screen justify-center">
+            <div className="text-white bg-slate-950 flex h-screen justify-center">
                 <LeftSideBar
                     user={user}
                     setShowCreate={setShowCreate}
                 />
 
                 <main className="w-full sm:w-1/2 max-w-xl border-x border-gray-800">
-                    <div className="flex flex-col sticky top-20 border-b p-4 bg-zinc-950">
+                    <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
                         <div className="flex items-start gap-4">
                             <div className="relative aspect-square h-20 w-20 overflow-hidden sm:h-24 sm:w-24">
                                 <Image

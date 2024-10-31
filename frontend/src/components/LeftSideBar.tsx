@@ -11,7 +11,7 @@ interface Props {
 
 function LeftSideBar(props: Props) {
     return (
-        <nav className="hidden sm:block w-1/4 max-w-xs fixed left-0 bg-opacity-10 rounded-lg bg-gray-900 h-fit p-4">
+        <nav className="hidden text-white sm:block w-1/4 max-w-xs fixed left-0 bg-opacity-10 rounded-lg bg-gray-900 h-fit p-4">
           <div className="flex flex-col space-y-4">
             <a
               href="#"
