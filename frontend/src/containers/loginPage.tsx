@@ -92,7 +92,7 @@ function LoginPage() {
                     className="rounded-full border-4 border-gray-700 mx-auto"
                   />
                   <h2 className="mt-4 text-2xl font-bold text-white">
-                    Welcome
+                    Welcome to Blog
                   </h2>
                   <p className="mt-2 text-gray-400">Sign in to continue</p>
                 </div>
