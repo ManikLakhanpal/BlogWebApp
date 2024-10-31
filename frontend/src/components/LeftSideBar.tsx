@@ -35,11 +35,11 @@ function LeftSideBar(props: Props) {
               <span>Messages</span>
             </a>
             <a
-              href={`http://localhost:3000/user/${props.user?.emails[0].value}`}
+              href={props.user? `http://localhost:3000/user/${props.user?.emails[0].value}` : "http://localhost:3000/login"}
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <User />
-              <span>Profile</span>
+              <span>{props.user? `Profile` : `Login`}</span>
             </a>
             {props.user && (
               <button
