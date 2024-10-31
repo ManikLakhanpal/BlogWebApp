@@ -13,6 +13,10 @@ interface Props {
         posts: string;
     };
 
+    setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
+
+    showSettings: boolean;
+
     uid: string;
 }
 
@@ -38,7 +42,9 @@ function UserProfileCard(props: Props) {
                         </h1>
                         {props.userData?.email == user?.emails[0].value && (
                             <span
-                                className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center cursor-pointer rounded-full">
+                                className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center cursor-pointer rounded-full"
+                                onClick={() => {props.setShowSettings(!props.showSettings)}}
+                            >
                                 <Settings />
                             </span>
                         )}

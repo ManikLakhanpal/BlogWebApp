@@ -10,6 +10,7 @@ import { Plus } from "lucide-react";
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import { useState, useEffect } from "react";
 import UserProfileCard from "@/components/UserProfileCard";
+import UserSettings from "@/components/UserSettings";
 
 const BACKEND = "http://localhost:5000";
 
@@ -41,6 +42,7 @@ interface UserData {
 function ProfilePage(props: Props) {
     const { user, loading, error } = useUser();
     const [showCreate, setShowCreate] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
     const [userData, setUserData] = useState<UserData>();
     const [postData, setPostData] = useState<Post[]>([]);
 
@@ -61,7 +63,7 @@ function ProfilePage(props: Props) {
     return (
         <>
             <NavigationBar />
-            <div className="text-white bg-slate-950 flex min-h-screen justify-center">
+            <div className="text-white bg-slate-950 flex min-h-screen justify-center pb-16">
                 <LeftSideBar
                     user={user}
                     setShowCreate={setShowCreate}
@@ -71,6 +73,8 @@ function ProfilePage(props: Props) {
                         {(userData) && (
                             <UserProfileCard
                                 userData={userData}
+                                showSettings={showSettings}
+                                setShowSettings={setShowSettings}
                                 uid={props.uid}
                             />
                         )}
@@ -113,6 +117,13 @@ function ProfilePage(props: Props) {
                 <PostInput
                     setShowCreate={setShowCreate}
                     showCreate={showCreate}
+                />
+            )}
+            {showSettings && (
+                <UserSettings 
+                    set={setShowSettings}
+                    show={showSettings}
+                    userData={userData || null}
                 />
             )}
         </>
