@@ -10,6 +10,7 @@ import axios from "axios";
 import { Plus, Settings } from "lucide-react";
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import { useState, useEffect } from "react";
+import UserProfileCard from "@/components/UserProfileCard";
 
 const BACKEND = "http://localhost:5000";
 
@@ -49,7 +50,6 @@ function ProfilePage(props: Props) {
             try {
                 const response = await axios.get(`${BACKEND}/user/${props.uid}`);
                 setUserData(response.data.users[0]);
-
                 setPostData(response.data.postsWithUserInfo);
             } catch (error) {
                 console.error("Error fetching posts:", error);
@@ -67,73 +67,39 @@ function ProfilePage(props: Props) {
                     user={user}
                     setShowCreate={setShowCreate}
                 />
-
-                <main className="w-full sm:w-1/2 max-w-xl border-x border-gray-800">
-                    <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
-                        <div className="flex items-start gap-4">
-                            <div className="relative aspect-square h-20 w-20 overflow-hidden sm:h-24 sm:w-24">
-                                <Image
-                                    src={userData ? userData.photo : "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"}
-                                    alt="Profile picture"
-                                    fill
-                                    className="rounded-full border-2 object-cover"
-                                    priority
-                                />
-                            </div>
-                            <div className="flex min-w-0 flex-1 flex-col gap-1">
-                                <div className="flex items-center gap-2">
-                                    <h1 className="truncate text-lg font-bold sm:text-xl">
-                                        {userData?.name}
-                                    </h1>
-                                    {userData?.email == user?.emails[0].value && (
-                                        <span
-                                            className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center rounded-full">
-                                            <Settings />
-                                        </span>
-                                    )}
-                                </div>
-                                <h2 className="text-sm text-gray-400">
-                                    {props.uid}
-                                </h2>
-                            </div>
-                        </div>
-
-                        <p className="mt-2 text-sm">
-                            {userData?.bio}
-                        </p>
-
-                        <div className="mt-4 flex justify-between text-sm">
-                            <div className="flex flex-col items-center">
-                                <span className="font-semibold">Posts</span>
-                                <span className="text-xsr">{userData?.posts}</span>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <span className="font-semibold">Followers</span>
-                                <span className="text-xs">{userData?.followers}</span>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <span className="font-semibold">Following</span>
-                                <span className="text-xs">{userData?.following}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {postData.length !== 0
-                        ? postData.map((post, index) => (
-                            <PostCard
-                                key={index}
-                                id={post._id}
-                                user={user ? user?.emails[0].value : null}
-                                name={post.name}
-                                content={post.content}
-                                photo={post.photo}
-                                email={post.email}
-                                createdAt={post.createdAt}
+                {userData !== undefined && (
+                    <main className="w-full sm:w-1/2 max-w-xl border-x border-gray-800">
+                        {(userData) && (
+                            <UserProfileCard
+                                userData={userData}
+                                uid={props.uid}
                             />
-                        ))
-                        : Array.from({ length: 5 }).map((_, index) => (
-                            <PostCardTemp key={index} />
-                        ))}
-                </main>
+                        )}
+                        {postData.length !== 0
+                            ? postData.map((post, index) => (
+                                <PostCard
+                                    key={index}
+                                    id={post._id}
+                                    user={user ? user?.emails[0].value : null}
+                                    name={post.name}
+                                    content={post.content}
+                                    photo={post.photo}
+                                    email={post.email}
+                                    createdAt={post.createdAt}
+                                />
+                            ))
+                            : Array.from({ length: 5 }).map((_, index) => (
+                                <PostCardTemp key={index} />
+                            ))}
+                    </main>
+                )}
+
+                {userData == undefined && (
+                    <main className="w-full sm:w-1/2 max-w-xl flex justify-center items-center border-x border-gray-800">
+                        <h1 className="text-white text-center">User not available</h1>
+                    </main>
+                )}
+
             </div>
             <MobileFooterBar />
             {user && (

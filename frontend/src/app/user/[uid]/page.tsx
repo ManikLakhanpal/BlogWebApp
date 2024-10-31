@@ -9,7 +9,6 @@ async function Page({ params }: { params: Promise<{ uid: string }> }) {
             <ProfilePage
                 uid={uid.replace("%40", "@")}
             />
-            <h1>{uid.replace("%40", "@")}</h1>
         </UserProvider>
     );
 }
