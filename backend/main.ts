@@ -23,7 +23,7 @@ app.use(
 );
 
 // TODO Trust first proxy, very important for secure cookies, using vercel as proxy
-// TODO app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 // Session setup
 app.use(
