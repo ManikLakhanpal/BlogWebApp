@@ -32,7 +32,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: "mongodb://localhost:27017/sessions",
+      mongoUrl: `mongodb+srv://lakhanpalmanik:${Deno.env.get("ATLAS_SECRET")}@cluster0.07wzl.mongodb.net/sessions?retryWrites=true&w=majority`,
       ttl: 1000 * 60 * 60 * 24 * 14,
     }),
     cookie: {

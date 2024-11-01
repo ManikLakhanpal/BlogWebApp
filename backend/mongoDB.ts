@@ -1,7 +1,7 @@
 import mongoose from "npm:mongoose";
 
 const Schema = mongoose.Schema;
-const dbURL = "mongodb://localhost:27017/Blog"; // * Specify the database name here at end of URL
+const dbURL = `mongodb+srv://lakhanpalmanik:${Deno.env.get("ATLAS_SECRET")}@cluster0.07wzl.mongodb.net/Blog?retryWrites=true&w=majority`; // * Specify the database name here at end of URL
 
 async function connectDB() {
   try {
