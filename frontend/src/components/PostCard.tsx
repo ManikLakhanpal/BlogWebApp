@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Heart, Flag, Bookmark, Share } from "lucide-react";
-import PostDeleteButton from "./PostDeleteButton";
+import PostDeleteButton from "@/components/PostDeleteButton";
 
 interface PostCardProps {
   id: string

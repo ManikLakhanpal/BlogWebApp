@@ -1,16 +1,16 @@
 "use client"
 
-import NavigationBar from "./navigationBar";
-import LeftSideBar from "../components/LeftSideBar";
-import { useUser } from "../context/UserContext";
-import PostInput from "../components/PostInput";
-import MobileFooterBar from "../components/MobileFooterBar";
+import NavigationBar from "@/containers/navigationBar";
+import LeftSideBar from "@/components/LeftSideBar";
+import { useUser } from "@/context/UserContext";
+import PostInput from "@/components/PostInput";
+import MobileFooterBar from "@/components/MobileFooterBar";
 import axios from "axios";
 import { Plus } from "lucide-react";
-import { PostCard, PostCardTemp } from "../components/PostCard";
+import { PostCard, PostCardTemp } from "@/components/PostCard";
 import { useState, useEffect } from "react";
-import UserProfileCard from "../components/UserProfileCard";
-import UserSettings from "../components/UserSettings";
+import UserProfileCard from "@/components/UserProfileCard";
+import UserSettings from "@/components/UserSettings";
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 

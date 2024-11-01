@@ -1,5 +1,5 @@
 import { Home, Bell, Mail, User } from "lucide-react";
-import { useUser } from "../context/UserContext";
+import { useUser } from "@/context/UserContext";
 
 const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 

@@ -1,4 +1,4 @@
-import NavProfileIcon from "./NavProfileIcon";
+import NavProfileIcon from "@/components/NavProfileIcon";
 
 
 function NavigationBarLinks() {

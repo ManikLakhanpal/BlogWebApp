@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Settings } from "lucide-react";
-import { useUser } from "../context/UserContext";
+import { useUser } from "@/context/UserContext";
 
 interface Props {
     userData: {
