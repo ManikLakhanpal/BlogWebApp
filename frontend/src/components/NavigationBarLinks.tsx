@@ -1,5 +1,5 @@
 import NavProfileIcon from "@/components/NavProfileIcon";
-
+import Link from "next/link";
 
 function NavigationBarLinks() {
   const linkClasses = "relative group hidden lg:block";
@@ -15,7 +15,7 @@ function NavigationBarLinks() {
     <div className="flex items-center justify-end sm:justify-around">
       {routes.map(([name, path], index) => (
         <div key={index} className={linkClasses}>
-          <a href={`${path}`}>{name}</a>
+          <Link href={`${path}`}>{name}</Link>
           <div className={underlineClasses}></div>
         </div>
       ))}

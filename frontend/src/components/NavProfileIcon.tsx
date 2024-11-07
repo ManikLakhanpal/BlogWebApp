@@ -7,14 +7,13 @@ import { useUser } from "@/context/UserContext";
 function NavProfileIcon() {
     const { user, loading, error } = useUser();
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+    const profileImageUrl = user?.photos[0]?.value || "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg";
+
   return (
-    <a className="relative">
+    <div className="relative">
       <Image
-        src={
-          user == null
-            ? "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"
-            : user.photos[0].value
-        }
+        src={profileImageUrl}
         alt="profilePhoto"
         height={50}
         width={50}
@@ -33,7 +32,7 @@ function NavProfileIcon() {
           {user == null ? "Login" : "Logout"}
         </div>
       )}
-    </a>
+    </div>
   );
 }
 

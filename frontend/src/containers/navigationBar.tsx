@@ -3,6 +3,7 @@
 import NavigationBarLinks from "@/components/NavigationBarLinks";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MobileNav from "@/components/MobileNav";
+import Link from "next/link";
 import { useState } from "react";
 
 function NavigationBar() {
@@ -25,7 +26,7 @@ function NavigationBar() {
             }}
            />
           <div className="flex flex-row justify-center sm:justify-start items-center">
-            <a href="./">Blog</a>
+            <Link href="./">Blog</Link>
           </div>  
             <NavigationBarLinks />
         </nav>

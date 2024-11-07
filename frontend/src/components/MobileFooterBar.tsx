@@ -1,5 +1,6 @@
 import { Home, Bell, Mail, User } from "lucide-react";
 import { useUser } from "@/context/UserContext";
+import Link from "next/link";
 
 const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 
@@ -14,18 +15,18 @@ function MobileFooterBar() {
             backgroundColor: "rgba(3, 3, 32, 0.6)",
           }}
         >
-          <a href="/" className="p-2 rounded-full hover:bg-gray-800">
+          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
             <Home className="w-6 h-6" />
-          </a>
-          <a href="/" className="p-2 rounded-full hover:bg-gray-800">
+          </Link>
+          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
             <Bell className="w-6 h-6" />
-          </a>
-          <a href="/" className="p-2 rounded-full hover:bg-gray-800">
+          </Link>
+          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
             <Mail className="w-6 h-6" />
-          </a>
-          <a href={user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">
+          </Link>
+          <Link href={user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">
             <User className="w-6 h-6" />
-          </a>
+          </Link>
         </nav>
     );
 }

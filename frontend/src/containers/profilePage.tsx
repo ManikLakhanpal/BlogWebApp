@@ -1,6 +1,5 @@
 "use client"
 
-import NavigationBar from "@/containers/navigationBar";
 import LeftSideBar from "@/components/LeftSideBar";
 import { useUser } from "@/context/UserContext";
 import PostInput from "@/components/PostInput";
@@ -64,7 +63,6 @@ function ProfilePage(props: Props) {
 
     return (
         <>
-            <NavigationBar />
             <div className="text-white bg-slate-950 flex min-h-screen justify-center pb-16">
                 <LeftSideBar
                     user={user}

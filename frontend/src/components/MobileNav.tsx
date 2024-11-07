@@ -1,4 +1,5 @@
 import { useUser } from "@/context/UserContext";
+import Link from "next/link";
 
 interface Props {
   show: boolean;
@@ -51,9 +52,9 @@ function MobileNav(props: Props) {
             <ul className="flex flex-col h-full justify-around pb-52 mt-10 text-white text-xl px-6">
               {routes.map(([name, path], index) => (
                 <li key={index}>
-                <a href={`${path}`} onClick={() => props.set(false)}>
+                <Link href={`${path}`} onClick={() => props.set(false)}>
                   {name}
-                </a>
+                </Link>
               </li>
               ))}
             </ul>
