@@ -11,7 +11,7 @@ const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 function MobileNav(props: Props) {
   const { user, loading, error } = useUser();
 
-  const profile = user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login`
+  const profile = user? `${FRONTEND}/main/user/${user?.emails[0].value}` : `${FRONTEND}/login`
   const profileLink = user? `Profile` : `Login`;
 
   const routes = [
