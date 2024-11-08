@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { UserProvider } from "@/context/UserContext";
 import localFont from "next/font/local";
-import NavigationBar from "@/containers/navigationBar";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -34,7 +33,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950`}
       >
         <UserProvider>
-          <NavigationBar />
           {children}
         </UserProvider>
       </body>
