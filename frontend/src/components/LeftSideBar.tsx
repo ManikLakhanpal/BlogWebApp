@@ -38,7 +38,7 @@ function LeftSideBar(props: Props) {
               <span>Messages</span>
             </Link>
             <Link
-              href={props.user? `${FRONTEND}/user/${props.user?.emails[0].value}` : `${FRONTEND}/login`}
+              href={props.user? `${FRONTEND}/main/user/${props.user?.emails[0].value}` : `${FRONTEND}/login`}
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <User />

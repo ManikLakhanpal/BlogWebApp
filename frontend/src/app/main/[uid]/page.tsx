@@ -1,4 +1,4 @@
-import ProfilePage from "../../../containers/profilePage";
+import ProfilePage from "@/containers/profilePage";
 
 async function Page({ params }: { params: Promise<{ uid: string }> }) {
 

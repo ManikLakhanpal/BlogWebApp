@@ -24,7 +24,7 @@ function MobileFooterBar() {
           <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
             <Mail className="w-6 h-6" />
           </Link>
-          <Link href={user? `${FRONTEND}/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">
+          <Link href={user? `${FRONTEND}/main/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">
             <User className="w-6 h-6" />
           </Link>
         </nav>
