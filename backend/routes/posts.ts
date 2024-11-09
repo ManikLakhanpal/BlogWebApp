@@ -5,7 +5,7 @@ const router = express.Router();
 const FRONTEND = "http://localhost:3000";
 
 // Add new post
-router.post("/", async (req: express.Request, res: express.Response) => {
+router.post("/add", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated()) {
     try {
       const newPost = new Post({
@@ -56,7 +56,7 @@ router.get("/", async (_req: express.Request, res: express.Response) => {
 });
 
 // Delete post
-router.delete("/:id", async (req: express.Request, res: express.Response) => {
+router.delete("/delete/:id", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated()) {
     try {
       const post = await Post.findById(req.params.id);

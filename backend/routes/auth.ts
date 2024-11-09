@@ -33,6 +33,13 @@ router.get(
 );
 
 router.get(
+  "/github",
+  passport.authenticate("github", {
+    scope: ["user:email"],
+  })
+);
+
+router.get(
     "/auth/github/callback",
     passport.authenticate("github", { failureRedirect: "/login" }),
     async (req: express.Request, res: express.Response) => {
