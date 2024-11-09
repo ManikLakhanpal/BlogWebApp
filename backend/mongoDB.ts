@@ -24,7 +24,7 @@ const userSchema = new Schema({
   uid: {
     type: String,
     default: function(this: { email: string }) {
-      return this.email; // Set uid default to email value
+      return this.email; // ? Set uid default to email value
     },
     unique: true
   },
@@ -36,7 +36,7 @@ const postSchema = new Schema({
   content: { type: String, required: true, maxlength: 150 },
   createdAt: { type: Number, required: true },
   likes: { type: Number, default: 0 },
-  email: { type: String, required: true },  // Using email to link to the user
+  email: { type: String, required: true },  // ? Using email to link to the user
 });
 
 const User = mongoose.model("Users", userSchema); // ! 1st Param creates a collection name called "Users"

@@ -50,7 +50,7 @@ function ProfilePage(props: Props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`${BACKEND}/user/${props.uid}`);
+                const response = await axios.get(`${BACKEND}/api/user/${props.uid}`);
                 setUserData(response.data.users[0]);
                 setPostData(response.data.postsWithUserInfo);
             } catch (error) {
