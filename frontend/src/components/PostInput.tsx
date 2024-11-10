@@ -31,7 +31,7 @@ function PostInput(props: Props) {
       user: user?.emails[0].value
     };
     try {
-      const resp = await axios.post(`${BACKEND}/add/posts`, data, {
+      const resp = await axios.post(`${BACKEND}/posts/add`, data, {
         headers: {
           "Content-Type": "application/json",
         },
