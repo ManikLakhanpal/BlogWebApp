@@ -9,7 +9,7 @@ import postRoutes from "./routes/posts.ts";
 import userRoutes from "./routes/users.ts";
 
 const app = express();
-const PORT = 5000;
+const PORT = Deno.env.get("PORT");
 const FRONTEND = Deno.env.get("FRONTEND");
 
 // Initialize database

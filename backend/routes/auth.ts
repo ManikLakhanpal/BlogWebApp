@@ -3,7 +3,7 @@ import passport from "npm:passport";
 import { User } from "../mongoDB.ts";
 
 const authRoutes = express.Router();
-const FRONTEND = Deno.env.get("FRONTEND");
+const FRONTEND = "http://localhost:3000";
 
 authRoutes.get(
   "/google",
