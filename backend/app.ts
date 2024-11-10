@@ -10,7 +10,7 @@ import userRoutes from "./routes/users.ts";
 
 const app = express();
 const PORT = 5000;
-const FRONTEND = "http://localhost:3000";
+const FRONTEND = Deno.env.get("FRONTEND");
 
 // Initialize database
 initializeDatabase();

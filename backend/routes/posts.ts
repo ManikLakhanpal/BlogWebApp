@@ -2,7 +2,7 @@ import express from "npm:express";
 import { Post, User } from "../mongoDB.ts";
 
 const router = express.Router();
-const FRONTEND = "http://localhost:3000";
+const FRONTEND = Deno.env.get("FRONTEND");
 
 // Add new post
 router.post("/add", async (req: express.Request, res: express.Response) => {

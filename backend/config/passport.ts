@@ -3,7 +3,7 @@ import GoogleStrategy from "npm:passport-google-oauth20";
 import GitHubStrategy from "npm:passport-github";
 import express from "npm:express";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = Deno.env.get("BACKEND");
 
 export const configurePassport = () => {
   passport.use(
