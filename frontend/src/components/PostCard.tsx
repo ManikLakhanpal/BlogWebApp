@@ -26,7 +26,15 @@ function PostCard(props: PostCardProps) {
   }).format(date);
 
   return (
-    <div className="p-4 sm:p-6 border hover:cursor-pointer border-gray-900 rounded-sm">
+    <div 
+      className="p-4 sm:p-6 border hover:cursor-pointer border-gray-900 rounded-sm"
+      onClick={() => {
+        const targetUrl = `/main/user/${props.uid}`;
+        if (window.location.pathname !== targetUrl) {
+          window.location.href = targetUrl;
+        }
+      }}      
+      >
       <div className="flex items-center space-x-4 mb-4">
         <Image
           src={props.photo}
@@ -49,7 +57,7 @@ function PostCard(props: PostCardProps) {
       </p>
       <p className="text-sm text-gray-500 mb-4">{formattedDate}</p>
       <div className="flex justify-around mt-2">
-        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-pink-500 hover:bg-pink-500 hover:bg-opacity-30 transition-colors duration-200">
+        <button className="text-gray-500 flex justify-</div>center items-center rounded-full p-1 hover:text-pink-500 hover:bg-pink-500 hover:bg-opacity-30 transition-colors duration-200">
           <Heart className="w-5 h-5" />
         </button>
         <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-blue-500 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200">

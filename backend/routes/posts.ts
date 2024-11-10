@@ -16,7 +16,7 @@ router.post("/add", async (req: express.Request, res: express.Response) => {
       console.log({
         content: req.body.content,
         createdAt: req.body.createdAt,
-        email: req.user.user
+        email: req.body.user
       });
       await newPost.save();
       res.json(newPost);
