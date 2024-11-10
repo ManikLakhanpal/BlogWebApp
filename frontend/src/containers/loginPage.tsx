@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GoogleImage, GoogleText } from "@/components/Google";
 import { GitHubImage, GitHubText } from "@/components/GitHub";
-import { Loader2, LogOut } from "lucide-react";
+import { ArrowLeft, Loader2, LogOut } from "lucide-react";
 import { useUser, handleLogout as logout } from "@/context/UserContext";
 
 interface UserData {
@@ -43,8 +44,13 @@ function LoginPage() {
     setSignInMethod(null);
     logout();
   }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col items-center justify-center p-4">
+      <Link href="/" className="absolute top-4 left-4 text-white hover:text-gray-300 transition-colors duration-300">
+        <ArrowLeft className="w-6 h-6" />
+        <span className="sr-only">Back to Home</span>
+      </Link>
       <div className="w-full max-w-md">
         <div className="bg-gray-800 shadow-xl rounded-lg overflow-hidden">
           <div className="p-8">

@@ -19,7 +19,7 @@ authRoutes.delete("/logout", (req: express.Request, res: express.Response) => {
     }
     res.clearCookie("connect.sid"); // Clear session cookie
     res.clearCookie("user"); // Clear user cookie
-    res.redirect("/home"); // Redirect to login page
+    res.json({ message: "Logged out successfully" });
   });
 });
 
