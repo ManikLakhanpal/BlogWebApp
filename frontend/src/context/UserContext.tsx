@@ -79,11 +79,9 @@ function UserProvider({ children }: { children: React.ReactNode }) {
 
 async function handleLogout() {
   try {
-    await axios.get(`${BACKEND}/auth/logout`, {
-      withCredentials: true
+    await axios.delete(`${BACKEND}/auth/logout`, {
+      withCredentials: true,
     });
-    Cookies.remove('user');
-    window.location.href = '/';
   } catch (error) {
     console.error("Error during logout:", error);
   }
