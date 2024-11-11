@@ -41,7 +41,7 @@ export default function UserSettings(props: Props) {
     };
 
     try {
-      const resp = await axios.put(`${BACKEND}/user/update`, data, {
+      const resp = await axios.put(`${BACKEND}/api/user/update`, data, {
         headers: {
           "Content-Type": "application/json",
         },
