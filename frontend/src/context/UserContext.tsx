@@ -84,6 +84,7 @@ async function handleLogout() {
     });
 
     if (resp.data.message === "Logged out successfully") {
+      Cookies.remove("user");
       window.location.href = "/main"; // Redirect client-side
     }
 

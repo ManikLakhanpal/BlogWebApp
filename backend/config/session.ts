@@ -9,7 +9,9 @@ export const sessionConfig = {
     ttl: 1000 * 60 * 60 * 24 * 14,
   }),
   cookie: {
-    secure: false,
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
     maxAge: 1000 * 60 * 60 * 24 * 14,
   },
 };

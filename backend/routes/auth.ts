@@ -15,8 +15,10 @@ authRoutes.get(
 authRoutes.delete("/logout", (req: express.Request, res: express.Response) => {
   req.logOut((err: express.Error) => { // ? it's logOut not logout
     if (err) {
+      console.log({ error: "Error logging out" })
       return res.status(500).json({ error: "Error logging out" });
     }
+    console.log({ message: "Logged out successfully" });
     res.clearCookie("connect.sid"); // Clear session cookie
     res.clearCookie("user"); // Clear user cookie
     res.json({ message: "Logged out successfully" });
