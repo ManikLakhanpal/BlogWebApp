@@ -85,6 +85,7 @@ async function handleLogout() {
 
     if (resp.data.message === "Logged out successfully") {
       Cookies.remove("user");
+      Cookies.remove("connect.sid");
       window.location.href = "/main"; // Redirect client-side
     }
 
