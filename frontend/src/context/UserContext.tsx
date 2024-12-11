@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { redirect } from 'next/dist/server/api-utils';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
@@ -51,6 +52,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
             setUser(response.data);
             // Update cookie with latest data
             Cookies.set('user', JSON.stringify(response.data));
+            window.location.href = "/main";
           } else {
             setUser(null);
             Cookies.remove('user');

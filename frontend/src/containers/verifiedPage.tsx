@@ -35,7 +35,7 @@ export default function Page() {
 
         setTimeout(() => {
             fetchUserData();
-            window.open(`${FRONTEND}/`, "_self");
+            window.open(`${FRONTEND}/main`, "_self");
         }, 3000);
 
     }, []);
