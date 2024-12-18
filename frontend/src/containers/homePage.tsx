@@ -1,25 +1,11 @@
 import Link from "next/link";
-import Head from "next/head";
-import { FaCloud, FaReact, FaDatabase } from "react-icons/fa";
+import { FaCloud, FaDatabase } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiDeno, SiSocketdotio } from "react-icons/si";
 
 export default function HomePage() {
   return (
     <>
-      <Head>
-        <title>Welcome to Blog</title>
-        <meta
-          name="description"
-          content="Explore our tech blog powered by cutting-edge technologies: Deno, Next.js, MongoDB, and Socket.io. Created by Manik Lakhanpal. Stay updated with the latest in web development."
-        />
-        <meta
-          name="keywords"
-          content="Blog, Deno, Next.js, MongoDB, Socket.io, Web Development, Manik Lakhanpal"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="canonical" href="https://blogs.w16manik.ninja" />
-      </Head>
       <main className="min-h-screen w-full flex flex-col justify-between p-4 bg-gradient-to-br from-black to-slate-900 text-white">
         <div className="flex-grow flex flex-col justify-center items-center">
           <div className="max-w-4xl w-full space-y-8 text-center">
