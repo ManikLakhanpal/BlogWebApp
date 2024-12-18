@@ -10,7 +10,6 @@ import { useRef } from "react";
 
 export default function HomePage() {
   const heading = useRef<HTMLHeadingElement>(null);
-  const { contextSafe } = useGSAP({ scope: heading });
   const content = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
