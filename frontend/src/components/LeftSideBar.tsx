@@ -17,21 +17,21 @@ function LeftSideBar(props: Props) {
         <nav className="hidden text-white sm:block w-1/4 max-w-xs fixed left-0 bg-opacity-10 rounded-lg bg-gray-900 h-fit p-4">
           <div className="flex flex-col space-y-4">
             <Link
-              href="/"
+              href="/main"
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <Home />
               <span>Home</span>
             </Link>
             <Link
-              href="/"
+              href="/main"
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <Bell />
               <span>Notifications</span>
             </Link>
             <Link
-              href="/"
+              href="/main"
               className="flex items-center space-x-4 text-xl transition-colors duration-75 hover:bg-gray-800 rounded-xl p-3"
             >
               <Mail />

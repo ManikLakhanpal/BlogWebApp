@@ -47,7 +47,7 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col items-center justify-center p-4">
-      <Link href="/" className="absolute top-4 left-4 text-white hover:text-gray-300 transition-colors duration-300">
+      <Link href="/main" className="absolute top-4 left-4 text-white hover:text-gray-300 transition-colors duration-300">
         <ArrowLeft className="w-6 h-6" />
         <span className="sr-only">Back to Home</span>
       </Link>
