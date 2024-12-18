@@ -9,50 +9,76 @@ import gsap from "gsap";
 import { useRef } from "react";
 
 export default function HomePage() {
-  const container = useRef<HTMLHeadingElement>(null);
-  const { contextSafe } = useGSAP({scope: container});
+  const heading = useRef<HTMLHeadingElement>(null);
+  const { contextSafe } = useGSAP({ scope: heading });
+  const content = useRef<HTMLHeadingElement>(null);
 
-  // const onClickGood = contextSafe(() => {
-  //   gsap.to('.good', { rotation: 180 });
-  // });
+  useGSAP(() => {
+    gsap.from(heading.current, {
+      y: "-40%",
+      opacity: "0",
+      duration: 2,
+      ease: "power4.out",
+    });
+  }, []);
 
   return (
     <>
       <main className="min-h-screen w-full flex flex-col justify-between p-4 bg-gradient-to-br from-black to-slate-900 text-white">
         <div className="flex-grow flex flex-col justify-center items-center">
           <div className="max-w-4xl w-full space-y-8 text-center">
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight" ref={container}>
+            <h1
+              className="text-4xl sm:text-6xl font-bold tracking-tight"
+              ref={heading}
+            >
               Welcome to <span className="text-blue-400">Blog</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto">
-              A professional blog platform featuring integrated messaging
-              capabilities (currently under development)
-            </p>
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto">
-              Created by Manik Lakhanpal
-            </p>
+            <div>
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto">
+                A professional blog platform featuring integrated messaging
+                capabilities (currently under development)
+              </p>
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto">
+                Created by Manik Lakhanpal
+              </p>
+            </div>
             <div className="flex justify-center">
               <div className="flex cursor-pointer w-1/2 justify-around items-center space-x-4">
-                <SiDeno 
-                  className="text-3xl text-white" 
-                  title="Deno" 
+                <SiDeno
+                  className="text-3xl text-white deno"
+                  title="Deno"
+                  onClick={contextSafe(() => {
+                    gsap.to(".deno", { rotation: "+=180" });
+                  })}
                 />
 
                 <RiNextjsFill
-                  className="text-4xl text-white"
+                  className="text-4xl text-white react"
                   title="React (Next.js)"
+                  onClick={contextSafe(() => {
+                    gsap.to(".react", { rotation: "+=180" });
+                  })}
                 />
                 <FaDatabase
-                  className="text-3xl text-green-500"
+                  className="text-3xl text-green-500 mongo"
                   title="MongoDB"
+                  onClick={contextSafe(() => {
+                    gsap.to(".mongo", { rotation: "+=180" });
+                  })}
                 />
                 <SiSocketdotio
-                  className="text-3xl text-yellow-400"
+                  className="text-3xl text-yellow-400 socket"
                   title="Socket.io"
+                  onClick={contextSafe(() => {
+                    gsap.to(".socket", { rotation: "+=180" });
+                  })}
                 />
                 <FaCloud
-                  className="text-3xl text-purple-400"
+                  className="text-3xl text-purple-400 cloud"
                   title="Cloud Deployed"
+                  onClick={contextSafe(() => {
+                    gsap.to(".cloud", { rotation: "+=180" });
+                  })}
                 />
               </div>
             </div>
