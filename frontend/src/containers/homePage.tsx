@@ -1,15 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import { FaCloud, FaDatabase } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiDeno, SiSocketdotio } from "react-icons/si";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
 
 export default function HomePage() {
+  const container = useRef<HTMLHeadingElement>(null);
+  const { contextSafe } = useGSAP({scope: container});
+
+  // const onClickGood = contextSafe(() => {
+  //   gsap.to('.good', { rotation: 180 });
+  // });
+
   return (
     <>
       <main className="min-h-screen w-full flex flex-col justify-between p-4 bg-gradient-to-br from-black to-slate-900 text-white">
         <div className="flex-grow flex flex-col justify-center items-center">
           <div className="max-w-4xl w-full space-y-8 text-center">
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight" ref={container}>
               Welcome to <span className="text-blue-400">Blog</span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto">
@@ -21,7 +33,10 @@ export default function HomePage() {
             </p>
             <div className="flex justify-center">
               <div className="flex cursor-pointer w-1/2 justify-around items-center space-x-4">
-                <SiDeno className="text-3xl text-white" title="Deno" />
+                <SiDeno 
+                  className="text-3xl text-white" 
+                  title="Deno" 
+                />
 
                 <RiNextjsFill
                   className="text-4xl text-white"
@@ -41,7 +56,7 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            <p className="text-lg sm:text-xl bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg shadow-lg">
+            <p className="text-lg sm:text-xl bg-gradient-to-b from-black to-slate-400 p-4 rounded-lg shadow-lg">
               Site created using Deno, Next.js, MongoDB, Socket.io, Deployed on
               the Cloud
             </p>
