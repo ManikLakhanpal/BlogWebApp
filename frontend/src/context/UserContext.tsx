@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { redirect } from 'next/dist/server/api-utils';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
