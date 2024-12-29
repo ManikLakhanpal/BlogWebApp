@@ -21,7 +21,7 @@ const users = [
 
 export default function RightSideBar() {
   return (
-    <aside className="w-1/4 max-w-xs fixed right-0 h-screen p-4 overflow-y-auto">
+    <aside className="w-1/4 hidden sm:block max-w-xs fixed right-0 h-screen p-4 overflow-y-auto">
       <div className="bg-gray-900 rounded-full mb-4 relative">
         <input
           type="text"
