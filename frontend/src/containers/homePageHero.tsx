@@ -1,7 +1,10 @@
 import SparklesText from "@/components/ui/sparkles-text";
 import ShinyButton from "@/components/ui/shiny-button";
-import {AnimatedGridPattern} from "@/components/ui/animated-grid-pattern";
-import {cn} from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { HomeIcon, User } from "lucide-react";
+import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function HomePageHero() {
     return (
@@ -23,9 +26,18 @@ export default function HomePageHero() {
                         Join the conversation. Share your stories. Connect with writers and readers around the
                         world.
                     </p>
-                    <ShinyButton>
-                        Log In
-                    </ShinyButton>
+                    <div className="w-1/2 flex justify-around">
+                        <Link href="/main">
+                            <Button>
+                                <HomeIcon /> Home
+                            </Button>
+                        </Link>
+                        <Link href="/main">
+                            <ShinyButton>
+                                Log In
+                            </ShinyButton>
+                        </Link>
+                    </div>
                 </div>
                 <AnimatedGridPattern
                     numSquares={60}
