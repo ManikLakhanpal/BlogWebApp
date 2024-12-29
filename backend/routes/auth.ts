@@ -41,6 +41,7 @@ authRoutes.get(
       });
       await newUser.save();
     }
+      console.log(`~[SERVER] : ${req.user?.emails[0].value} just logged using google`);
     res.redirect(`${FRONTEND}/verified`);
   }
 );
@@ -69,6 +70,7 @@ authRoutes.get(
       });
       await newUser.save();
     }
+    console.log(`~[SERVER] : ${req.user?.emails[0].value} just logged using github`);
     res.redirect(`${FRONTEND}/verified`);
   }
 );
