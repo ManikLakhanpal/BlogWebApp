@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaLinkedin, FaXTwitter, FaGlobe, FaInstagram } from "react-icons/fa6";
+import {FaGlobe, FaInstagram, FaLinkedin, FaXTwitter} from "react-icons/fa6";
 
 export default function Footer() {
     return (
@@ -9,7 +9,8 @@ export default function Footer() {
                     {/* Personal Info */}
                     <div className="space-y-4">
                         <h3 className="text-xl font-semibold text-white">Manik Lakhanpal</h3>
-                        <p className="text-sm">Full Stack Developer | iOS Developer | Crafting Seamless Web and Mobile Experiences</p>
+                        <p className="text-sm">Full Stack Developer | iOS Developer | Crafting Seamless Web and Mobile
+                            Experiences</p>
                         <div className="flex space-x-4">
                             <a
                                 href="https://www.linkedin.com/in/lakhanpalmanik/"
@@ -18,7 +19,7 @@ export default function Footer() {
                                 className="hover:text-white transition-colors"
                                 aria-label="LinkedIn"
                             >
-                                <FaLinkedin size={20} />
+                                <FaLinkedin size={20}/>
                             </a>
                             <a
                                 href="https://x.com/w16manik"
@@ -27,7 +28,7 @@ export default function Footer() {
                                 className="hover:text-white transition-colors"
                                 aria-label="X (formerly Twitter)"
                             >
-                                <FaXTwitter size={20} />
+                                <FaXTwitter size={20}/>
                             </a>
                             <a
                                 href="https://www.w16manik.ninja"
@@ -36,7 +37,7 @@ export default function Footer() {
                                 className="hover:text-white transition-colors"
                                 aria-label="Website"
                             >
-                                <FaGlobe size={20} />
+                                <FaGlobe size={20}/>
                             </a>
                             <a
                                 href="https://instagram.com/w16.manik"
@@ -45,7 +46,7 @@ export default function Footer() {
                                 className="hover:text-white transition-colors"
                                 aria-label="Instagram"
                             >
-                                <FaInstagram size={20} />
+                                <FaInstagram size={20}/>
                             </a>
                         </div>
                     </div>
@@ -56,7 +57,10 @@ export default function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="/main" className="hover:text-white transition-colors">Home</Link></li>
                             <li><Link href="/login" className="hover:text-white transition-colors">Login</Link></li>
-                            <li><Link href="https://www.w16manik.ninja" className="hover:text-white transition-colors">About Me</Link></li>
+                            <li>
+                                <Link href="https://www.w16manik.ninja" className="hover:text-white transition-colors">
+                                    About Me
+                                </Link></li>
                         </ul>
                     </div>
 
@@ -69,8 +73,6 @@ export default function Footer() {
                         </address>
                     </div>
                 </div>
-
-                
             </div>
         </footer>
     );
