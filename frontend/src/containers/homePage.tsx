@@ -46,7 +46,7 @@ export default function HomePage() {
                 capabilities (currently under development)
               </p>
               <p className="text-xl sm:text-2xl text-gray-300 max-w-2xl mx-auto mt-5">
-                Created by Manik Lakhanpal
+                Created by Maniik Lakhanpal
               </p>
             </div>
             <div className="flex justify-center">
