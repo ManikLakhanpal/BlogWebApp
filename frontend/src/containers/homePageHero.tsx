@@ -1,7 +1,7 @@
 import SparklesText from "@/components/ui/sparkles-text";
 import ShinyButton from "@/components/ui/shiny-button";
 import { Button } from "@/components/ui/button";
-import { HomeIcon, User } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
