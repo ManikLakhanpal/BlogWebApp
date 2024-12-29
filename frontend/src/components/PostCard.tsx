@@ -57,13 +57,13 @@ function PostCard(props: PostCardProps) {
         <button className="text-gray-500 flex justify-</div>center items-center rounded-full p-1 hover:text-pink-500 hover:bg-pink-500 hover:bg-opacity-30 transition-colors duration-200">
           <Heart className="w-5 h-5" />
         </button>
-        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-blue-500 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200">
+        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-red-500 hover:bg-red-500 hover:bg-opacity-30 transition-colors duration-200">
           <Flag className="w-5 h-5" />
         </button>
-        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-green-500 hover:bg-green-500 hover:bg-opacity-30 transition-colors duration-200">
+        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-blue-500 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200">
           <Bookmark className="w-5 h-5" />
         </button>
-        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-blue-500 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200">
+        <button className="text-gray-500 flex justify-center items-center rounded-full p-1 hover:text-green-500 hover:bg-green-500 hover:bg-opacity-30 transition-colors duration-200">
           <Share className="w-5 h-5" />
         </button>
         {props.email === props.user && <PostDeleteButton id={props.id} />}
