@@ -64,7 +64,7 @@ function ProfilePage(props: Props) {
   return (
     <>
       <div className="text-white bg-slate-950 flex min-h-screen justify-center pb-16">
-        <LeftSideBar user={user} setShowCreate={setShowCreate} />
+        <LeftSideBar setShowCreate={setShowCreate} />
         {userData !== undefined && (
           <main className="w-full sm:w-1/2 max-w-xl border-x border-gray-800">
             {userData && (
