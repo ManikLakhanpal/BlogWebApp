@@ -5,20 +5,22 @@ import ShinyButton from "@/components/ui/shiny-button"
 import Particles from "@/components/ui/particles";
 import {GradualSpacing} from "@/components/ui/gradual-spacing";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 import {Globe} from "@/components/globe";
 
 const technologies = [
     // Frontend technologies
+    { name: 'React', icon: '/tech/react.svg', color: 'text-[#61DAFB]' },
+    { name: 'NextJs', icon: '/tech/nextjs.svg', color: 'text-[#a6a6a6]' },
     { name: 'JavaScript', icon: '/tech/javascript.svg', color: 'text-[#F7DF1E]' },
     { name: 'TypeScript', icon: '/tech/typescript.svg', color: 'text-[#3178C6]' },
-    { name: 'React', icon: '/tech/react.svg', color: 'text-[#61DAFB]' },
     { name: 'Tailwind', icon: '/tech/tailwind.svg', color: 'text-[#38B2AC]' },
-    { name: 'NextJs', icon: '/tech/nextjs.svg', color: 'text-[#a6a6a6]' },
 
     // Backend technologies
     { name: 'Node.js', icon: '/tech/nodejs.svg', color: 'text-[#339933]' },
-    { name: 'Deno', icon: '/tech/deno.svg', color: 'text-[#ffffff]' },
     { name: 'Express.js', icon: '/tech/express.svg', color: 'text-[#000000]' },
+    { name: 'Deno', icon: '/tech/deno.svg', color: 'text-[#ffffff]' },
+    { name: 'Digital Ocean', icon: '/tech/digitalocean.svg', color: 'text-[#0058F5]' },
 
     // Databases
     { name: 'MongoDB', icon: '/tech/mongodb.svg', color: 'text-[#47A248]' },
@@ -33,7 +35,7 @@ export default function HomePage() {
         <section className="dark min-h-screen bg-black text-white">
             <div className=" text-white min-h-[103vh] max-h-fit">
                 <div className="relative flex min-h-[103vh] max-h-fit w-full items-center justify-center overflow-hidden
-        rounded-lg border-zinc-800 border bg-zinc-950 p-6 md:p-10 lg:p-20 font-sans">
+        rounded-lg border-zinc-800 border-b-2 bg-zinc-950 p-6 md:p-10 lg:p-20 font-sans">
                     <div className="z-10 flex flex-col items-center space-y-6">
                         <h1 className="whitespace-pre-wrap text-center text-4xl md:text-5xl lg:text-6xl
              tracking-tighter text-white font-black">
@@ -66,7 +68,7 @@ export default function HomePage() {
                 </div>
 
             </div>
-            <div className="relative border-2 border-red-500 min-h-screen max-h-fit">
+            <div className="relative min-h-screen max-h-fit">
                 <GradualSpacing
                     className="font-display mt-10 text-center text-4xl font-bold -tracking-widest
                      text-black dark:text-white md:text-7xl md:leading-[5rem]"
@@ -104,9 +106,10 @@ export default function HomePage() {
                     refresh={true}
                 />
             </div>
-            <div className="min-h-screen max-h-fit bg-neutral-950">
+            <div className="min-h-screen max-h-fit border-t-2 bg-neutral-950">
                 <Globe/>
             </div>
+            <Footer />
         </section>
     )
 }
