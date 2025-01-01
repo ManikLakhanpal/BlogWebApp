@@ -85,13 +85,13 @@ function PostInput(props: Props) {
             <button
               type="button"
               onClick={handleCancel}
-              className="px-4 py-2 bg-gray-600 text-gray-300 rounded-md hover:bg-gray-500 focus:outline-none"
+              className="px-4 py-2 bg-red-500 text-gray-100 rounded-md hover:bg-red-700 transition-colors focus:outline-none"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors focus:outline-none"
             >
               Submit
             </button>
