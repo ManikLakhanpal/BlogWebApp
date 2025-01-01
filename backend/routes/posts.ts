@@ -4,7 +4,7 @@ import { Post, User } from "../mongoDB.ts";
 const router = express.Router();
 const FRONTEND = Deno.env.get("FRONTEND");
 
-// Add new post
+// * Add new post
 router.post("/add", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated()) {
     try {
@@ -28,7 +28,7 @@ router.post("/add", async (req: express.Request, res: express.Response) => {
   }
 });
 
-// Get all posts with user info
+// * Get all posts with user info
 router.get("/", async (_req: express.Request, res: express.Response) => {
   try {
     const posts = await Post.find().sort({ createdAt: "desc" }).lean();

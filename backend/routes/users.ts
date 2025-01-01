@@ -4,13 +4,13 @@ import { User, Post } from "../mongoDB.ts";
 const router = express.Router();
 const FRONTEND = Deno.env.get("FRONTEND");
 
-// Get current user
+// * Get current user
 router.get("/", (req: express.Request, res: express.Response) => {
   console.log(req.user || null);
   res.json(req.user || null);
 });
 
-// Update user profile
+// * Update user profile
 router.put("/update", async (req: express.Request, res: express.Response) => {
   if (req.isAuthenticated) {
     try {
@@ -28,13 +28,13 @@ router.put("/update", async (req: express.Request, res: express.Response) => {
   }
 });
 
-// Get user by ID or email with their posts
+// * Get user by ID or email with their posts
 router.get("/api/user", (req: express.Request, res: express.Response) => {
   console.log(req.user || null);
   res.json(req.user || null);
 });
 
-// Get user by ID or email with their posts
+// * Get user by ID or email with their posts
 router.get("/:id", async (req: express.Request, res: express.Response) => {
   try {
     let users = await User.find({ email: req.params.id });
@@ -80,21 +80,5 @@ router.get("/:id", async (req: express.Request, res: express.Response) => {
     return res.status(500).json({ error: `Failed to get user.\n ${error}` });
   }
 });
-
-// Define interfaces for type safety
-interface IUser {
-  email: string;
-  name: string;
-  uid?: string;
-  photo?: string;
-}
-
-interface IPost {
-  _id: string;
-  email: string;
-  content: string;
-  createdAt: Date;
-  likes?: number;
-}
 
 export default router;

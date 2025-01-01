@@ -1,6 +1,6 @@
 import express from "npm:express";
 import passport from "npm:passport";
-import { User } from "../mongoDB.ts";
+import {User} from "../mongoDB.ts";
 
 const authRoutes = express.Router();
 const FRONTEND = Deno.env.get("FRONTEND");
@@ -9,13 +9,13 @@ authRoutes.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
-  })
+  }),
 );
 
 authRoutes.delete("/logout", (req: express.Request, res: express.Response) => {
   req.logOut((err: express.Error) => { // ? it's logOut not logout
     if (err) {
-      console.log({ error: "Error logging out" })
+      console.log({ error: "Error logging out" });
       return res.status(500).json({ error: "Error logging out" });
     }
     console.log({ message: "Logged out successfully" });
@@ -41,16 +41,18 @@ authRoutes.get(
       });
       await newUser.save();
     }
-      console.log(`~[SERVER] : ${req.user?.emails[0].value} just logged using google`);
+    console.log(
+      `~[SERVER] : ${req.user?.emails[0].value} just logged using google`,
+    );
     res.redirect(`${FRONTEND}/verified`);
-  }
+  },
 );
 
 authRoutes.get(
   "/github",
   passport.authenticate("github", {
     scope: ["user:email"],
-  })
+  }),
 );
 
 authRoutes.get(
@@ -70,9 +72,11 @@ authRoutes.get(
       });
       await newUser.save();
     }
-    console.log(`~[SERVER] : ${req.user?.emails[0].value} just logged using github`);
+    console.log(
+      `~[SERVER] : ${req.user?.emails[0].value} just logged using github`,
+    );
     res.redirect(`${FRONTEND}/verified`);
-  }
+  },
 );
 
 export default authRoutes;

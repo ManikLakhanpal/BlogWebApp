@@ -3,8 +3,10 @@ import GoogleStrategy from "npm:passport-google-oauth20";
 import GitHubStrategy from "npm:passport-github";
 import express from "npm:express";
 
+// * This will get `Backend` url from the env
 const BACKEND = Deno.env.get("BACKEND");
 
+// * This configuration is for `Google` and `Github` OAuth methods.
 export const configurePassport = () => {
   passport.use(
     new GoogleStrategy(
@@ -42,10 +44,12 @@ export const configurePassport = () => {
     )
   );
 
+// * Stores data of user into the session
   passport.serializeUser((user: express.user, done: passport.done) => {
     done(null, user);
   });
 
+  // * Retrieves data of user from the session
   passport.deserializeUser((user: express.user, done: passport.done) => {
     done(null, user);
   });

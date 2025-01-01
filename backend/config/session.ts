@@ -5,11 +5,13 @@ export const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
-    mongoUrl: `mongodb+srv://lakhanpalmanik:${Deno.env.get("ATLAS_SECRET")}@cluster0.07wzl.mongodb.net/sessions?retryWrites=true&w=majority`,
+    mongoUrl: `mongodb+srv://lakhanpalmanik:${
+      Deno.env.get("ATLAS_SECRET")
+    }@cluster0.07wzl.mongodb.net/sessions?retryWrites=true&w=majority`,
     ttl: 1000 * 60 * 60 * 24 * 14,
   }),
   cookie: {
-    secure: true,
+    secure: Deno.env.get("NODE_ENV") === "production",
     httpOnly: true,
     sameSite: "none",
     maxAge: 1000 * 60 * 60 * 24 * 14,

@@ -12,10 +12,10 @@ const app = express();
 const PORT = Deno.env.get("PORT");
 const FRONTEND = Deno.env.get("FRONTEND");
 
-// Initialize database
+// * Initialize database
 initializeDatabase();
 
-// Middleware
+// * Middleware
 app.use(
   cors({
     origin: FRONTEND,
@@ -25,14 +25,14 @@ app.use(
 app.set("trust proxy", 1);
 app.use(session(sessionConfig));
 
-// Passport configuration
+// * Passport configuration
 const passport = configurePassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.json());
 
-// Routes
+// * Routes
 app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
 app.use("/api/user", userRoutes);
