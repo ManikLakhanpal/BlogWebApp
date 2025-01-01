@@ -8,6 +8,7 @@ import axios from "axios";
 import { Plus } from "lucide-react";
 import { PostCard, PostCardTemp } from "@/components/PostCard";
 import { useState, useEffect } from "react";
+import { useShowCreate } from "@/context/showCreate";
 import UserProfileCard from "@/components/UserProfileCard";
 import UserSettings from "@/components/UserSettings";
 
@@ -42,7 +43,7 @@ interface UserData {
 
 function ProfilePage(props: Props) {
   const { user, loading, error } = useUser();
-  const [showCreate, setShowCreate] = useState(false);
+  const { showCreate, setShowCreate }= useShowCreate();
   const [showSettings, setShowSettings] = useState(false);
   const [userData, setUserData] = useState<UserData>();
   const [postData, setPostData] = useState<Post[]>([]);
@@ -64,7 +65,7 @@ function ProfilePage(props: Props) {
   return (
     <>
       <div className="text-white bg-slate-950 flex min-h-screen justify-center pb-16">
-        <LeftSideBar setShowCreate={setShowCreate} />
+        <LeftSideBar />
         {userData !== undefined && (
           <main className="w-full sm:w-1/2 max-w-xl border-x border-gray-800">
             {userData && (

@@ -15,13 +15,13 @@ function MobileFooterBar() {
             backgroundColor: "rgba(3, 3, 32, 0.6)",
           }}
         >
-          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
+          <Link href="/main" className="p-2 rounded-full hover:bg-gray-800">
             <Home className="w-6 h-6" />
           </Link>
-          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
+          <Link href="/main" className="p-2 rounded-full hover:bg-gray-800">
             <Bell className="w-6 h-6" />
           </Link>
-          <Link href="/" className="p-2 rounded-full hover:bg-gray-800">
+          <Link href="/main" className="p-2 rounded-full hover:bg-gray-800">
             <Mail className="w-6 h-6" />
           </Link>
           <Link href={user? `${FRONTEND}/main/user/${user?.emails[0].value}` : `${FRONTEND}/login` } className="p-2 rounded-full hover:bg-gray-800">

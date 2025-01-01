@@ -48,7 +48,7 @@ function PostInput(props: Props) {
   }
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50">
+    <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-800 bg-opacity-50 transition-all">
       <div className="h-fit w-11/12 sm:w-6/12 bg-slate-800 rounded-lg shadow-lg p-6">
         <div className="flex items-center space-x-4 mb-4">
           <Image
@@ -66,7 +66,7 @@ function PostInput(props: Props) {
             <h1 className="text-xl font-bold text-gray-200">
               {user?.displayName}
             </h1>
-            <p className="text-sm text-gray-500">{user?.emails[0].value}</p>
+            <p className="text-sm text-gray-500">{user?.displayName}</p>
           </div>
         </div>
 
