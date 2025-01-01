@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
+import { useShowCreate } from "@/context/showCreate";
 import PostInput from "@/components/PostInput";
 import DesktopLayout from "@/containers/desktopLayout";
 import MobileLayout from "@/containers/mobileLayout";
@@ -21,7 +22,7 @@ const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 export default function HeroPage() {
     const { user, loading, error } = useUser();
-    const [showCreate, setShowCreate] = useState(false);
+    const { showCreate, setShowCreate } = useShowCreate();
     const [postData, setPostData] = useState<Post[]>([]);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ export default function HeroPage() {
 
     return (
         <div className="min-h-screen bg-slate-950 text-white pb-16">
-            <DesktopLayout user={user} setShowCreate={setShowCreate} postData={postData} />
+            <DesktopLayout user={user}  postData={postData} />
             <MobileLayout user={user} setShowCreate={setShowCreate} postData={postData} />
 
             {showCreate && (

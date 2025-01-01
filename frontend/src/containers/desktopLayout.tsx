@@ -1,5 +1,4 @@
 import { PostCard, PostCardTemp } from "@/components/PostCard";
-import LeftSideBar from "@/components/LeftSideBar";
 
 interface Post {
     _id: string;
@@ -18,14 +17,12 @@ interface User {
 
 interface DesktopLayoutProps {
     user: User | null;
-    setShowCreate: (show: boolean) => void;
     postData: Post[];
 }
 
-export default function DesktopLayout({ user, setShowCreate, postData }: DesktopLayoutProps) {
+export default function DesktopLayout({ user, postData }: DesktopLayoutProps) {
     return (
         <div className="hidden sm:block">
-            <LeftSideBar setShowCreate={setShowCreate} />
             <div className="flex justify-center">
                 <main className="w-1/2 max-w-xl border-x border-gray-800">
                     <h1 className="text-2xl font-bold p-4 border-b border-gray-800">Home</h1>

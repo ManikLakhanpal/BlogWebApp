@@ -1,20 +1,19 @@
+"use client"
+
 import { Home, Bell, Mail, User } from "lucide-react";
 import { useUser } from "@/context/UserContext";
-import {useShowCreate} from "@/context/showCreate";
+import { useShowCreate } from "@/context/showCreate";
 import Link from "next/link";
 
 interface User {
     emails: { value: string }[];
 }
 
-interface Props {
-    setShowCreate: Function;
-}
-
 const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND;
 
-function LeftSideBar(props: Props) {
+function LeftSideBar() {
     const { user, loading, error } = useUser();
+    const { setShowCreate } = useShowCreate();
 
     return (
         <nav className="hidden text-white sm:block w-1/4 max-w-xs fixed left-0 bg-opacity-10 rounded-lg bg-gray-900 h-fit p-4">
@@ -49,7 +48,7 @@ function LeftSideBar(props: Props) {
             </Link>
             {user && (
               <button
-                onClick={() => props.setShowCreate(true)}
+                onClick={() => setShowCreate(true)}
                 className="bg-blue-500 text-white rounded-full py-3 transition-colors duration-75 px-6 font-bold hover:bg-blue-600"
               >
                 Post
