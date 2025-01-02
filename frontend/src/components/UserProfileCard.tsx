@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 
@@ -12,13 +13,9 @@ interface Props {
         following: string;
         posts: string;
     };
-
     setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
-
     showSettings: boolean;
-
     posts: number;
-
     uid: string;
 }
 
@@ -54,6 +51,16 @@ function UserProfileCard(props: Props) {
                     <h2 className="text-sm text-gray-400">
                         @{props.uid}
                     </h2>
+                    {props.userData?.email != user?.emails[0].value && (
+                        <span>
+                            <Button
+                                className="bg-blue-500 w-1/3 hover:bg-blue-700 h-8 my-3"
+                                onClick={() => { alert("Im currently working on it :-)")}}
+                            >
+                                Follow
+                            </Button>
+                        </span>
+                    )}
                 </div>
             </div>
 

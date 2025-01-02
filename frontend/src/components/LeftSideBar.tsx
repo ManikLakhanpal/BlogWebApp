@@ -49,7 +49,7 @@ function LeftSideBar() {
             {user && (
               <button
                 onClick={() => setShowCreate(true)}
-                className="bg-blue-500 text-white rounded-full py-3 transition-colors duration-75 px-6 font-bold hover:bg-blue-600"
+                className="bg-blue-500 text-white rounded-full py-3 transition-colors px-6 font-bold hover:bg-blue-600"
               >
                 Post
               </button>

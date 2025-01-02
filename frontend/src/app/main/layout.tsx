@@ -9,9 +9,9 @@ export default function VerificationLayout({children,}: Readonly<{
     return (
         <ShowCreateProvider>
             <section>
-                <NavigationBar />
-                <LeftSideBar />
-                <RightSideBar />
+                <NavigationBar/>
+                <LeftSideBar/>
+                <RightSideBar/>
                 {children}
             </section>
         </ShowCreateProvider>
