@@ -29,6 +29,7 @@ router.put("/update", async (req: express.Request, res: express.Response) => {
 });
 
 // * Get user by ID or email with their posts
+// ! I have to remove this thing 
 router.get("/api/user", (req: express.Request, res: express.Response) => {
   console.log(req.user || null);
   res.json(req.user || null);

@@ -1,4 +1,5 @@
 import { Search } from "lucide-react"
+import axios from "axios"
 import Image from "next/image"
 
 const users = [
@@ -19,7 +20,8 @@ const users = [
   }
 ]
 
-export default function RightSideBar() {
+export default async function RightSideBar() {
+
   return (
     <aside className="w-1/4 hidden sm:block max-w-xs fixed right-0 h-screen p-4 overflow-y-auto">
       <div className="bg-gray-900 rounded-full mb-4 relative">
