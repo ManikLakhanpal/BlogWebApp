@@ -22,13 +22,13 @@ const userSchema = new Schema({
   followers: [
     {
       name: {type: String, required: true},
-      email: {type: String, required: true},
+      email: {type: String, required: true, unique: true},
     }
   ],
   following: [
       {
         name: {type: String, required: true},
-        email: {type: String, required: true},
+        email: {type: String, required: true, unique: true},
       }
   ],
   uid: {

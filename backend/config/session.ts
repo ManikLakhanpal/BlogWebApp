@@ -13,7 +13,7 @@ export const sessionConfig = {
   cookie: {
     secure: Deno.env.get("NODE_ENV") === "production",
     httpOnly: false,
-    sameSite: "Lax", // ! Convert to `None` for deployment
+    sameSite: "None", // ! Convert to `None` for deployment
     maxAge: 1000 * 60 * 60 * 24 * 14,
   },
 };

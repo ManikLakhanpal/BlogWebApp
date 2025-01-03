@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useUser } from "@/context/UserContext";
+import axios from "axios";
 
 interface Props {
     userData: {
@@ -9,8 +11,8 @@ interface Props {
         email: string;
         photo: string;
         bio: string;
-        followers: string;
-        following: string;
+        followers: Array<{ name: string; email: string }>;
+        following: Array<{ name: string; email: string }>;
         posts: string;
     };
     setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,8 +21,31 @@ interface Props {
     uid: string;
 }
 
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
+
 function UserProfileCard(props: Props) {
-    const {user, loading, error} = useUser();
+    const { user } = useUser();
+    const [isFollowing, setIsFollowing] = useState(false);
+
+    useEffect(() => {
+        if (user && props.userData?.followers) {
+            setIsFollowing(props.userData.followers.some(f => f.email === user.emails[0].value));
+        }
+    }, [user, props.userData?.followers]);
+
+    const handleFollow = async () => {
+        try {
+            const response = await axios.post(`${BACKEND}/api/user/follow/${props.userData.email}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true  // If your server requires authentication with cookies
+            });
+            setIsFollowing(response.data.following);
+        } catch (error) {
+            console.error('Failed to follow/unfollow:', error);
+        }
+    };
 
     return (
         <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
@@ -39,10 +64,10 @@ function UserProfileCard(props: Props) {
                         <h1 className="truncate text-lg font-bold sm:text-xl">
                             {props.userData?.name}
                         </h1>
-                        {props.userData?.email == user?.emails[0].value && (
+                        {props.userData?.email === user?.emails[0].value && (
                             <span
                                 className="font-black items-center transition-all duration-75 hover:-rotate-90 justify-center cursor-pointer rounded-full"
-                                onClick={() => {props.setShowSettings(!props.showSettings)}}
+                                onClick={() => props.setShowSettings(!props.showSettings)}
                             >
                                 <Settings />
                             </span>
@@ -51,13 +76,17 @@ function UserProfileCard(props: Props) {
                     <h2 className="text-sm text-gray-400">
                         @{props.uid}
                     </h2>
-                    {props.userData?.email != user?.emails[0].value && (
+                    {props.userData?.email !== user?.emails[0].value && (
                         <span>
                             <Button
-                                className="bg-blue-500 w-1/3 hover:bg-blue-700 h-8 my-3"
-                                onClick={() => { alert("Im currently working on it :-)")}}
+                                className={`w-1/3 h-7 my-3 ${
+                                    isFollowing
+                                        ? 'bg-gray-500 hover:bg-red-700'
+                                        : 'bg-blue-500 hover:bg-blue-700'
+                                }`}
+                                onClick={handleFollow}
                             >
-                                Follow
+                                {isFollowing ? 'Unfollow' : 'Follow'}
                             </Button>
                         </span>
                     )}
@@ -68,10 +97,10 @@ function UserProfileCard(props: Props) {
                 {props.userData?.bio}
             </p>
 
-            <div className="mt-4 flex justify-between text-sm">
+            <div className="mt-4 grid grid-cols-3 text-sm">
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Posts</span>
-                    <span className="text-xsr">{props.posts}</span>
+                    <span className="text-xs">{props.posts}</span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Followers</span>
