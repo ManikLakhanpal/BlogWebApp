@@ -35,21 +35,29 @@ export default function FollowerList(props: Props) {
                 <h2 className="mb-6 text-2xl font-bold text-gray-200">Followers</h2>
 
                 <div className="space-y-6">
-                    {props.followers.map((follower, index) => (
-                        <div key={index} className="flex items-center space-x-4 border-b border-gray-700 pb-4 last:border-b-0">
-                            <Image
-                                src={follower.photo}
-                                height={64}
-                                width={64}
-                                alt={`${follower.name}'s profile picture`}
-                                className="rounded-full border-2 border-gray-200"
-                            />
-                            <div>
-                                <h3 className="text-xl font-bold text-gray-200">{follower.name}</h3>
-                                <p className="text-sm text-gray-500">{follower.email}</p>
+                    { (props.followers.length > 0 ) && (
+                        props.followers.map((follower, index) => (
+                            <div key={index}
+                                 className="flex items-center space-x-4 border-b border-gray-700 pb-4 last:border-b-0">
+                                <Image
+                                    src={follower.photo}
+                                    height={64}
+                                    width={64}
+                                    alt={`${follower.name}'s profile picture`}
+                                    className="rounded-full border-2 border-gray-200"
+                                />
+                                <div>
+                                    <h3 className="text-xl font-bold text-gray-200">{follower.name}</h3>
+                                    <p className="text-sm text-gray-500">{follower.email}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
+                    { (props.followers.length <= 0 ) && (
+                        <h1 className="text-white text-xl text-center">
+                            Nothing to show
+                        </h1>
+                    )}
                 </div>
             </div>
         </div>
