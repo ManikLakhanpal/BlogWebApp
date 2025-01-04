@@ -15,8 +15,8 @@ interface Props {
     email: string;
     photo: string;
     bio: string;
-    followers: string;
-    following: string;
+    followers: Array<{ name: string; email: string }>;
+    following: Array<{ name: string; email: string }>;
     uid: string;
     posts: string;
   } | null

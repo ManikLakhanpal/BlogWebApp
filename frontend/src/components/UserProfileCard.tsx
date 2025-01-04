@@ -8,6 +8,7 @@ interface Props {
         name: string;
         email: string;
         photo: string;
+        uid: string;
         bio: string;
         followers: Array<{ name: string; email: string }>;
         following: Array<{ name: string; email: string }>;

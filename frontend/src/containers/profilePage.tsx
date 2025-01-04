@@ -36,8 +36,8 @@ interface UserData {
   photo: string;
   bio: string;
   uid: string;
-  followers: string;
-  following: string;
+  followers: Array<{ name: string; email: string }>;
+  following: Array<{ name: string; email: string }>;
   posts: string;
 }
 
