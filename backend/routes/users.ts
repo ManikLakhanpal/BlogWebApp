@@ -4,6 +4,12 @@ import { Post, User } from "../mongoDB.ts";
 const router = express.Router();
 const FRONTEND = Deno.env.get("FRONTEND");
 
+interface userType {
+    name: string,
+    email: string,
+    photo: string
+}
+
 // * Get current user
 router.get("/", (req: express.Request, res: express.Response) => {
   console.log(req.user || null);
@@ -99,7 +105,7 @@ router.patch("/follow/", async (req: express.Request, res: express.Response) => 
         }
 
         // * 3. Check if already following
-        const isFollowing = current[0].following.some((user) =>
+        const isFollowing = current[0].following.some((user: userType) =>
           user.email === email
         );
         if (isFollowing) {
@@ -181,7 +187,7 @@ router.patch( "/unfollow/", async (req: express.Request, res: express.Response) 
         }
 
         // * 3. Check if already following
-        const isFollowing = current[0].following.some((user) =>
+        const isFollowing = current[0].following.some((user: userType) =>
           user.email === email
         );
         if (!isFollowing) {
