@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useUser } from "@/context/UserContext";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface Props {
     userData: {
@@ -20,8 +22,44 @@ interface Props {
     uid: string;
 }
 
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
+
 function UserProfileCard(props: Props) {
     const { user } = useUser();
+    const [isFollowing, setIsFollowing] = useState(false);
+
+    const data = {
+        name: props.userData.name,
+        email: props.userData.email,
+        photo: props.userData.photo
+    };
+
+    useEffect(() => {
+        if (user) {
+            const isUserFollowing = props.userData.followers.some(
+                follower => follower.email === user.emails[0].value
+            );
+            setIsFollowing(isUserFollowing);
+        }
+    }, [user, props.userData.followers]);
+
+    async function handleFollowAction() {
+        try {
+            const resp = await axios.patch(`${BACKEND}/api/user/follow/`, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+            
+            setIsFollowing(!isFollowing);
+            alert(resp.data.message);
+            console.log(resp);
+        } catch(err) {
+            alert(err);
+            console.error(`Error is this ${err}`);
+        }
+    }
 
     return (
         <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
@@ -55,9 +93,10 @@ function UserProfileCard(props: Props) {
                     {props.userData?.email !== user?.emails[0].value && (
                         <span>
                             <Button
-                                className='bg-blue-500 hover:bg-blue-700 h-7 my-2'
+                                className={isFollowing ? 'bg-red-500 hover:bg-red-700 h-7 my-2' : 'bg-blue-500 hover:bg-blue-700 h-7 my-2'}
+                                onClick={handleFollowAction}
                             >
-                                Follow
+                                {isFollowing ? 'Unfollow' : 'Follow'}
                             </Button>
                         </span>
                     )}
