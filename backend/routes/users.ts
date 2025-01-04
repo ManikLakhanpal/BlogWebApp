@@ -83,52 +83,5 @@ router.get("/:id", async (req: express.Request, res: express.Response) => {
   }
 });
 
-// * Follow user by ID
-router.post("/follow/:id", async (req: express.Request, res: express.Response) => {
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
-  try {
-    const currentUserEmail = req.user?.emails?.[0]?.value;
-    const targetUserEmail = req.params.id;
-
-    const currentUser = await User.findOne({ email: currentUserEmail });
-    const targetUser = await User.findOne({ email: targetUserEmail });
-
-    if (!currentUser || !targetUser) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Check if already following
-    const alreadyFollowing = currentUser.following.some(f => f.email === targetUserEmail);
-
-    if (alreadyFollowing) {
-      // Unfollow
-      await User.updateOne(
-          { email: currentUserEmail },
-          { $pull: { following: { email: targetUserEmail } } }
-      );
-      await User.updateOne(
-          { email: targetUserEmail },
-          { $pull: { followers: { email: currentUserEmail } } }
-      );
-    } else {
-      // Follow
-      await User.updateOne(
-          { email: currentUserEmail },
-          { $push: { following: { name: targetUser.name, email: targetUserEmail } } }
-      );
-      await User.updateOne(
-          { email: targetUserEmail },
-          { $push: { followers: { name: currentUser.name, email: currentUserEmail } } }
-      );
-    }
-
-    res.json({ success: true, following: !alreadyFollowing });
-  } catch (error) {
-    res.status(500).json({ error: String(error) });
-  }
-});
-
+// ? Follow user by ID
 export default router;

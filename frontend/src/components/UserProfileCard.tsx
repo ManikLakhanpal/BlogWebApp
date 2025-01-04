@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useUser } from "@/context/UserContext";
-import axios from "axios";
 
 interface Props {
     userData: {
@@ -21,31 +19,8 @@ interface Props {
     uid: string;
 }
 
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
-
 function UserProfileCard(props: Props) {
     const { user } = useUser();
-    const [isFollowing, setIsFollowing] = useState(false);
-
-    useEffect(() => {
-        if (user && props.userData?.followers) {
-            setIsFollowing(props.userData.followers.some(f => f.email === user.emails[0].value));
-        }
-    }, [user, props.userData?.followers]);
-
-    const handleFollow = async () => {
-        try {
-            const response = await axios.post(`${BACKEND}/api/user/follow/${props.userData.email}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                withCredentials: true  // If your server requires authentication with cookies
-            });
-            setIsFollowing(response.data.following);
-        } catch (error) {
-            console.error('Failed to follow/unfollow:', error);
-        }
-    };
 
     return (
         <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
@@ -79,14 +54,9 @@ function UserProfileCard(props: Props) {
                     {props.userData?.email !== user?.emails[0].value && (
                         <span>
                             <Button
-                                className={`w-1/3 h-7 my-3 ${
-                                    isFollowing
-                                        ? 'bg-gray-500 hover:bg-red-700'
-                                        : 'bg-blue-500 hover:bg-blue-700'
-                                }`}
-                                onClick={handleFollow}
+                                className='bg-blue-500 hover:bg-blue-700 h-7 my-2'
                             >
-                                {isFollowing ? 'Unfollow' : 'Follow'}
+                                Follow
                             </Button>
                         </span>
                     )}
