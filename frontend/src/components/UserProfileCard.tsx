@@ -35,11 +35,13 @@ function UserProfileCard(props: Props) {
     };
 
     useEffect(() => {
-        if (user) {
+        if (user && props.userData?.followers) {
             const isUserFollowing = !!props.userData.followers.find(
                 follower => follower.email === user.emails[0].value
             );
             setIsFollowing(isUserFollowing);
+        } else {
+            setIsFollowing(false); // Handle case where followers data is missing
         }
     }, [user, props.userData?.followers]);
 
