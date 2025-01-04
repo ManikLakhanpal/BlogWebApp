@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export default function HomePageHero() {
     return (
-        <div className=" text-white min-h-[103vh] max-h-fit">
+        <div className=" text-white min-h-[103vh] max-h-fit w-screen">
             <div className="relative flex min-h-[103vh] max-h-fit w-full items-center justify-center overflow-hidden
         rounded-lg border-zinc-800 border-b-2 bg-zinc-950 p-6 md:p-10 lg:p-20 font-sans">
                 <div className="z-10 flex flex-col items-center space-y-6">
@@ -26,14 +26,19 @@ export default function HomePageHero() {
                         Join the conversation. Share your stories. Connect with writers and readers around the
                         world.
                     </p>
-                    <div className="w-1/2 flex justify-around">
+
+                    <p className="text-center text-lg md:text-xl text-gray-400 max-w-[500px] font-medium">
+                        Created by Manik Lakhanpal 😎
+                    </p>
+                    <div className="sm:w-1/2 flex justify-around">
                         <Link href="/main">
-                            <Button>
-                                <HomeIcon /> Home
+                            <Button className="w-full flex items-center justify-around space-x-2">
+                                <HomeIcon/>
+                                <span>Home</span>
                             </Button>
                         </Link>
-                        <Link href="/main">
-                            <ShinyButton>
+                        <Link href="/login">
+                            <ShinyButton className="w-full flex items-center justify-center">
                                 Log In
                             </ShinyButton>
                         </Link>
