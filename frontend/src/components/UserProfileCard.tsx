@@ -61,6 +61,24 @@ function UserProfileCard(props: Props) {
         }
     }
 
+    async function handleUnfollowAction() {
+        try {
+            const resp = await axios.patch(`${BACKEND}/api/user/unfollow/`, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+
+            setIsFollowing(!isFollowing);
+            alert(resp.data.message);
+            console.log(resp);
+        } catch(err) {
+            alert(err);
+            console.error(`Error is this ${err}`);
+        }
+    }
+
     return (
         <div className="flex flex-col sticky top-20 border-b p-4 bg-slate-950">
             <div className="flex items-start gap-4">
@@ -94,7 +112,7 @@ function UserProfileCard(props: Props) {
                         <span>
                             <Button
                                 className={isFollowing ? 'bg-red-500 hover:bg-red-700 h-7 my-2' : 'bg-blue-500 hover:bg-blue-700 h-7 my-2'}
-                                onClick={handleFollowAction}
+                                onClick={isFollowing ? handleUnfollowAction : handleFollowAction }
                             >
                                 {isFollowing ? 'Unfollow' : 'Follow'}
                             </Button>
