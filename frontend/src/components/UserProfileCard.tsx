@@ -86,7 +86,8 @@ function UserProfileCard(props: Props) {
                     <Image
                         src={props.userData ? props.userData.photo : "https://w16manik.blr1.cdn.digitaloceanspaces.com/Luffy.jpeg"}
                         alt="Profile picture"
-                        fill
+                        height={100}
+                        width={100}
                         className="rounded-full border-2 object-cover"
                         priority
                     />
