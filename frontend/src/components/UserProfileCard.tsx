@@ -41,7 +41,7 @@ function UserProfileCard(props: Props) {
             );
             setIsFollowing(isUserFollowing);
         }
-    }, [user, props.userData.followers]);
+    }, [user, props.userData?.followers]);
 
     async function handleFollowAction() {
         try {
