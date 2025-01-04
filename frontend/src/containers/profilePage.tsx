@@ -36,8 +36,8 @@ interface UserData {
   photo: string;
   bio: string;
   uid: string;
-  followers: Array<{ name: string; email: string }>;
-  following: Array<{ name: string; email: string }>;
+  followers: Array<{ name: string; email: string, photo: string }>;
+  following: Array<{ name: string; email: string, photo: string }>;
   posts: string;
 }
 
@@ -45,6 +45,7 @@ function ProfilePage(props: Props) {
   const { user, loading, error } = useUser();
   const { showCreate, setShowCreate }= useShowCreate();
   const [showSettings, setShowSettings] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false);
   const [userData, setUserData] = useState<UserData>();
   const [postData, setPostData] = useState<Post[]>([]);
 

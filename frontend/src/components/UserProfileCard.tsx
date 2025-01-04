@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useState, useEffect } from "react";
+import FollowList from "@/components/FollowList";
 import axios from "axios";
 
 interface Props {
@@ -12,8 +13,8 @@ interface Props {
         photo: string;
         uid: string;
         bio: string;
-        followers: Array<{ name: string; email: string }>;
-        following: Array<{ name: string; email: string }>;
+        followers: Array<{ name: string; email: string, photo: string }>;
+        following: Array<{ name: string; email: string, photo: string }>;
         posts: string;
     };
     setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +27,8 @@ const BACKEND = process.env.NEXT_PUBLIC_BACKEND;
 
 function UserProfileCard(props: Props) {
     const { user } = useUser();
+    const [showFollowers, setShowFollowers] = useState(false);
+    const [showFollowing, setShowFollowing] = useState(false);
     const [isFollowing, setIsFollowing] = useState(false);
 
     const data = {
@@ -133,15 +136,32 @@ function UserProfileCard(props: Props) {
                     <span className="font-semibold">Posts</span>
                     <span className="text-xs">{props.posts}</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center cursor-pointer" onClick={() => {setShowFollowers(!showFollowers)}}>
                     <span className="font-semibold">Followers</span>
                     <span className="text-xs">{props.userData?.followers?.length || 0}</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center cursor-pointer" onClick={() => {setShowFollowing(!showFollowing)}}>
                     <span className="font-semibold">Following</span>
                     <span className="text-xs">{props.userData?.following?.length || 0}</span>
                 </div>
             </div>
+
+            {showFollowers && (
+                <FollowList 
+                    followers={props.userData?.followers}
+                    setIsOpen={setShowFollowers}
+                    isOpen={showFollowers}
+                />
+            )}
+
+            {showFollowing && (
+                <FollowList 
+                    followers={props.userData?.following}
+                    setIsOpen={setShowFollowing}
+                    isOpen={showFollowing}
+                />
+            )}
+
         </div>
     );
 }
