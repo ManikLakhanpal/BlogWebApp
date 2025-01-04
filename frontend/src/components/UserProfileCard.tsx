@@ -133,11 +133,11 @@ function UserProfileCard(props: Props) {
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Followers</span>
-                    <span className="text-xs">{props.userData.followers.length}</span>
+                    <span className="text-xs">{props.userData?.followers?.length || 0}</span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="font-semibold">Following</span>
-                    <span className="text-xs">{props.userData.following.length}</span>
+                    <span className="text-xs">{props.userData?.following?.length || 0}</span>
                 </div>
             </div>
         </div>
