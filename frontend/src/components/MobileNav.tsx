@@ -15,10 +15,10 @@ function MobileNav(props: Props) {
   const profileLink = user? `Profile` : `Login`;
 
   const routes = [
-    ["Home", "/"],
+    ["Home", "/main"],
     [profileLink, profile],
     ["Support", "https://www.w16manik.ninja/support-me"],
-    ["About", "/"]
+    ["About", "/main"]
   ]
     return(
         <div
