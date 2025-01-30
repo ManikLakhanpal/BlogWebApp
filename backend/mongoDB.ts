@@ -47,7 +47,9 @@ const userSchema = new Schema({
 const postSchema = new Schema({
   content: { type: String, required: true, maxlength: 150 },
   createdAt: { type: Number, required: true },
-  likes: { type: Number, default: 0 },
+  likes: [
+      { type: String, default: [] }
+  ],
   email: { type: String, required: true },  // ? Using email to link to the user
 });
 
